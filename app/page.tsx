@@ -3,7 +3,7 @@
  */
 export default function Home() {
   return (
-    <div className="m-auto flex-1 text-center items-center h-screen justify-center">
+    <div className="m-auto h-screen flex-1 items-center justify-center text-center">
       <p>HOME PAGE</p>
     </div>
   );
