@@ -11,7 +11,10 @@
     "build-storybook": "storybook build",
     "format": "prettier --write .",
     "test": "vitest run --project=base",
-    "coverage": "vitest run --project=base --coverage"
+    "coverage": "vitest run --project=base --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed --project=chromium",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "next": "16.0.10",
@@ -20,6 +23,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.3",
+    "@playwright/test": "^1.57.0",
     "@storybook/addon-a11y": "^10.1.10",
     "@storybook/addon-docs": "^10.1.10",
     "@storybook/addon-onboarding": "^10.1.10",

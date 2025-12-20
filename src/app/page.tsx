@@ -1,3 +1,4 @@
+"use client";
 import DemoComponent from '../components/demo-component';
 
 /**
