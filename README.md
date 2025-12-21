@@ -35,7 +35,7 @@ Top-level structure (non-exhaustive):
 - `tsconfig.json` – TypeScript configuration
 - `vitest.config.ts` / `vitest.setup.ts` / `vitest.shims.d.ts` – Vitest configuration and setup
 
-Here is the folder structure section fully in Markdown, ready to paste into your README.[1]
+Here is the folder structure section fully in Markdown, ready to paste into your README
 
 ````md
 ## Folder Structure
@@ -96,7 +96,7 @@ or
 npm install
 ```
 
-or with any other package manager yarn , pnpm etc..
+or with any other package manager's like  yarn , pnpm etc..
 
 ### Start the development server
 
@@ -106,8 +106,6 @@ bun dev
 or
 npm run dev
 ```
-
-### Start the development server
 
 Then open http://localhost:3000 in your browser.
 
