@@ -1,36 +1,143 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Media Logger Web
 
-## Getting Started
+Media Logger Web is a web frontend built with Next.js for logging and exploring media such as movies, shows, and games.
 
-First, run the development server:
+## Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Framework**: Next.js (App Router, TypeScript)
+- **Language**: TypeScript
+- **Styling**: CSS (with PostCSS config present)
+- **Package manager / Runtime**: Bun (with `bun.lock`)
+- **Tooling**:
+  - ESLint (flat config via `eslint.config.mjs`)
+  - Prettier (`.prettierrc`, `.prettierignore`)
+  - Vitest for unit tests (`vitest.config.ts`, `vitest.setup.ts`, `vitest.shims.d.ts`)
+  - Playwright for e2e tests (`playwright.config.ts`, `e2e/`)
+  - Storybook (`.storybook/`, `stories/`)
+
+## Project Structure
+
+Top-level structure (non-exhaustive):
+
+- `.storybook/` – Storybook configuration files
+- `e2e/` – Playwright end-to-end test files
+- `public/` – Static assets served by Next.js
+- `src/` – Application source code (Next.js app, components, etc.)
+- `stories/` – Storybook stories
+- `.gitignore` – Git ignore configuration
+- `.prettierignore` / `.prettierrc` – Prettier configuration
+- `bun.lock` – Bun lockfile
+- `eslint.config.mjs` – ESLint configuration
+- `next.config.ts` – Next.js configuration
+- `package.json` – Project scripts and dependencies
+- `playwright.config.ts` – Playwright configuration
+- `postcss.config.mjs` – PostCSS configuration
+- `tsconfig.json` – TypeScript configuration
+- `vitest.config.ts` / `vitest.setup.ts` / `vitest.shims.d.ts` – Vitest configuration and setup
+
+Here is the folder structure section fully in Markdown, ready to paste into your README
+
+````md
+## Folder Structure
+
+The project uses a standard Next.js App Router layout with supporting config, testing, and Storybook folders
+
+```txt
+media-logger-web/
+├─ .storybook/          # Storybook configuration for UI components.
+├─ e2e/                 # Playwright end-to-end tests.
+├─ public/              # Static assets served by Next.js.
+├─ src/ # Application source.
+│ ├─ app/ # Next.js App Router entry (layouts, pages).
+│ ├─ components/ # Reusable UI components and tests.
+│ └─ constants/ # Shared configuration/constants.
+├─ stories/             # Storybook stories.
+├─ .gitignore           # Git ignore rules.
+├─ .prettierignore      # Files ignored by Prettier.
+├─ .prettierrc          # Prettier configuration.
+├─ bun.lock             # Bun lockfile.
+├─ eslint.config.mjs    # ESLint configuration.
+├─ next.config.ts       # Next.js configuration.
+├─ package.json         # Project scripts and dependencies.
+├─ playwright.config.ts # Playwright configuration.
+├─ postcss.config.mjs   # PostCSS configuration.
+├─ tsconfig.json        # TypeScript configuration.
+├─ vitest.config.ts     # Vitest configuration.
+├─ vitest.setup.ts      # Vitest setup file.
+└─ vitest.shims.d.ts    # Vitest type shims.
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Common scripts defined in `package.json` (adjust if you change names later):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `dev` – Start Next.js development server
+- `build` – Build the Next.js app for production
+- `start` – Start the production server
+- `lint` – Run ESLint
+- `test` – Run Vitest test suite
+- `test:e2e` – Run Playwright end-to-end tests (name may differ based on your config)
 
-## Learn More
+## Running the Project
 
-To learn more about Next.js, take a look at the following resources:
+### Prerequisites
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Node.js or Bun installed
+- Package manager of your choice (Bun, npm, pnpm, or yarn)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Install dependencies
 
-## Deploy on Vercel
+Using Bun (recommended, since `bun.lock` is present):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+bun install
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+or
+npm install
+```
+
+or with any other package manager's like  yarn , pnpm etc..
+
+### Start the development server
+
+```bash
+bun dev
+
+or
+npm run dev
+```
+
+Then open http://localhost:3000 in your browser.
+
+### Run unit tests (Vitest)
+
+```bash
+bun test
+
+or
+npm test
+```
+
+### Run e2e tests (Playwright)
+
+```bash
+bun test:e2e
+
+or
+npm test:e2e
+```
+
+### Run Storybook
+
+```bash
+bun storybook
+
+or
+npm run storybook
+```
+
+## Code Formatting and Linting
+
+- ESLint is configured via `eslint.config.mjs` for linting.
+- Prettier is configured via `.prettierrc` and `.prettierignore` for code formatting.
+````
