@@ -35,9 +35,7 @@ Top-level structure (non-exhaustive):
 - `tsconfig.json` – TypeScript configuration
 - `vitest.config.ts` / `vitest.setup.ts` / `vitest.shims.d.ts` – Vitest configuration and setup
 
-Here is the folder structure section fully in Markdown, ready to paste into your README
 
-````md
 ## Folder Structure
 
 The project uses a standard Next.js App Router layout with supporting config, testing, and Storybook folders
@@ -140,4 +138,4 @@ npm run storybook
 
 - ESLint is configured via `eslint.config.mjs` for linting.
 - Prettier is configured via `.prettierrc` and `.prettierignore` for code formatting.
-````
+
