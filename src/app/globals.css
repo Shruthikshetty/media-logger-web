@@ -10,6 +10,27 @@
 :root {
   --background: 220 13% 9%; /* Numbers, not hsl() */
   --foreground: 210 11% 96%;
+  --card: 220 13% 13%;
+  --card-foreground: 210 11% 96%;
+  --popover: 220 13% 13%;
+  --popover-foreground: 210 11% 96%;
+  --primary: 235 86% 65%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 220 9% 18%;
+  --secondary-foreground: 210 11% 96%;
+  --muted: 220 9% 18%;
+  --muted-foreground: 215 10% 65%;
+  --accent: 220 9% 21%;
+  --accent-foreground: 210 11% 96%;
+  --destructive: 359 82% 61%;
+  --destructive-foreground: 0 0% 100%;
+  --success: 142 71% 45%;
+  --success-foreground: 0 0% 100%;
+  --warning: 38 92% 50%;
+  --warning-foreground: 0 0% 100%;
+  --border: 220 10% 22%;
+  --input: 220 10% 22%;
+  --ring: 235 86% 65%;
 }
 
 @layer base {
@@ -22,10 +43,24 @@
 /* Themes */
 .blurple {
   --background: 220 13% 9%;
+  --foreground: 210 11% 96%;
   --primary: 235 86% 65%;
 }
 
 .purple {
   --background: 260 15% 8%;
-  --primary: 260 80% 65%; /* Fixed visibility */
+  --foreground: 270 10% 96%;
+  --primary: 260 80% 65%;
+}
+
+.emerald {
+  --background: 150 15% 8%;
+  --foreground: 140 10% 96%;
+  --primary: 142 71% 45%;
+}
+
+.rose {
+  --background: 150 15% 8%;
+  --foreground: 350 15% 8%;
+  --primary: 346 77% 60%;
 }
