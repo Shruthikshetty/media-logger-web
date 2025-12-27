@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Button } from '@/src/components/ui/button';
+import { fn } from 'storybook/test';
 
 const meta: Meta<typeof Button> = {
   title: 'Button',
@@ -17,5 +18,18 @@ type Story = StoryObj<typeof Button>;
 export const Default: Story = {
   args: {
     children: 'Button',
+  },
+};
+
+export const CustomText: Story = {
+  args: {
+    children: 'Custom Button',
+  },
+};
+
+export const WithOnClick: Story = {
+  args: {
+    children: 'Button',
+    onClick: fn(),
   },
 };
