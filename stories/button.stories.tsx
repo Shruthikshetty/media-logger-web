@@ -29,7 +29,7 @@ export const CustomText: Story = {
 
 export const WithOnClick: Story = {
   args: {
-    children: 'Button',
+    children: 'Click me',
     onClick: fn(),
   },
 };
