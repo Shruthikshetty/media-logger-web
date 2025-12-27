@@ -49,11 +49,7 @@ const preview: Preview = {
         document.body.classList.add(theme);
       }, [theme]);
 
-      return (
-        <div className="bg-background text-foreground min-h-screen p-8">
-          <Story />
-        </div>
-      );
+      return <Story />;
     },
   ],
 };
