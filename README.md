@@ -134,6 +134,10 @@ or
 npm run storybook
 ```
 
+### storybook link 
+
+https://shruthikshetty.github.io/media-logger-web/
+
 ## Code Formatting and Linting
 
 - ESLint is configured via `eslint.config.mjs` for linting.
