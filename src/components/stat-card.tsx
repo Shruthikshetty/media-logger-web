@@ -1,13 +1,13 @@
 import { JSX } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { LucideIcon, LucideProps } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 type StatCardProps = {
   title: string;
   description: string;
   Icon?: LucideIcon;
-  iconStyles?: LucideProps;
+  iconStyles?: string;
   statNumber: number;
 };
 
