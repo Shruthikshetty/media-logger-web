@@ -9,6 +9,9 @@ const meta: Meta<typeof Button> = {
   parameters: {
     layout: 'centered',
   },
+  args: {
+    'aria-label': 'stroy-button',
+  },
 };
 
 export default meta;
