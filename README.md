@@ -35,7 +35,6 @@ Top-level structure (non-exhaustive):
 - `tsconfig.json` – TypeScript configuration
 - `vitest.config.ts` / `vitest.setup.ts` / `vitest.shims.d.ts` – Vitest configuration and setup
 
-
 ## Folder Structure
 
 The project uses a standard Next.js App Router layout with supporting config, testing, and Storybook folders
@@ -94,7 +93,7 @@ or
 npm install
 ```
 
-or with any other package manager's like  yarn , pnpm etc..
+or with any other package manager's like yarn , pnpm etc..
 
 ### Start the development server
 
@@ -142,4 +141,3 @@ https://shruthikshetty.github.io/media-logger-web/
 
 - ESLint is configured via `eslint.config.mjs` for linting.
 - Prettier is configured via `.prettierrc` and `.prettierignore` for code formatting.
-
