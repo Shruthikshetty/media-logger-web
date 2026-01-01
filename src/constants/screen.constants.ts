@@ -1,4 +1,4 @@
-import { Heart, Palette, Sparkles, Zap } from "lucide-react";
+import { Heart, Palette, Sparkles, Zap } from 'lucide-react';
 
 // themes icons options
 export const THEME_SELECTOR_OPTIONS = [

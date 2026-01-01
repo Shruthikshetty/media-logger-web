@@ -10,7 +10,7 @@ export default function Home() {
     <div className="m-auto flex flex-col items-center justify-center gap-2 text-center">
       <p>HOME PAGE</p>
       <p className="text-primary text-2xl">switch themes</p>
-      <div className="flex flex-1 items-center justify-center">
+      <div className="flex items-center justify-center">
         <ThemeSwitcher />
       </div>
       <Button>Button</Button>
