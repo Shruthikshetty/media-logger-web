@@ -7,10 +7,12 @@ import { Button } from '../components/ui/button';
  */
 export default function Home() {
   return (
-    <div className="m-auto h-screen flex-1 items-center justify-center text-center">
+    <div className="m-auto flex flex-col items-center justify-center gap-2 text-center">
       <p>HOME PAGE</p>
-      <p className='text-2xl text-primary'>switch themes</p>
-      <ThemeSwitcher />
+      <p className="text-primary text-2xl">switch themes</p>
+      <div className="flex flex-1 items-center justify-center">
+        <ThemeSwitcher />
+      </div>
       <Button>Button</Button>
     </div>
   );
