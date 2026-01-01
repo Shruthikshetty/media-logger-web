@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Button } from '@/src/components/ui/button';
-import { fn } from 'storybook/test';
+import { expect, fn } from 'storybook/test';
 
 const meta: Meta<typeof Button> = {
   title: 'Ui/Button',
@@ -31,5 +31,13 @@ export const WithOnClick: Story = {
   args: {
     children: 'Click me',
     onClick: fn(),
+  },
+  // this is a custom play function
+  // used to test user interactions
+  play: async ({ args, canvas, userEvent }) => {
+    const button = canvas.getByRole('button');
+    // simulate user click
+    await userEvent.click(button);
+    await expect(args.onClick).toHaveBeenCalled();
   },
 };
