@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { ToggleGroup, ToggleGroupItem } from '@/src/components/ui/toggle-group';
 import { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { Bold, Italic, Underline } from 'lucide-react';
+import { Bold, Italic, Strikethrough } from 'lucide-react';
 const meta = {
   title: 'Ui/ToggleGroup',
   component: ToggleGroup,
@@ -29,7 +29,7 @@ export const SimpleExample: StoryObj = {
         <Italic className="h-4 w-4" />
       </ToggleGroupItem>
       <ToggleGroupItem value="strikethrough" aria-label="Toggle strikethrough">
-        <Underline className="h-4 w-4" />
+        <Strikethrough className="h-4 w-4" />
       </ToggleGroupItem>
     </ToggleGroup>
   ),
