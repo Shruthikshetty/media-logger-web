@@ -1,5 +1,4 @@
 'use client';
-import MediaLinkCard from '../components/media-link-card';
 import { ThemeSwitcher } from '../components/theme-switch';
 import { Button } from '../components/ui/button';
 

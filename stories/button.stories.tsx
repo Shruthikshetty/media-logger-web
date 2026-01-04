@@ -10,7 +10,7 @@ const meta: Meta<typeof Button> = {
     layout: 'centered',
   },
   args: {
-    'aria-label': 'stroy-button',
+    'aria-label': 'story button',
   },
 };
 
