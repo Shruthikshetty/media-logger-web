@@ -2,6 +2,7 @@ import type { Preview } from '@storybook/nextjs-vite';
 import '@/src/app/globals.css';
 import { useEffect } from 'react';
 import { APP_THEMES } from '../src/constants/config.constants';
+import { themes } from 'storybook/theming';
 
 const preview: Preview = {
   parameters: {
@@ -17,6 +18,9 @@ const preview: Preview = {
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
       test: 'todo',
+    },
+    docs: {
+      theme: themes.dark, // This sets the docs page to dark theme
     },
   },
   // toolbar menu
