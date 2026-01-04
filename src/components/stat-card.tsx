@@ -27,7 +27,7 @@ const StatCard = ({
   statNumber,
 }: StatCardProps): JSX.Element => {
   return (
-    <Card className="gap-2 rounded-md border-white/20 bg-white/10 backdrop-blur-sm transition-colors hover:bg-white/15">
+    <Card className="gap-2 rounded-lg border-white/20 bg-white/10 backdrop-blur-sm transition-colors hover:bg-white/15">
       <CardHeader>
         <div className="flex flex-row justify-between">
           <CardTitle className="text-gray-300">{title}</CardTitle>
