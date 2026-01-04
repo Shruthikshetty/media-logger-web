@@ -11,6 +11,7 @@ const meta: Meta<typeof Toggle> = {
   },
   args: {
     variant: 'outline',
+    'aria-label': 'Toggle italic',
   },
 };
 

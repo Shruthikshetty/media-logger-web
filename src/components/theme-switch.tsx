@@ -26,6 +26,7 @@ export function ThemeSwitcher() {
             key={option.value}
             value={option.value}
             className="data-[state=on]:bg-primary bg-gray-500/20"
+            aria-label={`Toggle ${option.value} theme`}
           >
             <option.icon className="h-4 w-4" />
           </ToggleGroupItem>
