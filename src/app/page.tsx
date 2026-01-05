@@ -1,5 +1,4 @@
 'use client';
-import MyCollectionCard from '../components/my-collection-card';
 import { ThemeSwitcher } from '../components/theme-switch';
 import { Button } from '../components/ui/button';
 
@@ -15,7 +14,6 @@ export default function Home() {
         <ThemeSwitcher />
       </div>
       <Button>Button</Button>
-      <MyCollectionCard />
     </div>
   );
 }
