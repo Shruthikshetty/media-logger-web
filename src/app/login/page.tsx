@@ -22,6 +22,9 @@ import {
   FieldGroup,
   FieldLabel,
 } from '@/src/components/ui/field';
+import { useLoginUser } from '@/src/services/auth-service';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 /**
  * Login page containing the login form
  */
@@ -33,9 +36,23 @@ export default function Login() {
     defaultValues: loginDefaultValues,
   });
 
+  // route for navigation
+  const route = useRouter();
+
+  // login mutation hook
+  const { mutate } = useLoginUser();
+
   //handle login form submit
   const handleLoginSubmit = (data: LoginSchema) => {
-    console.log(data);
+    mutate(data, {
+      onSuccess: () => {
+        route.replace('/');
+        toast.success('Login successful');
+      },
+      onError: (err) => {
+        toast.error(err.response?.data?.message || 'Login failed');
+      },
+    });
   };
 
   return (
