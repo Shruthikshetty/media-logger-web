@@ -51,7 +51,9 @@ export default function Login() {
         toast.success('Login successful');
       },
       onError: (err) => {
-        toast.error(err.response?.data?.message || 'Login failed');
+        toast.error(
+          err.response?.data?.message || 'Login failed try after sometime',
+        );
       },
     });
   };
@@ -111,9 +113,9 @@ export default function Login() {
                 )}
               />
             </FieldGroup>
-            {error?.message ? (
+            {error?.response?.data?.message ? (
               <p className="text-center text-sm text-red-500">
-                {error?.response?.data?.message}
+                {error.response.data.message}
               </p>
             ) : null}
             <Button type="submit" aria-label="sign-in" disabled={isPending}>
