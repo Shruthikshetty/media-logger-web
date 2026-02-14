@@ -25,6 +25,7 @@ import {
 import { useLoginUser } from '@/src/services/auth-service';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+
 /**
  * Login page containing the login form
  */
@@ -40,7 +41,7 @@ export default function Login() {
   const route = useRouter();
 
   // login mutation hook
-  const { mutate } = useLoginUser();
+  const { mutate, isPending, error } = useLoginUser();
 
   //handle login form submit
   const handleLoginSubmit = (data: LoginSchema) => {
@@ -110,7 +111,12 @@ export default function Login() {
                 )}
               />
             </FieldGroup>
-            <Button type="submit" aria-label="sign-in">
+            {error?.message ? (
+              <p className="text-center text-sm text-red-500">
+                {error?.response?.data?.message}
+              </p>
+            ) : null}
+            <Button type="submit" aria-label="sign-in" disabled={isPending}>
               Sign in
             </Button>
           </form>
