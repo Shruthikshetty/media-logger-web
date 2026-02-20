@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { ThemeSwitcher } from '../components/theme-switch';
 import { Button } from '../components/ui/button';
+import { successToast } from '../lib/toast-wrapper';
 
 // TODO page in dev
 /**
@@ -16,7 +17,7 @@ export default function Home() {
       <div className="flex items-center justify-center">
         <ThemeSwitcher />
       </div>
-      <Button>Button</Button>
+      <Button onClick={() => successToast('test')}>Button</Button>
       <Button variant="default" onClick={() => route.push('/login')}>
         Login
       </Button>

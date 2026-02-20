@@ -24,7 +24,7 @@ import {
 } from '@/src/components/ui/field';
 import { useLoginUser } from '@/src/services/auth-service';
 import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
+import { errorToast, successToast } from '@/src/lib/toast-wrapper';
 
 /**
  * Login page containing the login form
@@ -48,10 +48,10 @@ export default function Login() {
     mutate(data, {
       onSuccess: () => {
         route.replace('/');
-        toast.success('Login successful');
+        successToast('Login success');
       },
       onError: (err) => {
-        toast.error(
+        errorToast(
           err.response?.data?.message || 'Login failed try after sometime',
         );
       },
