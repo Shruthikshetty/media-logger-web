@@ -72,10 +72,10 @@ export default function Login() {
         <CardContent>
           <form
             id="login-form"
-            className="flex flex-col gap-5"
+            className="flex flex-col gap-6"
             onSubmit={handleSubmit(handleLoginSubmit)}
           >
-            <FieldGroup>
+            <FieldGroup className="flex flex-col gap-4">
               <Controller
                 control={control}
                 name="email"
@@ -99,7 +99,17 @@ export default function Login() {
                 name="password"
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel>Password</FieldLabel>
+                    <div className="flex items-center justify-between">
+                      <FieldLabel>Password</FieldLabel>
+                      {/* TODO this functionality will be implemented later */}
+                      <Button
+                        variant="link"
+                        className="p-0 font-normal"
+                        type="button"
+                      >
+                        forgot password
+                      </Button>
+                    </div>
                     <Input
                       {...field}
                       type="password"
@@ -118,10 +128,22 @@ export default function Login() {
                 {error.response.data.message}
               </p>
             ) : null}
-            <Button type="submit" aria-label="sign-in" disabled={isPending}>
+            <Button
+              type="submit"
+              aria-label="sign-in"
+              disabled={isPending}
+              className="cursor-pointer"
+            >
               Sign in
             </Button>
           </form>
+          <div className="mt-2 flex items-center justify-center gap-1 text-sm">
+            <p>Don&apos;t have an account?</p>
+            {/* TODO this functionality will be implemented later */}
+            <Button variant="link" className="p-0" type="button">
+              Create Account
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </div>
