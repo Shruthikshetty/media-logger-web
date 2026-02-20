@@ -33,7 +33,7 @@ const initialState = {
 };
 
 //create auth store
-export const userAuthStore = create<authStore>((set) => ({
+export const useAuthStore = create<authStore>((set) => ({
   ...initialState,
   /**
    * handler to set isLoggedIn
@@ -43,4 +43,8 @@ export const userAuthStore = create<authStore>((set) => ({
    * handler to set user
    */
   setUser: (user: User | null) => set({ user }),
+  /**
+   * rest thr store
+   */
+  resetAuth: () => set(initialState),
 }));

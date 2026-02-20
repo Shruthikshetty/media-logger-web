@@ -25,6 +25,9 @@ import {
 import { useLoginUser } from '@/src/services/auth-service';
 import { useRouter } from 'next/navigation';
 import { errorToast, successToast } from '@/src/lib/toast-wrapper';
+import { useAuthStore } from '@/src/state-management/auth.store';
+import Cookies from 'js-cookie';
+import { COOKIE_EXPIRY, COOKIE_NAMES } from '@/src/constants/config.constants';
 
 /**
  * Login page containing the login form
@@ -37,6 +40,10 @@ export default function Login() {
     defaultValues: loginDefaultValues,
   });
 
+  // get setters from auth store
+  const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
+  const setUser = useAuthStore((state) => state.setUser);
+
   // route for navigation
   const route = useRouter();
 
@@ -46,7 +53,17 @@ export default function Login() {
   //handle login form submit
   const handleLoginSubmit = (data: LoginSchema) => {
     mutate(data, {
-      onSuccess: () => {
+      onSuccess: (res) => {
+        // set user in store
+        setIsLoggedIn(true);
+        setUser(res.data.user);
+        // set token in cookie
+        Cookies.set(COOKIE_NAMES.token, res?.data?.token, {
+          expires: COOKIE_EXPIRY.token,
+          path: '/', // accessible across the app
+          secure: true,
+        });
+        // navigate to home page
         route.replace('/');
         successToast('Login success');
       },
