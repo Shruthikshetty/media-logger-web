@@ -133,7 +133,7 @@ or
 npm run storybook
 ```
 
-### storybook link 
+### storybook link
 
 https://shruthikshetty.github.io/media-logger-web/
 
