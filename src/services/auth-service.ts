@@ -2,10 +2,11 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { User } from '../state-management/auth.store';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { ApiError } from '../types/global.types';
 import { MUTATION_KEYS } from '../constants/service-key.constants';
 import { Endpoints } from '../constants/endpoints.constants';
+import apiClient from '../lib/api-client';
 
 type RequestAuthType = {
   email: string;
@@ -25,6 +26,6 @@ export function useLoginUser() {
   return useMutation<ResponseAuthType, AxiosError<ApiError>, RequestAuthType>({
     mutationKey: [MUTATION_KEYS.auth.login],
     mutationFn: async (req: RequestAuthType) =>
-      axios.post(Endpoints.login, req).then((res) => res.data),
+      apiClient.post(Endpoints.login, req).then((res) => res.data),
   });
 }

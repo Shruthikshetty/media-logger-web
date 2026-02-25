@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import { ThemeSwitcher } from '../components/theme-switch';
 import { Button } from '../components/ui/button';
 import { useAuthStore } from '../state-management/auth.store';
+import { useGetUserDetails } from '../services/user-service';
 
 // TODO page in dev
 /**
@@ -10,12 +11,11 @@ import { useAuthStore } from '../state-management/auth.store';
  */
 export default function Home() {
   const route = useRouter();
-
   // get user data from auth store
-  const user = useAuthStore((state) => state.user);
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
-  console.log(user);
+  // fetch user details
+  const { data: userDetails } = useGetUserDetails();
 
   return (
     <div className="m-auto flex flex-col items-center justify-center gap-2 text-center">
@@ -31,8 +31,8 @@ export default function Home() {
       ) : (
         <div className="text-fo">
           <h1 className="mb-2 text-xl font-bold">Welcome</h1>
-          <p>{user?.name}</p>
-          <p>{user?.email}</p>
+          <p>{userDetails?.data?.name}</p>
+          <p>{userDetails?.data?.email}</p>
         </div>
       )}
     </div>

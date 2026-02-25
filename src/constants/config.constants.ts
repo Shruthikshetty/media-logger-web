@@ -17,3 +17,8 @@ export const COOKIE_NAMES = {
 export const COOKIE_EXPIRY = {
   token: 1, // days
 };
+
+/**
+ * user details stale time
+ */
+export const UserDataStaleTime = 5 * 60 * 1000; // 5 minutes
