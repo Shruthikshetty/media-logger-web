@@ -4,7 +4,7 @@
 
 export const QUERY_KEYS = {
   user: {
-    // todo
+    userDetails: 'user-details',
   },
 };
 

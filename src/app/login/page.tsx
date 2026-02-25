@@ -24,7 +24,10 @@ import {
 } from '@/src/components/ui/field';
 import { useLoginUser } from '@/src/services/auth-service';
 import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
+import { errorToast, successToast } from '@/src/lib/toast-wrapper';
+import { useAuthStore } from '@/src/state-management/auth.store';
+import Cookies from 'js-cookie';
+import { COOKIE_EXPIRY, COOKIE_NAMES } from '@/src/constants/config.constants';
 
 /**
  * Login page containing the login form
@@ -37,6 +40,10 @@ export default function Login() {
     defaultValues: loginDefaultValues,
   });
 
+  // get setters from auth store
+  const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
+  const setUser = useAuthStore((state) => state.setUser);
+
   // route for navigation
   const route = useRouter();
 
@@ -46,12 +53,22 @@ export default function Login() {
   //handle login form submit
   const handleLoginSubmit = (data: LoginSchema) => {
     mutate(data, {
-      onSuccess: () => {
+      onSuccess: (res) => {
+        // set token in cookie
+        Cookies.set(COOKIE_NAMES.token, res?.data?.token, {
+          expires: COOKIE_EXPIRY.token,
+          path: '/', // accessible across the app
+          secure: true,
+        });
+        // set user in store
+        setIsLoggedIn(true);
+        setUser(res.data.user);
+        // navigate to home page
+        successToast('Login success');
         route.replace('/');
-        toast.success('Login successful');
       },
       onError: (err) => {
-        toast.error(
+        errorToast(
           err.response?.data?.message || 'Login failed try after sometime',
         );
       },
@@ -72,10 +89,10 @@ export default function Login() {
         <CardContent>
           <form
             id="login-form"
-            className="flex flex-col gap-5"
+            className="flex flex-col gap-6"
             onSubmit={handleSubmit(handleLoginSubmit)}
           >
-            <FieldGroup>
+            <FieldGroup className="flex flex-col gap-4">
               <Controller
                 control={control}
                 name="email"
@@ -99,7 +116,18 @@ export default function Login() {
                 name="password"
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel>Password</FieldLabel>
+                    <div className="flex items-center justify-between">
+                      <FieldLabel>Password</FieldLabel>
+                      {/* TODO this functionality will be implemented later */}
+                      <Button
+                        variant="link"
+                        className="p-0 font-normal"
+                        type="button"
+                        aria-label="forgot password"
+                      >
+                        forgot password
+                      </Button>
+                    </div>
                     <Input
                       {...field}
                       type="password"
@@ -118,10 +146,27 @@ export default function Login() {
                 {error.response.data.message}
               </p>
             ) : null}
-            <Button type="submit" aria-label="sign-in" disabled={isPending}>
+            <Button
+              type="submit"
+              aria-label="sign in"
+              disabled={isPending}
+              className="cursor-pointer"
+            >
               Sign in
             </Button>
           </form>
+          <div className="mt-2 flex items-center justify-center gap-1 text-sm">
+            <p>Don&apos;t have an account?</p>
+            {/* TODO this functionality will be implemented later */}
+            <Button
+              variant="link"
+              className="p-0"
+              type="button"
+              aria-label="sign up"
+            >
+              Create Account
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </div>
