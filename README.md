@@ -1,3 +1,5 @@
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/Shruthikshetty/media-logger-web?utm_source=oss&utm_medium=github&utm_campaign=Shruthikshetty%2Fmedia-logger-web&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
+
 # Media Logger Web
 
 Media Logger Web is a web frontend built with Next.js for logging and exploring media such as movies, shows, and games.

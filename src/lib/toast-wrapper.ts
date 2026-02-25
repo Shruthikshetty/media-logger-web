@@ -6,7 +6,7 @@ import { toast } from 'sonner';
  */
 export const successToast = (message: string, description?: string) => {
   toast.success(message, {
-    className: '!bg-success !text-white',
+    className: 'bg-success! text-white!',
     description: description,
   });
 };
@@ -17,7 +17,7 @@ export const successToast = (message: string, description?: string) => {
  */
 export const errorToast = (message: string, description?: string) => {
   toast.error(message, {
-    className: '!bg-destructive !text-white',
+    className: 'bg-destructive! text-white!',
     description: description,
   });
 };

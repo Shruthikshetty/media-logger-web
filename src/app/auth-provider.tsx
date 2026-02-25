@@ -17,7 +17,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useLayoutEffect(() => {
     const token = Cookies.get(COOKIE_NAMES.token);
     if (token) {
-      // fetch user data
       // set is logged in to true
       setIsLoggedIn(true);
     }

@@ -54,15 +54,15 @@ export default function Login() {
   const handleLoginSubmit = (data: LoginSchema) => {
     mutate(data, {
       onSuccess: (res) => {
-        // set user in store
-        setIsLoggedIn(true);
-        setUser(res.data.user);
         // set token in cookie
         Cookies.set(COOKIE_NAMES.token, res?.data?.token, {
           expires: COOKIE_EXPIRY.token,
           path: '/', // accessible across the app
           secure: true,
         });
+        // set user in store
+        setIsLoggedIn(true);
+        setUser(res.data.user);
         // navigate to home page
         route.replace('/');
         successToast('Login success');
@@ -123,6 +123,7 @@ export default function Login() {
                         variant="link"
                         className="p-0 font-normal"
                         type="button"
+                        aria-label="forgot password"
                       >
                         forgot password
                       </Button>
@@ -147,7 +148,7 @@ export default function Login() {
             ) : null}
             <Button
               type="submit"
-              aria-label="sign-in"
+              aria-label="sign in"
               disabled={isPending}
               className="cursor-pointer"
             >
@@ -157,7 +158,12 @@ export default function Login() {
           <div className="mt-2 flex items-center justify-center gap-1 text-sm">
             <p>Don&apos;t have an account?</p>
             {/* TODO this functionality will be implemented later */}
-            <Button variant="link" className="p-0" type="button">
+            <Button
+              variant="link"
+              className="p-0"
+              type="button"
+              aria-label="sign up"
+            >
               Create Account
             </Button>
           </div>

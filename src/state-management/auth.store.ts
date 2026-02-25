@@ -24,6 +24,7 @@ type authStore = {
   setIsLoggedIn: (isLoggedIn: boolean) => void;
   user: User | null;
   setUser: (user: User | null) => void;
+  resetAuth: () => void;
 };
 
 // define initial state
@@ -44,7 +45,7 @@ export const useAuthStore = create<authStore>((set) => ({
    */
   setUser: (user: User | null) => set({ user }),
   /**
-   * rest thr store
+   * rest the store
    */
   resetAuth: () => set(initialState),
 }));

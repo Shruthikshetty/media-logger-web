@@ -29,7 +29,7 @@ export default function Home() {
           Login
         </Button>
       ) : (
-        <div className="text-fo">
+        <div className="text-foreground">
           <h1 className="mb-2 text-xl font-bold">Welcome</h1>
           <p>{userDetails?.data?.name}</p>
           <p>{userDetails?.data?.email}</p>

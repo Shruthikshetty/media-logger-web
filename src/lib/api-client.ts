@@ -36,12 +36,12 @@ axiosInstance.interceptors.response.use(
   (error) => {
     const status = error.response?.status;
     if (status === 401) {
-      // set the is logged in to false in user store
-      useAuthStore.getState().setIsLoggedIn(false);
+      // reset the auth store
+      useAuthStore.getState().resetAuth();
       // remove the token from cookie
       Cookies.remove(COOKIE_NAMES.token);
-      // reject with error
     }
+    // reject with error
     return Promise.reject(error);
   },
 );
