@@ -45,7 +45,7 @@ export const useAuthStore = create<authStore>((set) => ({
    */
   setUser: (user: User | null) => set({ user }),
   /**
-   * rest the store
+   * reset the store
    */
   resetAuth: () => set(initialState),
 }));

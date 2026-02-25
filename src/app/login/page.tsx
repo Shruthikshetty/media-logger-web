@@ -64,8 +64,8 @@ export default function Login() {
         setIsLoggedIn(true);
         setUser(res.data.user);
         // navigate to home page
-        route.replace('/');
         successToast('Login success');
+        route.replace('/');
       },
       onError: (err) => {
         errorToast(

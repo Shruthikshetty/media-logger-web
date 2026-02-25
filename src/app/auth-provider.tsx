@@ -8,7 +8,7 @@ import { useLayoutEffect } from 'react';
 /**
  * This component provides the authentication context to the app
  * check if the user token is present in the cookie
- * if present set the user in the store
+ * if present set the is logged in to true
  */
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
