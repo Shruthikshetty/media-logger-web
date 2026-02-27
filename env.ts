@@ -4,6 +4,7 @@ import { z } from 'zod';
 // create a env schema
 const EnvSchema = z.object({
   NEXT_PUBLIC_BASE_URL: z.url(),
+  NEXT_PUBLIC_GITHUB_LINK: z.url(),
 });
 
 // infer the env type
@@ -14,6 +15,7 @@ let tempEnv: ENV;
 try {
   tempEnv = EnvSchema.parse({
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+    NEXT_PUBLIC_GITHUB_LINK: process.env.NEXT_PUBLIC_GITHUB_LINK,
   });
 } catch (err) {
   const error = err as z.ZodError;
