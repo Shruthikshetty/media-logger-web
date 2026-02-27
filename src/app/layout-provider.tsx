@@ -9,6 +9,8 @@ import { useState } from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from '../components/ui/sonner';
 import AuthProvider from './auth-provider';
+import TopBar from '../components/top-bar';
+import AppFooter from '../components/app-footer';
 
 /**
  * This component wraps all the required providers for the app
@@ -21,7 +23,11 @@ const AppLayoutProviders = ({ children }: { children: React.ReactNode }) => {
     <ThemeProvider attribute="class" defaultTheme="blurple" themes={APP_THEMES}>
       <QueryClientProvider client={queryClient}>
         <Toaster position="bottom-right" />
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <TopBar />
+          <div className="h-screen pt-14">{children}</div>
+          <AppFooter />
+        </AuthProvider>
         {/* Dev tools only active in dev mode */}
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
