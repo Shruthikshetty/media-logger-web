@@ -46,7 +46,12 @@ const AppFooter = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Image src={'/github.svg'} alt={'/'} width={20} height={20} />
+                <Image
+                  src={'/github.svg'}
+                  alt={'github'}
+                  width={20}
+                  height={20}
+                />
                 <span className="sr-only">GitHub</span>
               </a>
             </li>
