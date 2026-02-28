@@ -1,8 +1,7 @@
 'use client';
 
 import { ArrowLeft, Bell } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
+import AppLogo from './app-logo';
 //@TODO inprogress
 /** App top bar */
 const TopBar = () => {
@@ -11,15 +10,7 @@ const TopBar = () => {
       <div className="flex flex-row items-center gap-3">
         <ArrowLeft className="h-full" />
         {/* logo */}
-        <Link href={'/'}>
-          <Image
-            height={40}
-            width={40}
-            src={'/app-logo.svg'}
-            alt={'app logo'}
-            className="rounded-lg"
-          />
-        </Link>
+        <AppLogo />
         {/* pages details to be added */}
         <p>Dashboard</p>
       </div>

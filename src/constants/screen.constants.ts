@@ -1,5 +1,4 @@
 import env from '@/env';
-import { time } from 'console';
 import { Heart, Palette, Sparkles, Zap } from 'lucide-react';
 
 // themes icons options
