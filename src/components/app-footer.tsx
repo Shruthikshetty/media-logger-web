@@ -5,6 +5,7 @@ import {
   APP_FOOTER_CONTACTS,
   APP_FOOTER_NAVIGATES,
 } from '@/src/constants/screen.constants';
+import { Separator } from './ui/separator';
 
 /**
  * This component is the footer of the app
@@ -66,7 +67,7 @@ const AppFooter = () => {
         </div>
       </div>
       {/* separator */}
-      <div className="bg-border h-full w-full border-t" />
+      <Separator />
       {/* Attributions  */}
       <div>
         <p className="text-muted-foreground mb-2 text-center text-xs">

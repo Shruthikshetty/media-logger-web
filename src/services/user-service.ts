@@ -20,9 +20,9 @@ export const useGetUserDetails = () => {
     queryKey: [QUERY_KEYS.user.userDetails],
     enabled: isLoggedIn, // enabled only if user is logged in
     staleTime: UserDataStaleTime,
-    queryFn: async () =>
+    queryFn: async ({ signal }) =>
       apiClient
-        .get<ResponseUserDetails>(Endpoints.baseUser)
+        .get<ResponseUserDetails>(Endpoints.baseUser, { signal })
         .then((res) => res.data),
   });
 };
