@@ -26,8 +26,14 @@ const TopBarSearch = () => {
         </InputGroupAddon>
       </InputGroup>
       <Sheet>
-        <SheetTrigger className="border-border bg-input/30 rounded-lg border p-1.5 sm:hidden">
-          <Search className="hover:text-primary min-h-4 min-w-4 hover:cursor-pointer sm:hidden" />
+        <SheetTrigger
+          className="border-border bg-input/30 rounded-lg border p-1.5 sm:hidden"
+          aria-label="Open search"
+        >
+          <Search
+            className="hover:text-primary min-h-4 min-w-4 hover:cursor-pointer sm:hidden"
+            aria-hidden="true"
+          />
         </SheetTrigger>
         <SheetContent side="top">
           <SheetHeader>

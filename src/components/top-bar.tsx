@@ -33,7 +33,7 @@ const TopBar = () => {
         {/* search  */}
         <TopBarSearch />
         {/* filter */}
-        <Button variant="outline" className="group">
+        <Button variant="outline" className="group" aria-label="Open filters">
           <Filter className="group-hover:text-primary size-4" />
           <p className="hidden sm:block">Filter</p>
         </Button>

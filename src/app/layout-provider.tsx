@@ -24,9 +24,11 @@ const AppLayoutProviders = ({ children }: { children: React.ReactNode }) => {
       <QueryClientProvider client={queryClient}>
         <Toaster position="bottom-right" />
         <AuthProvider>
-          <TopBar />
-          <div className="min-h-screen pt-14">{children}</div>
-          <AppFooter />
+          <div className="flex min-h-screen flex-col justify-between gap-2">
+            <TopBar />
+            <div className="grow pt-14">{children}</div>
+            <AppFooter />
+          </div>
         </AuthProvider>
         {/* Dev tools only active in dev mode */}
         <ReactQueryDevtools initialIsOpen={false} />
