@@ -25,7 +25,7 @@ const AppLayoutProviders = ({ children }: { children: React.ReactNode }) => {
         <Toaster position="bottom-right" />
         <AuthProvider>
           <TopBar />
-          <div className="h-screen pt-14">{children}</div>
+          <div className="min-h-screen pt-14">{children}</div>
           <AppFooter />
         </AuthProvider>
         {/* Dev tools only active in dev mode */}
