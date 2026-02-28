@@ -7,7 +7,7 @@ import Link from 'next/link';
  */
 const AppLogo = () => {
   return (
-    <Link href={'/'}>
+    <Link href={'/'} aria-label="Home">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         version="1.1"
