@@ -1,8 +1,10 @@
 'use client';
 
-import { ArrowLeft, Bell } from 'lucide-react';
+import { ArrowLeft, Bell, Search } from 'lucide-react';
 import AppLogo from './app-logo';
-//@TODO inprogress
+import { InputGroup, InputGroupAddon, InputGroupInput } from './ui/input-group';
+
+//@TODO some of the functionality will be implemented later
 /** App top bar */
 const TopBar = () => {
   return (
@@ -16,6 +18,12 @@ const TopBar = () => {
       </div>
       <div className="flex flex-row items-center gap-3">
         {/* search  */}
+        <InputGroup>
+          <InputGroupInput placeholder="Search media..." />
+          <InputGroupAddon>
+            <Search />
+          </InputGroupAddon>
+        </InputGroup>
         {/* filter */}
         {/* layout switch  */}
         {/* notification */}
