@@ -1,5 +1,15 @@
 import env from '@/env';
-import { Heart, Palette, Sparkles, Zap } from 'lucide-react';
+import {
+  Calendar,
+  Clapperboard,
+  Gamepad2,
+  Heart,
+  Palette,
+  Sparkles,
+  TrendingUp,
+  TvMinimalPlay,
+  Zap,
+} from 'lucide-react';
 
 // themes icons options
 export const THEME_SELECTOR_OPTIONS = [
@@ -65,3 +75,28 @@ export const APP_FOOTER_ATTRIBUTES = [
     href: 'https://rawg.io/',
   },
 ] as const;
+
+export const DASHBOARD_TABS = [
+  {
+    value: 'overview',
+    label: 'Overview',
+    icon: TrendingUp,
+  },
+  {
+    value: 'timeline',
+    label: 'Timeline',
+    icon: Calendar,
+  },
+  {
+    value: 'movies',
+    label: 'Movies',
+    icon: Clapperboard,
+    navigate: '/movie',
+  },
+  {
+    value: 'tv-shows',
+    label: 'TV Shows',
+    icon: TvMinimalPlay,
+    navigate: '/tv-show',
+  },
+];
