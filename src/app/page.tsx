@@ -1,9 +1,5 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { ThemeSwitcher } from '../components/theme-switch';
-import { Button } from '../components/ui/button';
-import { useAuthStore } from '../state-management/auth.store';
-import { useGetUserDetails } from '../services/user-service';
 import {
   Tabs,
   TabsContent,
@@ -12,6 +8,7 @@ import {
 } from '../components/ui/tabs';
 import { DASHBOARD_TABS } from '../constants/screen.constants';
 import { useState } from 'react';
+import OverviewTab from '../components/dashboard/overview-tab';
 
 /**
  * Home page of the app
@@ -21,9 +18,6 @@ export default function Dashboard() {
     DASHBOARD_TABS[0].value,
   );
   const route = useRouter();
-  // get user data from auth store
-  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
-
   // function to handle tab change
   const handleTabChange = (value: string) => {
     // check if the tab has a navigate property
@@ -62,7 +56,7 @@ export default function Dashboard() {
           ))}
         </TabsList>
         {/* render all the contents tap contents to be added if a new tab is added*/}
-        <TabsContent value={'overview'}>overview tab</TabsContent>
+        <OverviewTab />
         <TabsContent value={'timeline'}>timeline tab</TabsContent>
       </Tabs>
     </div>
