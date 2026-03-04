@@ -2,7 +2,6 @@ import env from '@/env';
 import {
   Calendar,
   Clapperboard,
-  Gamepad2,
   Heart,
   Palette,
   Sparkles,
