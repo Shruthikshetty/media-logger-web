@@ -23,3 +23,12 @@ export interface FilterLimits<T = number> {
   gte: T;
   lte: T;
 }
+
+export type OnModelType = 'Movie' | 'TVShow' | 'Game';
+
+export type MediaStatus =
+  | 'Planning'
+  | 'Playing'
+  | 'Watching'
+  | 'Completed'
+  | 'Dropped ';

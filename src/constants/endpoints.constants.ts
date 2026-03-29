@@ -6,4 +6,6 @@
 export const Endpoints = {
   login: `/api/auth/login`,
   baseUser: `/api/user`,
+  discoverGames: `/api/discover/games`,
+  discoverMovies: `/api/discover/movies`,
 };
