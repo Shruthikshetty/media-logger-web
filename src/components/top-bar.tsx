@@ -21,7 +21,7 @@ const TopBar = () => {
   const { data: user } = useGetUserDetails();
 
   return (
-    <header className="bg-background/20 fixed flex h-13 w-full flex-row items-center justify-between gap-1 overflow-hidden px-5 backdrop-blur-sm">
+    <header className="bg-background/20 fixed z-60 flex h-13 w-full flex-row items-center justify-between gap-1 overflow-hidden px-5 backdrop-blur-sm">
       <div className="flex flex-row items-center gap-3">
         <ArrowLeft className="h-full" />
         {/* logo */}

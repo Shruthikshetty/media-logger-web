@@ -90,13 +90,13 @@ export const DASHBOARD_TABS = [
     value: 'movies',
     label: 'Movies',
     icon: Clapperboard,
-    navigate: '/movie',
+    navigate: '/movies',
   },
   {
     value: 'tv-shows',
     label: 'TV Shows',
     icon: TvMinimalPlay,
-    navigate: '/tv-show',
+    navigate: '/tv-shows',
   },
 ];
 

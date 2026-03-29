@@ -58,6 +58,7 @@ export default function Dashboard() {
         {/* render all the contents tap contents to be added if a new tab is added*/}
         <OverviewTab />
         <TabsContent value={'timeline'}>timeline tab</TabsContent>
+        <TabsContent value={'movies'}>movies tab</TabsContent>
       </Tabs>
     </div>
   );
