@@ -2,6 +2,9 @@ import { TabsContent } from '../ui/tabs';
 import StatCard from '../stat-card';
 import LoginPlaceholder from '../login-placeholder';
 import { Clock, Film, Gamepad, Star, TrendingUp, Tv } from 'lucide-react';
+import MyCollectionCard from '../my-collection-card';
+import MediaLinkCard from '../media-link-card';
+import { OVERVIEW_QUICK_LINKS } from '@/src/constants/screen.constants';
 
 /**
  * this contains the content of overview tab used in the dashboard page
@@ -55,7 +58,11 @@ const OverviewTab = () => {
   ];
   // fetch dashboard stats
   return (
-    <TabsContent value={'overview'} className="w-full px-5 py-4">
+    <TabsContent
+      value={'overview'}
+      className="flex w-full flex-col gap-5 px-5 py-4"
+    >
+      {/* stats card */}
       <LoginPlaceholder message="Login to check your stats">
         <div className="grid w-full grid-cols-1 justify-center gap-3 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
           {overviewStats.map((stat) => (
@@ -70,6 +77,22 @@ const OverviewTab = () => {
           ))}
         </div>
       </LoginPlaceholder>
+      {/* my collection card */}
+      <LoginPlaceholder message="Login to check your collection">
+        {/* @TODO yet to implement */}
+        <MyCollectionCard href={'/'} />
+      </LoginPlaceholder>
+      {/* quick link cards */}
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+        {OVERVIEW_QUICK_LINKS.map((link) => (
+          <MediaLinkCard
+            key={link.title}
+            href={link.href}
+            title={link.title}
+            description={link.description}
+          />
+        ))}
+      </div>
     </TabsContent>
   );
 };

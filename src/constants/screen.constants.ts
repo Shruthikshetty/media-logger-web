@@ -99,3 +99,21 @@ export const DASHBOARD_TABS = [
     navigate: '/tv-show',
   },
 ];
+
+export const OVERVIEW_QUICK_LINKS = [
+  {
+    title: '🎮 Browse Games',
+    description: 'Discover and track games',
+    href: '/games',
+  },
+  {
+    title: '🎬 Browse Movies',
+    description: 'Explore and log movies',
+    href: '/movie',
+  },
+  {
+    title: '📺 Browse TV Shows',
+    description: 'Track your favorite tv shows',
+    href: '/tv-show',
+  },
+];
