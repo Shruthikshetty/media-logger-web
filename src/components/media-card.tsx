@@ -9,7 +9,8 @@ import { cn } from '../lib/utils';
 import StatusBadge from './status-badge';
 
 /**
- * A component that displays the media details with the image as background
+ * A component that displays media (Movie, Game, or TV Show) information in a card format.
+ * Includes poster image, rating, and status controls.
  */
 const MediaCard = ({
   mediaType,

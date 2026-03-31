@@ -14,4 +14,7 @@ export default meta;
 
 //Stories
 
+/**
+ * A simple example of a card that links to user media collection.
+ */
 export const SimpleExample: StoryObj = {};
