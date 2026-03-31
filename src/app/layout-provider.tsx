@@ -28,6 +28,7 @@ const AppLayoutProviders = ({ children }: { children: React.ReactNode }) => {
   const [queryClient] = useState(
     () =>
       new QueryClient({
+        // globally handle errors for all queries
         queryCache: new QueryCache({
           onError: (error) => {
             const message = isAxiosError<ApiError>(error)
@@ -36,6 +37,7 @@ const AppLayoutProviders = ({ children }: { children: React.ReactNode }) => {
             errorToast(message);
           },
         }),
+        // globally handle errors for all mutations
         mutationCache: new MutationCache({
           onError: (error) => {
             const message = isAxiosError<ApiError>(error)

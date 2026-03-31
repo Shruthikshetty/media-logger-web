@@ -1,19 +1,11 @@
 'use client';
 import MediaCard from '@/src/components/media-card';
-import { errorToast } from '@/src/lib/toast-wrapper';
 import { useGetDiscoverMovies } from '@/src/services/discover-service';
-import { useEffect } from 'react';
 
 //@TODO this page in progress and not completed
 const MoviesTab = () => {
   // fetch discover movies
-  const { data, error } = useGetDiscoverMovies();
-
-  useEffect(() => {
-    if (error) {
-      errorToast(error.response?.data?.message ?? 'Something went wrong');
-    }
-  }, [error]);
+  const { data } = useGetDiscoverMovies();
 
   return (
     <div className="flex flex-col items-center p-5">
