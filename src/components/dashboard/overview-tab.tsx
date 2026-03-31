@@ -32,7 +32,7 @@ const OverviewTab = () => {
       description: '+3 this month',
       statNumber: 22,
       icon: Tv,
-      iconStyles: 'text-purple-400',
+      iconStyles: 'text-purple-500',
     },
     {
       title: 'Hours Logged',
