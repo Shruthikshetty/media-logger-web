@@ -35,7 +35,7 @@ export type Movie = {
   youtubeVideoId?: string;
 };
 
-type UserEntry = {
+export type UserMediaEntry = {
   _id: string;
   user: string;
   onModel: OnModelType;
@@ -45,13 +45,15 @@ type UserEntry = {
 };
 
 export type MovieWithUserEntry = Movie & {
-  userEntry: UserEntry;
+  userEntry: UserMediaEntry;
 };
 
 type ResponseDiscoverMovies = {
   success: boolean;
-  data: MovieWithUserEntry[];
-  pagination: Pagination;
+  data: {
+    movies: MovieWithUserEntry[];
+    pagination: Pagination;
+  };
 };
 
 /**

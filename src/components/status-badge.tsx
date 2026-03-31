@@ -23,7 +23,7 @@ const StatusBadge = ({ status }: { status?: MediaStatus }) => {
     <Badge
       variant="outline"
       className={cn(
-        'px-1.5 py-0.5',
+        'cursor-default px-1.5 py-0.5',
         statusBadgeStyles?.[status] ?? 'bg-secondary/50 border-border border',
       )}
     >

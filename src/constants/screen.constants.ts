@@ -2,10 +2,13 @@ import env from '@/env';
 import {
   Calendar,
   Clapperboard,
+  Film,
+  Gamepad,
   Heart,
   Palette,
   Sparkles,
   TrendingUp,
+  Tv,
   TvMinimalPlay,
   Zap,
 } from 'lucide-react';
@@ -117,3 +120,18 @@ export const OVERVIEW_QUICK_LINKS = [
     href: '/tv-show',
   },
 ];
+
+export const MEDIA_ICON_MAPPING = {
+  Game: {
+    icon: Gamepad,
+    color: 'text-green-500',
+  },
+  Movie: {
+    icon: Film,
+    color: 'text-blue-500',
+  },
+  TvShow: {
+    icon: Tv,
+    color: 'text-purple-400',
+  },
+};

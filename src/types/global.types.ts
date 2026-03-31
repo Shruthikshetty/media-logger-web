@@ -31,4 +31,4 @@ export type MediaStatus =
   | 'Playing'
   | 'Watching'
   | 'Completed'
-  | 'Dropped ';
+  | 'Dropped';
