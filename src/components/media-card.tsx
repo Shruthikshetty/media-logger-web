@@ -38,16 +38,27 @@ const MediaCard = ({
       <CardContent
         className="m-0 cursor-pointer overflow-hidden rounded-lg p-0"
         onClick={onCardClick}
+        role="button"
+        tabIndex={0}
+        // handle enter and space key press
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onCardClick();
+          }
+        }}
       >
         <div className="relative aspect-2/3 w-full">
           <div className="absolute z-10 flex w-full flex-row justify-between p-2">
             <div className="bg-background/70 flex flex-row items-center gap-1 rounded-sm p-1 text-sm">
               {Icon && <Icon.icon className={cn('size-4', Icon.color)} />}
             </div>
-            <p className="bg-background/70 flex flex-row items-center gap-1 rounded-xl px-2 text-sm">
-              <Star className="size-3 text-yellow-500" fill="currentColor" />
-              {rating}
-            </p>
+            {rating ? (
+              <p className="bg-background/70 flex flex-row items-center gap-1 rounded-xl px-2 text-sm">
+                <Star className="size-3 text-yellow-500" fill="currentColor" />
+                {rating}
+              </p>
+            ) : null}
           </div>
           {/* rating and type of media */}
           {imageUrl && (

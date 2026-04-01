@@ -56,7 +56,7 @@ const CollapsableBadgeList = ({
         <Badge
           className={cn(
             'border-ui-600 bg-muted-foreground/50 flex flex-row items-center rounded-full border-0 p-0 px-2',
-            !isDisabled ? 'hover:opacity-80 active:scale-95' : '',
+            !isDisabled ? 'hover:scale-95 hover:opacity-80' : '',
             style?.buttonBadge,
           )}
           onClick={(e) => {
@@ -79,7 +79,8 @@ const CollapsableBadgeList = ({
         isExpanded && (
           <Badge
             className={cn(
-              'border-ui-600 bg-muted-foreground/50 flex flex-row items-center rounded-full border-0 px-2 hover:opacity-80 active:scale-95',
+              'border-ui-600 bg-muted-foreground/50 flex flex-row items-center rounded-full border-0 px-2',
+              !isDisabled ? 'hover:scale-95 hover:opacity-80' : '',
               style?.buttonBadge,
             )}
             onClick={(e) => {

@@ -50,7 +50,7 @@ const OverviewTab = () => {
     },
     {
       title: 'Completion Rate',
-      description: 'wdw',
+      description: '+97 this month',
       statNumber: 22,
       icon: TrendingUp,
       iconStyles: 'text-pink-400',

@@ -112,12 +112,12 @@ export const OVERVIEW_QUICK_LINKS = [
   {
     title: '🎬 Browse Movies',
     description: 'Explore and log movies',
-    href: '/movie',
+    href: '/movies',
   },
   {
     title: '📺 Browse TV Shows',
     description: 'Track your favorite tv shows',
-    href: '/tv-show',
+    href: '/tv-shows',
   },
 ];
 
