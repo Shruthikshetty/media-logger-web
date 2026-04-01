@@ -23,8 +23,8 @@ const MediaLinkCard = ({
   description,
 }: MediaLinkCardProps): JSX.Element => {
   return (
-    <Link href={href} aria-label={`media link ${title}`}>
-      <Card className="hover:bg-card/70 bg-card/50 group border-border/50 rounded-lg backdrop-blur-sm transition-colors">
+    <Link href={href} className="h-full" aria-label={`media link ${title}`}>
+      <Card className="hover:bg-card/70 bg-card/50 group border-border/50 h-full rounded-lg backdrop-blur-sm transition-colors">
         <CardContent className="flex flex-row items-center justify-between gap-5">
           <div className="flex flex-col gap-2 align-baseline">
             <CardTitle className="text-foreground text-lg">{title}</CardTitle>

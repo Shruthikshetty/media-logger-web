@@ -24,7 +24,7 @@ import {
 } from '@/src/components/ui/field';
 import { useLoginUser } from '@/src/services/auth-service';
 import { useRouter } from 'next/navigation';
-import { errorToast, successToast } from '@/src/lib/toast-wrapper';
+import { successToast } from '@/src/lib/toast-wrapper';
 import { useAuthStore } from '@/src/state-management/auth.store';
 import Cookies from 'js-cookie';
 import { COOKIE_EXPIRY, COOKIE_NAMES } from '@/src/constants/config.constants';
@@ -66,11 +66,6 @@ export default function Login() {
         // navigate to home page
         successToast('Login success');
         route.replace('/');
-      },
-      onError: (err) => {
-        errorToast(
-          err.response?.data?.message || 'Login failed try after sometime',
-        );
       },
     });
   };

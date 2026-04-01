@@ -6,6 +6,9 @@ export const QUERY_KEYS = {
   user: {
     userDetails: 'user-details',
   },
+  discover: {
+    movies: 'discover-movies',
+  },
 };
 
 export const MUTATION_KEYS = {

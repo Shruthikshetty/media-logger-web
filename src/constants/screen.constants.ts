@@ -1,5 +1,17 @@
 import env from '@/env';
-import { Heart, Palette, Sparkles, Zap } from 'lucide-react';
+import {
+  Calendar,
+  Clapperboard,
+  Film,
+  Gamepad,
+  Heart,
+  Palette,
+  Sparkles,
+  TrendingUp,
+  Tv,
+  TvMinimalPlay,
+  Zap,
+} from 'lucide-react';
 
 // themes icons options
 export const THEME_SELECTOR_OPTIONS = [
@@ -65,3 +77,61 @@ export const APP_FOOTER_ATTRIBUTES = [
     href: 'https://rawg.io/',
   },
 ] as const;
+
+export const DASHBOARD_TABS = [
+  {
+    value: 'overview',
+    label: 'Overview',
+    icon: TrendingUp,
+  },
+  {
+    value: 'timeline',
+    label: 'Timeline',
+    icon: Calendar,
+  },
+  {
+    value: 'movies',
+    label: 'Movies',
+    icon: Clapperboard,
+    navigate: '/movies',
+  },
+  {
+    value: 'tv-shows',
+    label: 'TV Shows',
+    icon: TvMinimalPlay,
+    navigate: '/tv-shows',
+  },
+];
+
+export const OVERVIEW_QUICK_LINKS = [
+  {
+    title: '🎮 Browse Games',
+    description: 'Discover and track games',
+    href: '/games',
+  },
+  {
+    title: '🎬 Browse Movies',
+    description: 'Explore and log movies',
+    href: '/movies',
+  },
+  {
+    title: '📺 Browse TV Shows',
+    description: 'Track your favorite tv shows',
+    href: '/tv-shows',
+  },
+];
+
+export const MEDIA_ICON_MAPPING = {
+  Game: {
+    icon: Gamepad,
+    color: 'text-green-500',
+  },
+  Movie: {
+    icon: Film,
+    color: 'text-blue-500',
+  },
+  TvShow: {
+    icon: Tv,
+    color: 'text-purple-400',
+  },
+};
