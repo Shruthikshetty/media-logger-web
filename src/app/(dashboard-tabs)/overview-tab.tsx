@@ -1,9 +1,9 @@
-import { TabsContent } from '../ui/tabs';
-import StatCard from '../stat-card';
-import LoginPlaceholder from '../login-placeholder';
+import { TabsContent } from '../../components/ui/tabs';
+import StatCard from '../../components/stat-card';
+import LoginPlaceholder from '../../components/login-placeholder';
 import { Clock, Film, Gamepad, Star, TrendingUp, Tv } from 'lucide-react';
-import MyCollectionCard from '../my-collection-card';
-import MediaLinkCard from '../media-link-card';
+import MyCollectionCard from '../../components/my-collection-card';
+import MediaLinkCard from '../../components/media-link-card';
 import { OVERVIEW_QUICK_LINKS } from '@/src/constants/screen.constants';
 
 /**
