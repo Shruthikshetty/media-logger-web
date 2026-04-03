@@ -1,5 +1,5 @@
 'use client';
-import MediaCard from '@/src/components/media-card';
+
 import {
   Tabs,
   TabsContent,
@@ -9,6 +9,7 @@ import {
 import { MOVIES_TABS } from '@/src/constants/screen.constants';
 import { useGetDiscoverMovies } from '@/src/services/discover-service';
 import { useState } from 'react';
+import MoviesMediaGrid from './movies-media-grid';
 
 //@TODO this page in progress and not completed
 const MoviesTab = () => {
@@ -34,22 +35,8 @@ const MoviesTab = () => {
           </TabsTrigger>
         ))}
       </TabsList>
-      <TabsContent value="discover">
-        {/* Grid of media cards */}
-        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
-          {data?.data?.movies?.map((movie) => (
-            <MediaCard
-              key={movie._id}
-              mediaType="Movie"
-              imageUrl={movie.posterUrl}
-              rating={movie.averageRating}
-              title={movie.title}
-              genres={movie.genre}
-              mediaEntry={movie.userEntry}
-            />
-          ))}
-        </div>
-        {/*@TODO List of media cards */}
+      <TabsContent value="discover" className="mt-2">
+        <MoviesMediaGrid data={data?.data?.movies} />
       </TabsContent>
       {/* rest of the tabs in progress */}
       <TabsContent value="planning"></TabsContent>
