@@ -9,4 +9,5 @@ export const Endpoints = {
   discoverGames: `/api/discover/games`,
   discoverMovies: `/api/discover/movies`,
   mediaEntriesBase: `/api/media-entry`,
+  mediaEntriesFilter: `/api/media-entry/filter`,
 };

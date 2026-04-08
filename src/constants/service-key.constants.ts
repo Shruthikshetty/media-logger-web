@@ -11,6 +11,7 @@ export const QUERY_KEYS = {
   },
   mediaEntries: {
     fetchAll: 'media-entries-all',
+    filter: 'media-entries-filter',
   },
 };
 

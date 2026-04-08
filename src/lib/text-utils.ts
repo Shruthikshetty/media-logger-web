@@ -15,3 +15,12 @@ export const getProfileFallback = (name?: string): string => {
 
   return initials.length > 2 ? initials.substring(0, 2) : initials;
 };
+
+/**
+ * capitalize first letter of a string
+ */
+export const capitalizeFirstLetter = (str: string): string => {
+  if (!str || typeof str !== 'string') return '';
+
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};

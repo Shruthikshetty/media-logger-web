@@ -10,12 +10,24 @@ import { MOVIES_TABS } from '@/src/constants/screen.constants';
 import { useGetDiscoverMovies } from '@/src/services/discover-service';
 import { useState } from 'react';
 import MoviesMediaGrid from './movies-media-grid';
+import { useFilterMediaEntries } from '@/src/services/media-entry';
+import { MediaStatus } from '@/src/types/global.types';
+import { capitalizeFirstLetter } from '@/src/lib/text-utils';
 
-//@TODO this page in progress and not completed
+//@TODO add loading
 const MoviesTab = () => {
-  const [selectedTab, setSelectedTab] = useState<string>(MOVIES_TABS[0].value);
+  const [selectedTab, setSelectedTab] = useState(MOVIES_TABS[0].value);
   // fetch discover movies
   const { data } = useGetDiscoverMovies();
+  // fetch movies with filters
+  const { data: filteredData } = useFilterMediaEntries(
+    selectedTab !== 'discover'
+      ? {
+          status: capitalizeFirstLetter(selectedTab) as MediaStatus,
+          onModel: 'Movie',
+        }
+      : {},
+  );
 
   return (
     <Tabs
@@ -35,11 +47,16 @@ const MoviesTab = () => {
           </TabsTrigger>
         ))}
       </TabsList>
+      {/* discover tab */}
       <TabsContent value="discover" className="my-2">
         <MoviesMediaGrid data={data?.data?.movies} />
       </TabsContent>
-      {/* rest of the tabs in progress */}
-      <TabsContent value="planning"></TabsContent>
+      {/* rest of the tabs */}
+      {MOVIES_TABS.slice(1).map((tab) => (
+        <TabsContent key={tab.value} value={tab.value}>
+          <MoviesMediaGrid data={filteredData?.data?.mediaEntries} />
+        </TabsContent>
+      ))}
     </Tabs>
   );
 };
