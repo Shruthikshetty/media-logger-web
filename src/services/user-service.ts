@@ -3,7 +3,7 @@ import { useAuthStore, User } from '../state-management/auth.store';
 import { AxiosError } from 'axios';
 import { Endpoints } from '../constants/endpoints.constants';
 import { ApiError } from '../types/global.types';
-import { UserDataStaleTime } from '../constants/config.constants';
+import { USER_DATA_STALE_TIME } from '../constants/config.constants';
 import { QUERY_KEYS } from '../constants/service-key.constants';
 import apiClient from '../lib/api-client';
 
@@ -19,7 +19,7 @@ export const useGetUserDetails = () => {
   return useQuery<ResponseUserDetails, AxiosError<ApiError>>({
     queryKey: [QUERY_KEYS.user.userDetails],
     enabled: isLoggedIn, // enabled only if user is logged in
-    staleTime: UserDataStaleTime,
+    staleTime: USER_DATA_STALE_TIME,
     queryFn: async ({ signal }) =>
       apiClient
         .get<ResponseUserDetails>(Endpoints.baseUser, { signal })

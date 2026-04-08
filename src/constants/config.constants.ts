@@ -21,9 +21,14 @@ export const COOKIE_EXPIRY = {
 /**
  * user details stale time
  */
-export const UserDataStaleTime = 5 * 60 * 1000; // 5 minutes
+export const USER_DATA_STALE_TIME = 5 * 60 * 1000; // 5 minutes
 
 /**
  * discover movies stale time
  */
-export const DiscoverMoviesStaleTime = 5 * 60 * 1000; // 5 minutes
+export const DISCOVER_MOVIES_STALE_TIME = 5 * 60 * 1000; // 5 minutes
+
+/**
+ * media entries stale time fetch all
+ */
+export const MEDIA_ENTRY_FETCH_ALL_SLATE_TIME = 5 * 60 * 1000; // 5 minutes

@@ -19,7 +19,7 @@ const MoviesMediaGrid = ({ data }: { data?: MovieWithUserEntry[] }) => {
             rating={movie.averageRating}
             title={movie.title}
             genres={movie.genre}
-            mediaEntry={movie.userEntry}
+            mediaEntry={movie.mediaEntry}
           />
         ))}
       </div>

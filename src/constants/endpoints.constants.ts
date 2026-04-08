@@ -8,4 +8,5 @@ export const Endpoints = {
   baseUser: `/api/user`,
   discoverGames: `/api/discover/games`,
   discoverMovies: `/api/discover/movies`,
+  mediaEntriesBase: `/api/media-entry`,
 };

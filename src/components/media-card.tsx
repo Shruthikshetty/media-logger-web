@@ -1,5 +1,5 @@
 import { Plus, Star } from 'lucide-react';
-import { UserMediaEntry } from '../services/discover-service';
+import { DiscoverMediaEntry } from '../services/discover-service';
 import { Card, CardContent, CardFooter } from './ui/card';
 import Image from 'next/image';
 import { Button } from './ui/button';
@@ -27,7 +27,7 @@ const MediaCard = ({
   rating?: number;
   title?: string;
   genres?: string[];
-  mediaEntry?: UserMediaEntry;
+  mediaEntry?: DiscoverMediaEntry;
   onAddTo?: () => void;
   onCardClick?: () => void;
 }) => {

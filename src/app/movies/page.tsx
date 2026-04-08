@@ -35,7 +35,7 @@ const MoviesTab = () => {
           </TabsTrigger>
         ))}
       </TabsList>
-      <TabsContent value="discover" className="mt-2">
+      <TabsContent value="discover" className="my-2">
         <MoviesMediaGrid data={data?.data?.movies} />
       </TabsContent>
       {/* rest of the tabs in progress */}

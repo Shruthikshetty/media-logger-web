@@ -9,6 +9,9 @@ export const QUERY_KEYS = {
   discover: {
     movies: 'discover-movies',
   },
+  mediaEntries: {
+    fetchAll: 'media-entries-all',
+  },
 };
 
 export const MUTATION_KEYS = {
