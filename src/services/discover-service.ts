@@ -13,7 +13,7 @@ import {
   Pagination,
 } from '../types/global.types';
 import { AxiosError } from 'axios';
-import { DiscoverMoviesStaleTime } from '../constants/config.constants';
+import { DISCOVER_MOVIES_STALE_TIME } from '../constants/config.constants';
 
 export type Movie = {
   _id: string;
@@ -35,17 +35,16 @@ export type Movie = {
   youtubeVideoId?: string;
 };
 
-export type UserMediaEntry = {
+export type DiscoverMediaEntry = {
   _id: string;
   user: string;
   onModel: OnModelType;
   status: MediaStatus;
-  mediaId: string;
   rating?: number;
 };
 
 export type MovieWithUserEntry = Movie & {
-  userEntry: UserMediaEntry;
+  mediaEntry: DiscoverMediaEntry;
 };
 
 type ResponseDiscoverMovies = {
@@ -60,13 +59,22 @@ type ResponseDiscoverMovies = {
  * fetch discover movies this fetches the movies with populated user entries
  * @TODO yet to add query params
  */
-export const useGetDiscoverMovies = () => {
+export const useGetDiscoverMovies = ({
+  page = 1,
+  limit = 20,
+}: {
+  page?: number;
+  limit?: number;
+} = {}) => {
   return useQuery<ResponseDiscoverMovies, AxiosError<ApiError>>({
-    queryKey: [QUERY_KEYS.discover.movies],
-    staleTime: DiscoverMoviesStaleTime,
+    queryKey: [QUERY_KEYS.discover.movies, page, limit],
+    staleTime: DISCOVER_MOVIES_STALE_TIME,
     queryFn: async ({ signal }) =>
       apiClient
-        .get<ResponseDiscoverMovies>(Endpoints.discoverMovies, { signal })
+        .get<ResponseDiscoverMovies>(Endpoints.discoverMovies, {
+          signal,
+          params: { page, limit },
+        })
         .then((res) => res.data),
   });
 };

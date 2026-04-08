@@ -8,7 +8,7 @@ import {
 } from '../components/ui/tabs';
 import { DASHBOARD_TABS } from '../constants/screen.constants';
 import { useState } from 'react';
-import OverviewTab from '../components/dashboard/overview-tab';
+import OverviewTab from './(dashboard-tabs)/overview-tab';
 
 /**
  * Home page of the app

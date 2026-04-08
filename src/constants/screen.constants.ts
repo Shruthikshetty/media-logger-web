@@ -103,6 +103,29 @@ export const DASHBOARD_TABS = [
   },
 ];
 
+export const MOVIES_TABS = [
+  {
+    value: 'discover',
+    label: 'Discover',
+  },
+  {
+    value: 'planning',
+    label: 'Planning',
+  },
+  {
+    value: 'watching',
+    label: 'Watching',
+  },
+  {
+    value: 'completed',
+    label: 'Completed',
+  },
+  {
+    value: 'dropped',
+    label: 'Dropped',
+  },
+];
+
 export const OVERVIEW_QUICK_LINKS = [
   {
     title: '🎮 Browse Games',
