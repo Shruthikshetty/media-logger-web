@@ -2,16 +2,21 @@ import MediaCard from '@/src/components/media-card';
 import { MovieWithUserEntry } from '@/src/services/discover-service';
 import { MediaEntryFull } from '@/src/services/media-entry';
 import { normalizeMediaItem } from './movies.utils';
+import MediaGridSkeleton from '@/src/components/media-grid-skeleton';
 
 // props type
 type Props = {
   data?: MovieWithUserEntry[] | MediaEntryFull[];
+  loading?: boolean;
 };
 
 /**
  * Component to display movies in a grid/list format.
  */
-const MoviesMediaGrid = ({ data }: Props) => {
+const MoviesMediaGrid = ({ data, loading }: Props) => {
+  // show loading skeleton
+  if (loading) return <MediaGridSkeleton />;
+  //normalize items
   const items = data?.map(normalizeMediaItem) ?? [];
 
   return (
