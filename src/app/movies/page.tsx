@@ -7,27 +7,18 @@ import {
   TabsTrigger,
 } from '@/src/components/ui/tabs';
 import { MOVIES_TABS } from '@/src/constants/screen.constants';
-import { useGetDiscoverMovies } from '@/src/services/discover-service';
 import { useState } from 'react';
-import MoviesMediaGrid from './movies-media-grid';
-import { useFilterMediaEntries } from '@/src/services/media-entry';
 import { MediaStatus } from '@/src/types/global.types';
 import { capitalizeFirstLetter } from '@/src/lib/text-utils';
+import MovieDiscoverTab from './movie-discover-tab';
+import FilteredTabContent from './filtered-tab-content';
 
-const MoviesTab = () => {
+/**
+ * This is the main movies tab containing movie content
+ */
+export default function MoviesTab() {
+  // holds the selected tab
   const [selectedTab, setSelectedTab] = useState(MOVIES_TABS[0].value);
-  // fetch discover movies
-  const { data, isLoading: isDiscoverLoading } = useGetDiscoverMovies();
-  // fetch movies with filters
-  const { data: filteredData, isLoading: isFilteredDataLoading } =
-    useFilterMediaEntries(
-      selectedTab !== 'discover'
-        ? {
-            status: capitalizeFirstLetter(selectedTab) as MediaStatus,
-            onModel: 'Movie',
-          }
-        : {},
-    );
 
   return (
     <Tabs
@@ -48,23 +39,15 @@ const MoviesTab = () => {
         ))}
       </TabsList>
       {/* discover tab */}
-      <TabsContent value="discover" className="my-2">
-        <MoviesMediaGrid
-          data={data?.data?.movies}
-          loading={isDiscoverLoading}
-        />
-      </TabsContent>
+      <MovieDiscoverTab />
       {/* rest of the tabs */}
       {MOVIES_TABS.slice(1).map((tab) => (
-        <TabsContent key={tab.value} value={tab.value}>
-          <MoviesMediaGrid
-            data={filteredData?.data?.mediaEntries}
-            loading={isFilteredDataLoading}
+        <TabsContent key={tab.value} value={tab.value} className="my-2 w-full">
+          <FilteredTabContent
+            status={capitalizeFirstLetter(tab.value) as MediaStatus}
           />
         </TabsContent>
       ))}
     </Tabs>
   );
-};
-
-export default MoviesTab;
+}

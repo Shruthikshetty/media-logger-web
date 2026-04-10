@@ -2,7 +2,12 @@
  * this @file contains all the services related to media entry
  */
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import {
   ApiError,
   ApiResponse,
@@ -115,6 +120,7 @@ export const useFilterMediaEntries = (filters: MediaEntryFilterParams = {}) => {
     queryKey: [QUERY_KEYS.mediaEntries.filter, filters],
     staleTime: MEDIA_ENTRY_FETCH_FILTER_SLATE_TIME,
     enabled: hasFilters,
+    placeholderData: keepPreviousData, // keep previous data when fetching next page
     queryFn: async ({ signal }) =>
       apiClient
         .post<ResponseMediaEntries>(
@@ -142,9 +148,7 @@ export const useAddMediaEntry = () => {
       apiClient
         .post<ResponseMediaEntryAdd>(Endpoints.mediaEntriesBase, data)
         .then((res) => res.data),
-    onSuccess: (data) => {
-      // send a toast notification
-      successToast(data?.message ?? 'Media entry added successfully');
+    onSuccess: () => {
       return Promise.all([
         // invalidate discover movies query
         queryClient.invalidateQueries({
