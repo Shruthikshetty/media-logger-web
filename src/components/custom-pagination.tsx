@@ -57,18 +57,17 @@ const CustomPagination = ({
     const firstPageIndex = 1;
     const lastPageIndex = totalPages;
 
+    const edgeWindowCount = 3 + siblingCount * 2;
+
     // case 1: if left side has dots
     if (shouldShowLeftDots && !shouldShowRightDots) {
-      return [
-        firstPageIndex,
-        'Dot',
-        ...arrayRange(leftSiblingIndex, totalPages),
-      ];
+      const start = Math.max(totalPages - edgeWindowCount + 1, 1);
+      return [firstPageIndex, 'Dot', ...arrayRange(start, totalPages)];
     }
 
     // case 2: if right side has dots
     if (!shouldShowLeftDots && shouldShowRightDots) {
-      return [...arrayRange(1, rightSiblingIndex), 'Dot', lastPageIndex];
+      return [...arrayRange(1, edgeWindowCount), 'Dot', lastPageIndex];
     }
 
     // case 3: if both sides have dots
@@ -89,23 +88,27 @@ const CustomPagination = ({
   return (
     <Pagination className="text-base-white mt-2">
       <PaginationContent>
-        <PaginationPrevious
-          className={
-            pagination?.hasPrevious
-              ? 'cursor-pointer'
-              : 'hover:bg-ui-600 hover:text-base-white cursor-not-allowed'
-          }
-          onClick={() => {
-            if (pagination?.hasPrevious) {
-              setPage((s) => s - 1);
+        <PaginationItem>
+          <PaginationPrevious
+            className={
+              pagination?.hasPrevious
+                ? 'cursor-pointer'
+                : 'hover:bg-ui-600 hover:text-base-white cursor-not-allowed'
             }
-          }}
-        >
-          Previous
-        </PaginationPrevious>
+            onClick={() => {
+              if (pagination?.hasPrevious) {
+                setPage((s) => s - 1);
+              }
+            }}
+          >
+            Previous
+          </PaginationPrevious>
+        </PaginationItem>
         {visiblePages?.map((pageNumber, i) =>
           pageNumber === 'Dot' ? (
-            <PaginationEllipsis key={`ellipsis-${i}`} />
+            <PaginationItem key={`ellipsis-${i}`}>
+              <PaginationEllipsis />
+            </PaginationItem>
           ) : (
             <PaginationItem key={pageNumber}>
               <PaginationLink
@@ -119,20 +122,22 @@ const CustomPagination = ({
             </PaginationItem>
           ),
         )}
-        <PaginationNext
-          className={
-            pagination?.hasMore
-              ? 'cursor-pointer'
-              : 'hover:bg-ui-600 hover:text-base-white cursor-not-allowed'
-          }
-          onClick={() => {
-            if (pagination?.hasMore) {
-              setPage((s) => s + 1);
+        <PaginationItem>
+          <PaginationNext
+            className={
+              pagination?.hasMore
+                ? 'cursor-pointer'
+                : 'hover:bg-ui-600 hover:text-base-white cursor-not-allowed'
             }
-          }}
-        >
-          Next
-        </PaginationNext>
+            onClick={() => {
+              if (pagination?.hasMore) {
+                setPage((s) => s + 1);
+              }
+            }}
+          >
+            Next
+          </PaginationNext>
+        </PaginationItem>
       </PaginationContent>
     </Pagination>
   );

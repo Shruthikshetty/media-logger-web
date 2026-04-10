@@ -15,7 +15,11 @@ type Props = {
  */
 const MoviesMediaGrid = ({ data, loading }: Props) => {
   // add media entry hook
-  const { mutate: addMediaEntryMutate } = useAddMediaEntry();
+  const {
+    mutate: addMediaEntryMutate,
+    isPending,
+    variables,
+  } = useAddMediaEntry();
   // show loading skeleton
   if (loading) return <MediaGridSkeleton />;
   //normalize items
@@ -23,6 +27,9 @@ const MoviesMediaGrid = ({ data, loading }: Props) => {
 
   // on Add to list
   const onAddToList = (item: NormalizedMediaItem) => {
+    // prevent double click
+    if (isPending && variables?.mediaItem === item._id) return;
+    // add media entry
     addMediaEntryMutate({
       status: 'Planning',
       onModel: 'Movie',
