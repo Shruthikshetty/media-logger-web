@@ -2,7 +2,7 @@
  * this @file contains all the services related to discover
  */
 
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '../constants/service-key.constants';
 import apiClient from '../lib/api-client';
 import { Endpoints } from '../constants/endpoints.constants';
@@ -69,6 +69,7 @@ export const useGetDiscoverMovies = ({
   return useQuery<ResponseDiscoverMovies, AxiosError<ApiError>>({
     queryKey: [QUERY_KEYS.discover.movies, page, limit],
     staleTime: DISCOVER_MOVIES_STALE_TIME,
+    placeholderData: keepPreviousData, // keep previous data when fetching next page
     queryFn: async ({ signal }) =>
       apiClient
         .get<ResponseDiscoverMovies>(Endpoints.discoverMovies, {
