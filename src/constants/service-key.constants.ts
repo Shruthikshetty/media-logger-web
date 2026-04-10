@@ -19,4 +19,7 @@ export const MUTATION_KEYS = {
   auth: {
     login: 'login',
   },
+  mediaEntries: {
+    add: 'media-entries-add',
+  },
 };

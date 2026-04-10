@@ -1,7 +1,7 @@
 import MediaCard from '@/src/components/media-card';
 import { MovieWithUserEntry } from '@/src/services/discover-service';
-import { MediaEntryFull } from '@/src/services/media-entry';
-import { normalizeMediaItem } from './movies.utils';
+import { MediaEntryFull, useAddMediaEntry } from '@/src/services/media-entry';
+import { NormalizedMediaItem, normalizeMediaItem } from './movies.utils';
 import MediaGridSkeleton from '@/src/components/media-grid-skeleton';
 
 // props type
@@ -14,10 +14,21 @@ type Props = {
  * Component to display movies in a grid/list format.
  */
 const MoviesMediaGrid = ({ data, loading }: Props) => {
+  // add media entry hook
+  const { mutate: addMediaEntryMutate } = useAddMediaEntry();
   // show loading skeleton
   if (loading) return <MediaGridSkeleton />;
   //normalize items
   const items = data?.map(normalizeMediaItem) ?? [];
+
+  // on Add to list
+  const onAddToList = (item: NormalizedMediaItem) => {
+    addMediaEntryMutate({
+      status: 'Planning',
+      onModel: 'Movie',
+      mediaItem: item._id,
+    });
+  };
 
   return (
     <>
@@ -32,6 +43,7 @@ const MoviesMediaGrid = ({ data, loading }: Props) => {
             title={item.title}
             genres={item.genre}
             mediaEntry={item.mediaEntry}
+            onAddTo={() => onAddToList(item)}
           />
         ))}
       </div>

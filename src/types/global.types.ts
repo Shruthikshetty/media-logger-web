@@ -24,6 +24,16 @@ export interface FilterLimits<T = number> {
   lte: T;
 }
 
+/**
+ * Generic response type for API calls
+ */
+export type ApiResponse<T> = {
+  success: boolean;
+  data: T;
+  requestId: string;
+  message?: string;
+};
+
 export type OnModelType = 'Movie' | 'TVShow' | 'Game';
 
 export type MediaStatus =

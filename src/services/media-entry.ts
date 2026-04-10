@@ -2,14 +2,15 @@
  * this @file contains all the services related to media entry
  */
 
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   ApiError,
+  ApiResponse,
   MediaStatus,
   OnModelType,
   Pagination,
 } from '../types/global.types';
-import { QUERY_KEYS } from '../constants/service-key.constants';
+import { MUTATION_KEYS, QUERY_KEYS } from '../constants/service-key.constants';
 import apiClient from '../lib/api-client';
 import { Endpoints } from '../constants/endpoints.constants';
 import { AxiosError } from 'axios';
@@ -18,11 +19,7 @@ import {
   MEDIA_ENTRY_FETCH_FILTER_SLATE_TIME,
 } from '../constants/config.constants';
 import { Movie } from './discover-service';
-
-/**
- * fetch all media entries
- * @TODO add pagination
- */
+import { successToast } from '../lib/toast-wrapper';
 
 export type MediaEntryFull = {
   _id: string;
@@ -35,6 +32,17 @@ export type MediaEntryFull = {
   updatedAt?: string;
 };
 
+export type MediaItem = {
+  _id: string;
+  user: string;
+  onModel: OnModelType;
+  status: MediaStatus;
+  mediaItem: string;
+  rating?: number;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
 type ResponseMediaEntries = {
   success: boolean;
   data: {
@@ -42,6 +50,25 @@ type ResponseMediaEntries = {
     pagination: Pagination;
   };
 };
+
+export type MediaEntryFilterParams = {
+  limit?: number;
+  page?: number;
+  status?: MediaStatus;
+  rating?: number;
+  onModel?: OnModelType;
+  sortBy?: 'createdAt' | 'rating' | 'status';
+  sortOrder?: 'asc' | 'desc';
+};
+
+export type MediaEntryAddParams = {
+  status: MediaStatus;
+  rating?: number;
+  onModel: OnModelType;
+  mediaItem: string;
+};
+
+type ResponseMediaEntryAdd = ApiResponse<MediaItem>;
 
 /**
  * fetch all media entries
@@ -66,18 +93,8 @@ export const useFetchMediaEntries = ({
   });
 };
 
-export type MediaEntryFilterParams = {
-  limit?: number;
-  page?: number;
-  status?: MediaStatus;
-  rating?: number;
-  onModel?: OnModelType;
-  sortBy?: 'createdAt' | 'rating' | 'status';
-  sortOrder?: 'asc' | 'desc';
-};
-
 /**
- * Fetch filtered media entries via POST /api/media-entry/filter.
+ * Fetch filtered media entries  with filters
  * The query is disabled when no filter fields are provided.
  */
 export const useFilterMediaEntries = (filters: MediaEntryFilterParams = {}) => {
@@ -106,5 +123,42 @@ export const useFilterMediaEntries = (filters: MediaEntryFilterParams = {}) => {
           { signal },
         )
         .then((res) => res.data),
+  });
+};
+
+/**
+ * Hook for adding a new media entry
+ */
+export const useAddMediaEntry = () => {
+  // query client
+  const queryClient = useQueryClient();
+  return useMutation<
+    ResponseMediaEntryAdd,
+    AxiosError<ApiError>,
+    MediaEntryAddParams
+  >({
+    mutationKey: [MUTATION_KEYS.mediaEntries.add],
+    mutationFn: async (data: MediaEntryAddParams) =>
+      apiClient
+        .post<ResponseMediaEntryAdd>(Endpoints.mediaEntriesBase, data)
+        .then((res) => res.data),
+    onSuccess: (data) => {
+      // send a toast notification
+      successToast(data?.message ?? 'Media entry added successfully');
+      return Promise.all([
+        // invalidate discover movies query
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.discover.movies],
+        }),
+        // invalidate the fetch all media entries query
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.mediaEntries.fetchAll],
+        }),
+        // invalidate the filter media entries query
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.mediaEntries.filter],
+        }),
+      ]);
+    },
   });
 };
