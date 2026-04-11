@@ -15,7 +15,13 @@ const statusBadgeStyles: Record<MediaStatus, string> = {
  * @param status - the status of the media
  * @returns
  */
-const StatusBadge = ({ status }: { status?: MediaStatus }) => {
+const StatusBadge = ({
+  status,
+  className,
+}: {
+  status?: MediaStatus;
+  className?: string;
+}) => {
   if (!status) {
     return null;
   }
@@ -24,6 +30,7 @@ const StatusBadge = ({ status }: { status?: MediaStatus }) => {
       variant="outline"
       className={cn(
         'cursor-default px-1.5 py-0.5',
+        className,
         statusBadgeStyles?.[status] ?? 'bg-secondary/50 border-border border',
       )}
     >

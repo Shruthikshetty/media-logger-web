@@ -7,14 +7,18 @@ import { useAuthStore } from '../state-management/auth.store';
 import { useGetUserDetails } from '../services/user-service';
 import { Button } from './ui/button';
 import { ToggleGroup, ToggleGroupItem } from './ui/toggle-group';
-import { useState } from 'react';
 import { getProfileFallback } from '../lib/text-utils';
 import TopBarSearch from './tob-bar-search';
+import {
+  MediaLayout,
+  useLayoutStore,
+} from '@/src/state-management/layout.store';
 
 //@TODO some of the functionality will be implemented later
 /** App top bar */
 const TopBar = () => {
-  const [layout, setLayout] = useState('grid');
+  // get layout from layout store
+  const { layout, setLayout } = useLayoutStore((state) => state);
   // get user data from auth store
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   // fetch user data
@@ -42,7 +46,7 @@ const TopBar = () => {
           type="single"
           className="border-border border"
           value={layout}
-          onValueChange={(value) => setLayout(value)}
+          onValueChange={(value: MediaLayout) => setLayout(value)}
         >
           <ToggleGroupItem
             value="grid"

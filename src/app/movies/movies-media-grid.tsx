@@ -5,8 +5,13 @@ import {
   useAddMediaEntry,
   useDeleteMediaEntry,
 } from '@/src/services/media-entry';
-import { NormalizedMediaItem, normalizeMediaItem } from './movies.utils';
+import {
+  NormalizedMovieMediaItem,
+  normalizeMediaItem,
+} from '../../lib/movies.utils';
 import MediaGridSkeleton from '@/src/components/media-grid-skeleton';
+import MediaListItem from '@/src/components/media-list-item';
+import { useLayoutStore } from '@/src/state-management/layout.store';
 
 // props type
 type Props = {
@@ -18,6 +23,8 @@ type Props = {
  * Component to display movies in a grid/list format.
  */
 const MoviesMediaGrid = ({ data, loading }: Props) => {
+  // get layout from layout store
+  const layout = useLayoutStore((state) => state.layout);
   // add media entry hook
   const {
     mutate: addMediaEntryMutate,
@@ -36,7 +43,7 @@ const MoviesMediaGrid = ({ data, loading }: Props) => {
   const items = data?.map(normalizeMediaItem) ?? [];
 
   // on Add to list
-  const onAddToList = (item: NormalizedMediaItem) => {
+  const onAddToList = (item: NormalizedMovieMediaItem) => {
     // add media entry
     addMediaEntryMutate({
       status: 'Planning',
@@ -46,7 +53,7 @@ const MoviesMediaGrid = ({ data, loading }: Props) => {
   };
 
   // on delete of the entry
-  const onDelete = (item: NormalizedMediaItem) => {
+  const onDelete = (item: NormalizedMovieMediaItem) => {
     if (!item.mediaEntry?._id) return;
     // delete media entry
     deleteMediaEntryMutate(item.mediaEntry?._id);
@@ -54,27 +61,52 @@ const MoviesMediaGrid = ({ data, loading }: Props) => {
 
   return (
     <>
-      {/* Grid of media cards */}
-      <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
-        {items.map((item) => (
-          <MediaCard
-            key={item._id}
-            mediaType="Movie"
-            imageUrl={item.posterUrl}
-            rating={item.averageRating}
-            title={item.title}
-            genres={item.genre}
-            mediaEntry={item.mediaEntry}
-            onAddTo={() => onAddToList(item)}
-            onDelete={() => onDelete(item)}
-            disableAdd={addVariables?.mediaItem === item._id && isAdding}
-            disableDelete={
-              deleteVariables === item.mediaEntry?._id && isDeleting
-            }
-          />
-        ))}
-      </div>
-      {/*@TODO List of media cards */}
+      {layout === 'grid' ? (
+        /* Grid of media cards */
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
+          {items.map((item) => (
+            <MediaCard
+              key={item._id}
+              mediaType="Movie"
+              imageUrl={item.posterUrl}
+              rating={item.averageRating}
+              title={item.title}
+              genres={item.genre}
+              mediaEntry={item.mediaEntry}
+              onAddTo={() => onAddToList(item)}
+              onDelete={() => onDelete(item)}
+              disableAdd={addVariables?.mediaItem === item._id && isAdding}
+              disableDelete={
+                deleteVariables === item.mediaEntry?._id && isDeleting
+              }
+            />
+          ))}
+        </div>
+      ) : (
+        /* list of media list items  */
+        <div className="flex flex-col gap-2">
+          {items.map((item) => (
+            <MediaListItem
+              key={item._id}
+              mediaType="Movie"
+              imageUrl={item.posterUrl}
+              title={item.title}
+              rating={item.averageRating}
+              releaseDate={item.releaseDate}
+              length={item.runTime}
+              description={item.description}
+              genres={item.genre}
+              status={item.mediaEntry?.status}
+              onAddTo={() => onAddToList(item)}
+              onDelete={() => onDelete(item)}
+              disableAdd={addVariables?.mediaItem === item._id && isAdding}
+              disableDelete={
+                deleteVariables === item.mediaEntry?._id && isDeleting
+              }
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 };

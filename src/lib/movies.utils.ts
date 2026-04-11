@@ -8,34 +8,43 @@ import {
 } from '@/src/services/discover-service';
 import { MediaEntryFull } from '@/src/services/media-entry';
 
-export type NormalizedMediaItem = {
+export type NormalizedMovieMediaItem = {
   _id: string;
   title: string;
   posterUrl?: string;
   averageRating?: number;
   genre: string[];
   mediaEntry?: DiscoverMediaEntry;
+  runTime?: number;
+  releaseDate?: string;
+  description: string;
 };
 
 export const normalizeMovieWithUserEntry = (
   item: MovieWithUserEntry,
-): NormalizedMediaItem => ({
+): NormalizedMovieMediaItem => ({
   _id: item._id,
   title: item.title,
   posterUrl: item.posterUrl,
   averageRating: item.averageRating,
   genre: item.genre,
   mediaEntry: item.mediaEntry,
+  runTime: item.runTime,
+  releaseDate: item.releaseDate,
+  description: item.description,
 });
 
 export const normalizeMediaEntryFull = (
   item: MediaEntryFull,
-): NormalizedMediaItem => ({
+): NormalizedMovieMediaItem => ({
   _id: item._id,
   title: item.mediaItem.title,
   posterUrl: item.mediaItem.posterUrl,
   averageRating: item.mediaItem.averageRating,
   genre: item.mediaItem.genre,
+  runTime: item.mediaItem.runTime,
+  releaseDate: item.mediaItem.releaseDate,
+  description: item.mediaItem.description,
   mediaEntry: {
     _id: item._id,
     user: item.user,
@@ -48,7 +57,7 @@ export const normalizeMediaEntryFull = (
 /** Detect which API shape an item came from and normalize it */
 export const normalizeMediaItem = (
   item: MovieWithUserEntry | MediaEntryFull,
-): NormalizedMediaItem =>
+): NormalizedMovieMediaItem =>
   'mediaItem' in item
     ? normalizeMediaEntryFull(item)
     : normalizeMovieWithUserEntry(item);
