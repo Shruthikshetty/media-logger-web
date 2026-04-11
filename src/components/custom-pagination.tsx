@@ -86,14 +86,12 @@ const CustomPagination = ({
   }, [page, pagination, siblingCount]);
 
   return (
-    <Pagination className="text-base-white mt-2">
+    <Pagination className="text-foreground mt-2">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
             className={
-              pagination?.hasPrevious
-                ? 'cursor-pointer'
-                : 'hover:bg-ui-600 hover:text-base-white cursor-not-allowed'
+              pagination?.hasPrevious ? 'cursor-pointer' : 'cursor-not-allowed'
             }
             onClick={() => {
               if (pagination?.hasPrevious) {
@@ -125,9 +123,7 @@ const CustomPagination = ({
         <PaginationItem>
           <PaginationNext
             className={
-              pagination?.hasMore
-                ? 'cursor-pointer'
-                : 'hover:bg-ui-600 hover:text-base-white cursor-not-allowed'
+              pagination?.hasMore ? 'cursor-pointer' : 'cursor-not-allowed'
             }
             onClick={() => {
               if (pagination?.hasMore) {

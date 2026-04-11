@@ -36,6 +36,8 @@ export type ApiResponse<T> = {
 
 export type OnModelType = 'Movie' | 'TVShow' | 'Game';
 
+export type MediaType = 'Movie' | 'TvShow' | 'Game';
+
 export type MediaStatus =
   | 'Planning'
   | 'Playing'

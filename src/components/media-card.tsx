@@ -7,6 +7,7 @@ import CollapsableBadgeList from './collapsable-badge-list';
 import { MEDIA_ICON_MAPPING } from '../constants/screen.constants';
 import { cn } from '../lib/utils';
 import StatusBadge from './status-badge';
+import { MediaType } from '../types/global.types';
 
 /**
  * A component that displays media (Movie, Game, or TV Show) information in a card format.
@@ -25,7 +26,7 @@ const MediaCard = ({
   disableAdd = false,
   disableDelete = false,
 }: {
-  mediaType: 'Game' | 'Movie' | 'TvShow';
+  mediaType: MediaType;
   imageUrl?: string;
   rating?: number;
   title?: string;
@@ -77,7 +78,7 @@ const MediaCard = ({
               priority={false}
             />
           )}
-          {/* if not image show a placeholder @TODO replace with image of the media*/}
+          {/* if not image show a placeholder*/}
           {!imageUrl && (
             <div className="flex h-full w-full items-center justify-center">
               {Icon ? (
