@@ -24,7 +24,6 @@ import {
   MEDIA_ENTRY_FETCH_FILTER_SLATE_TIME,
 } from '../constants/config.constants';
 import { Movie } from './discover-service';
-import { successToast } from '../lib/toast-wrapper';
 
 export type MediaEntryFull = {
   _id: string;
@@ -147,6 +146,37 @@ export const useAddMediaEntry = () => {
     mutationFn: async (data: MediaEntryAddParams) =>
       apiClient
         .post<ResponseMediaEntryAdd>(Endpoints.mediaEntriesBase, data)
+        .then((res) => res.data),
+    onSuccess: () => {
+      return Promise.all([
+        // invalidate discover movies query
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.discover.movies],
+        }),
+        // invalidate the fetch all media entries query
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.mediaEntries.fetchAll],
+        }),
+        // invalidate the filter media entries query
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.mediaEntries.filter],
+        }),
+      ]);
+    },
+  });
+};
+
+/**
+ * Hook for deleting a media entry
+ */
+export const useDeleteMediaEntry = () => {
+  // query client
+  const queryClient = useQueryClient();
+  return useMutation<ApiResponse<null>, AxiosError<ApiError>, string>({
+    mutationKey: [MUTATION_KEYS.mediaEntries.delete],
+    mutationFn: async (id: string) =>
+      apiClient
+        .delete<ApiResponse<null>>(`${Endpoints.mediaEntriesBase}/${id}`)
         .then((res) => res.data),
     onSuccess: () => {
       return Promise.all([

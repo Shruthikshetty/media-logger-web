@@ -11,6 +11,9 @@ const meta: Meta<typeof MediaCard> = {
   argTypes: {
     onAddTo: { action: 'added to list' },
     onCardClick: { action: 'card clicked' },
+    onDelete: { action: 'deleted' },
+    disableAdd: { control: 'boolean' },
+    disableDelete: { control: 'boolean' },
   },
 };
 
@@ -99,5 +102,30 @@ export const NoImage: Story = {
     mediaType: 'Movie',
     rating: 0,
     genres: ['Unknown'],
+  },
+};
+
+/**
+ * Story showcasing the disabled states for both "Add to List" and "Delete" buttons.
+ */
+export const DisabledStates: Story = {
+  render: (args) => (
+    <div className="flex gap-4">
+      <MediaCard {...args} title="Disabled Add" disableAdd={true} />
+      <MediaCard
+        {...args}
+        title="Disabled Delete"
+        disableDelete={true}
+        mediaEntry={{
+          _id: '1',
+          user: '1',
+          onModel: 'Movie',
+          status: 'Watching',
+        }}
+      />
+    </div>
+  ),
+  args: {
+    ...MovieDefault.args,
   },
 };

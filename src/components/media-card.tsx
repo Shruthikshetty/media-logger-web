@@ -1,4 +1,4 @@
-import { Plus, Star } from 'lucide-react';
+import { Plus, Star, Trash2 } from 'lucide-react';
 import { DiscoverMediaEntry } from '../services/discover-service';
 import { Card, CardContent, CardFooter } from './ui/card';
 import Image from 'next/image';
@@ -21,6 +21,9 @@ const MediaCard = ({
   title,
   onAddTo = () => {},
   onCardClick = () => {},
+  onDelete = () => {},
+  disableAdd = false,
+  disableDelete = false,
 }: {
   mediaType: 'Game' | 'Movie' | 'TvShow';
   imageUrl?: string;
@@ -30,6 +33,9 @@ const MediaCard = ({
   mediaEntry?: DiscoverMediaEntry;
   onAddTo?: () => void;
   onCardClick?: () => void;
+  onDelete?: () => void;
+  disableAdd?: boolean;
+  disableDelete?: boolean;
 }) => {
   const Icon = MEDIA_ICON_MAPPING[mediaType];
 
@@ -95,15 +101,26 @@ const MediaCard = ({
             />
           ) : null}
         </div>
-        {/*@TODO add design status tag*/}
         {mediaEntry ? (
-          <StatusBadge status={mediaEntry?.status} />
+          <div className="flex w-full flex-row items-center justify-between gap-1">
+            <StatusBadge status={mediaEntry?.status} />
+            <Button
+              variant={'ghost'}
+              className={'hover:text-destructive hover:bg-transparent!'}
+              aria-label="Delete media"
+              onClick={onDelete}
+              disabled={disableDelete}
+            >
+              <Trash2 aria-hidden={true} />
+            </Button>
+          </div>
         ) : (
           <Button
             variant={'ghost'}
             className="hover:bg-primary/5! text-primary hover:text-primary w-full"
             aria-label="Add to list"
             onClick={onAddTo}
+            disabled={disableAdd}
           >
             Add to List
             <Plus />
