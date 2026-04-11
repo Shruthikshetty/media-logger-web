@@ -111,14 +111,14 @@ const MediaListItem = ({
             {/* release date */}
             {releaseDate ? (
               <p className="flex flex-row items-center gap-1 text-sm sm:text-base">
-                <Calendar className="sm:3.5 size-3" />
+                <Calendar className="size-3 sm:size-3.5" />
                 {formatDate(releaseDate)}
               </p>
             ) : null}
             {/* length */}
             {length ? (
               <p className="flex flex-row items-center gap-1 text-sm sm:text-base">
-                <Clock className="size-3.5" />
+                <Clock className="size-3 sm:size-3.5" />
                 {formatDuration(length)}
               </p>
             ) : null}
