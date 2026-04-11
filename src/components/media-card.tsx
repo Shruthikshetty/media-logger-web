@@ -107,10 +107,11 @@ const MediaCard = ({
             <Button
               variant={'ghost'}
               className={'hover:text-destructive hover:bg-transparent!'}
+              aria-label="Delete media"
               onClick={onDelete}
               disabled={disableDelete}
             >
-              <Trash2 />
+              <Trash2 aria-hidden={true} />
             </Button>
           </div>
         ) : (
