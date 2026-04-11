@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { formatDate } from '../lib/date.utils';
 import { formatDuration } from '../lib/time.utils';
 import { Calendar, Clock, Plus, Star, Trash2 } from 'lucide-react';
 import { MEDIA_ICON_MAPPING } from '../constants/screen.constants';
@@ -63,7 +63,7 @@ const MediaListItem = ({
         <button
           className="aspect-2/3 h-[135px] w-[90px] shrink-0 overflow-hidden p-0"
           onClick={onMediaClick}
-          aria-label={`movie click ${title}`}
+          aria-label={`open ${title}`}
         >
           {/* image */}
           {imageUrl ? (
@@ -87,7 +87,7 @@ const MediaListItem = ({
         <button
           className="flex h-full grow flex-col items-start gap-2 text-left"
           onClick={onMediaClick}
-          aria-label={`movie click ${title}`}
+          aria-label={`open ${title}`}
         >
           <div className="flex flex-row items-center gap-2">
             {/* media icon */}
@@ -112,7 +112,7 @@ const MediaListItem = ({
             {releaseDate ? (
               <p className="flex flex-row items-center gap-1 text-sm sm:text-base">
                 <Calendar className="sm:3.5 size-3" />
-                {format(new Date(releaseDate), 'MMM d, yyyy')}
+                {formatDate(releaseDate)}
               </p>
             ) : null}
             {/* length */}
