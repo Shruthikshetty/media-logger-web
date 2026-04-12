@@ -1,5 +1,5 @@
 import { useScreenLoader } from '../state-management/screen-loader.store';
-import GradientLoader from './gradient-loader';
+import SpinLoader from './spin-loader';
 
 /**
  * This is a provider to be wrap the app with will allow to trigger
@@ -18,7 +18,7 @@ const ScreenLoaderProvider = ({ children }: { children: React.ReactNode }) => {
             e.stopPropagation();
           }}
         >
-          <GradientLoader />
+          <SpinLoader />
         </div>
       )}
       <div inert={isLoading} aria-hidden={isLoading} className="contents">

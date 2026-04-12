@@ -3,7 +3,7 @@ import { cn } from '../lib/utils';
 /**
  * creates a spinner
  */
-export default function GradientLoader({
+export default function SpinLoader({
   className,
   ...props
 }: React.ComponentProps<'svg'>) {
