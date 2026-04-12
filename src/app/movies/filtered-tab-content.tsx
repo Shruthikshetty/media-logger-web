@@ -39,15 +39,20 @@ const FilteredTabContent = ({
           setPage={setPage}
           pagination={data.data.pagination}
         />
-      ) : (
+      ) : null}
+      {data?.data?.pagination &&
+      data.data.mediaEntries.length === 0 &&
+      !isLoading &&
+      page === 1 ? (
         <EmptyStatusState
           status={status}
           mediaType="Movie"
+          className="min-w-[60vw]"
           handleAction={() => {
             setSelectedTab(MOVIES_TABS[0].value);
           }}
         />
-      )}
+      ) : null}
     </LoginPlaceholder>
   );
 };

@@ -12,7 +12,7 @@ const ScreenLoaderProvider = ({ children }: { children: React.ReactNode }) => {
     <>
       {isLoading && (
         <div
-          className="bg-background/80 absolute inset-0 z-100 flex items-center justify-center backdrop-blur-sm"
+          className="bg-background/80 fixed inset-0 z-100 flex items-center justify-center backdrop-blur-sm"
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
