@@ -145,11 +145,8 @@ const EmptyStatusState = ({
       </p>
 
       {/* Action button */}
-      <Button
-        onClick={handleAction}
-        className="from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-primary/20 flex flex-row items-center gap-2 bg-linear-to-r shadow-lg"
-      >
-        <Plus className="h-4 w-4" />
+      <Button onClick={handleAction} className="active:scale-95">
+        <Plus className="size-4" />
         {content.action}
       </Button>
 

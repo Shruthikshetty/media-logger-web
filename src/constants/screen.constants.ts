@@ -110,6 +110,7 @@ export const DASHBOARD_TABS = [
   },
 ];
 
+// order matters
 export const MOVIES_TABS = [
   {
     value: 'discover',
