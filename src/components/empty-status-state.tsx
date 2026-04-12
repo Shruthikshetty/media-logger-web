@@ -14,6 +14,7 @@ import { MediaStatus, OnModelType } from '@/src/types/global.types';
 import { MEDIA_LABELS } from '../constants/screen.constants';
 import { cn } from '@/src/lib/utils';
 
+//types
 interface EmptyStatusStateProps {
   status: MediaStatus | 'All';
   mediaType: OnModelType;
@@ -47,7 +48,7 @@ const EmptyStatusState = ({
           title: `Not ${mediaType === 'Game' ? 'playing' : 'watching'} anything right now`,
           subtitle: `Your current ${plural} list is empty. Time to discover something new!`,
           action: `Browse ${plural}`,
-          color: 'from-blue-500/20 to-cyan-500/20',
+          color: 'from-primary/20 to-primary/10',
         };
       case 'Completed':
         return {
@@ -55,7 +56,7 @@ const EmptyStatusState = ({
           title: 'Nothing completed yet',
           subtitle: `You haven't finished any ${plural} yet. Keep going!`,
           action: `Find ${plural} to complete`,
-          color: 'from-green-500/20 to-emerald-500/20',
+          color: 'from-success/20 to-success/10',
         };
       case 'Planning':
         return {
@@ -63,7 +64,7 @@ const EmptyStatusState = ({
           title: `Your ${mediaType === 'Game' ? 'backlog' : 'watch list'} is empty`,
           subtitle: `No ${plural} planned for later. Start building your list!`,
           action: `Add ${plural} to plan`,
-          color: 'from-amber-500/20 to-yellow-500/20',
+          color: 'from-warning/20 to-warning/10',
         };
       case 'Dropped':
         return {
@@ -71,7 +72,7 @@ const EmptyStatusState = ({
           title: `Nothing dropped`,
           subtitle: `You haven't dropped any ${plural}. That's actually great!`,
           action: `Browse ${plural}`,
-          color: 'from-red-500/20 to-rose-500/20',
+          color: 'from-destructive/20 to-destructive/10',
         };
       case 'All':
         return {
@@ -136,24 +137,24 @@ const EmptyStatusState = ({
       </div>
 
       {/* Text content */}
-      <h3 className="text-foreground relative z-10 mb-2 text-center text-xl font-bold">
+      <h3 className="text-foreground mb-2 text-center text-xl font-bold">
         {content.title}
       </h3>
-      <p className="text-muted-foreground relative z-10 mb-6 max-w-sm text-center">
+      <p className="text-muted-foreground mb-6 max-w-sm text-center">
         {content.subtitle}
       </p>
 
       {/* Action button */}
       <Button
         onClick={handleAction}
-        className="from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-primary/20 relative z-10 flex flex-row items-center gap-2 bg-linear-to-r shadow-lg"
+        className="from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-primary/20 flex flex-row items-center gap-2 bg-linear-to-r shadow-lg"
       >
         <Plus className="h-4 w-4" />
         {content.action}
       </Button>
 
       {/* Decorative bottom text */}
-      <p className="text-muted-foreground/60 relative z-10 mt-8 flex items-center gap-2 text-xs">
+      <p className="text-muted-foreground/60 mt-8 flex items-center gap-2 text-xs">
         <Sparkles className="h-3 w-3" />
         Start building your collection
         <Sparkles className="h-3 w-3" />
