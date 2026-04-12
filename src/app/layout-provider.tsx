@@ -19,6 +19,7 @@ import AppFooter from '../components/app-footer';
 import { errorToast } from '../lib/toast-wrapper';
 import { isAxiosError } from 'axios';
 import { ApiError } from '../types/global.types';
+import ScreenLoaderProvider from '../components/screen-loader-provider';
 
 /**
  * This component wraps all the required providers for the app
@@ -54,13 +55,15 @@ const AppLayoutProviders = ({ children }: { children: React.ReactNode }) => {
     <ThemeProvider attribute="class" defaultTheme="blurple" themes={APP_THEMES}>
       <QueryClientProvider client={queryClient}>
         <Toaster position="bottom-right" />
-        <AuthProvider>
-          <div className="flex min-h-screen flex-col justify-between gap-2">
-            <TopBar />
-            <div className="grow pt-14">{children}</div>
-            <AppFooter />
-          </div>
-        </AuthProvider>
+        <ScreenLoaderProvider>
+          <AuthProvider>
+            <div className="flex min-h-screen flex-col justify-between gap-2">
+              <TopBar />
+              <div className="grow pt-14">{children}</div>
+              <AppFooter />
+            </div>
+          </AuthProvider>
+        </ScreenLoaderProvider>
         {/* Dev tools only active in dev mode */}
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

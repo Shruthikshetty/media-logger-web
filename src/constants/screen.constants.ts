@@ -1,9 +1,9 @@
 import env from '@/env';
 import {
-  Calendar,
   Clapperboard,
   Film,
   Gamepad,
+  Gamepad2,
   Heart,
   Palette,
   Sparkles,
@@ -84,16 +84,23 @@ export const DASHBOARD_TABS = [
     label: 'Overview',
     icon: TrendingUp,
   },
-  {
-    value: 'timeline',
-    label: 'Timeline',
-    icon: Calendar,
-  },
+  // disabled for now
+  // {
+  //   value: 'timeline',
+  //   label: 'Timeline',
+  //   icon: Calendar,
+  // },
   {
     value: 'movies',
     label: 'Movies',
     icon: Clapperboard,
     navigate: '/movies',
+  },
+  {
+    value: 'games',
+    label: 'Games',
+    icon: Gamepad2,
+    navigate: '/games',
   },
   {
     value: 'tv-shows',

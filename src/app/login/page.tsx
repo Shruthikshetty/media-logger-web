@@ -28,6 +28,7 @@ import { successToast } from '@/src/lib/toast-wrapper';
 import { useAuthStore } from '@/src/state-management/auth.store';
 import Cookies from 'js-cookie';
 import { COOKIE_EXPIRY, COOKIE_NAMES } from '@/src/constants/config.constants';
+import { useScreenLoader } from '@/src/state-management/screen-loader.store';
 
 /**
  * Login page containing the login form
@@ -39,6 +40,8 @@ export default function Login() {
     resolver: zodResolver(loginSchema),
     defaultValues: loginDefaultValues,
   });
+  // get setters from screen loader store
+  const setLoader = useScreenLoader((state) => state.setLoader);
 
   // get setters from auth store
   const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
@@ -52,6 +55,8 @@ export default function Login() {
 
   //handle login form submit
   const handleLoginSubmit = (data: LoginSchema) => {
+    // set loading true
+    setLoader(true);
     mutate(data, {
       onSuccess: (res) => {
         // set token in cookie
@@ -66,6 +71,10 @@ export default function Login() {
         // navigate to home page
         successToast('Login success');
         route.replace('/');
+      },
+      onSettled: () => {
+        // set loading false
+        setLoader(false);
       },
     });
   };
