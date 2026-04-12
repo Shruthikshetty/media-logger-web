@@ -5,6 +5,7 @@ import { useFilterMediaEntries } from '@/src/services/media-entry';
 import { MediaStatus } from '@/src/types/global.types';
 import MoviesMediaGrid from './movies-media-grid';
 import CustomPagination from '@/src/components/custom-pagination';
+import EmptyStatusState from '@/src/components/empty-status-state';
 
 /**
  * Filtered Tab Content - common component for the content of
@@ -24,12 +25,14 @@ const FilteredTabContent = ({ status }: { status: MediaStatus }) => {
   return (
     <>
       <MoviesMediaGrid data={data?.data?.mediaEntries} loading={isLoading} />
-      {data?.data?.pagination && data.data.pagination.totalPages > 1 && (
+      {data?.data?.pagination && data.data.pagination.totalPages > 1 ? (
         <CustomPagination
           page={page}
           setPage={setPage}
           pagination={data.data.pagination}
         />
+      ) : (
+        <EmptyStatusState status={status} mediaType="Movie" />
       )}
     </>
   );

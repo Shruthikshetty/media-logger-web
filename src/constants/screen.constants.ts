@@ -165,3 +165,9 @@ export const MEDIA_ICON_MAPPING = {
     color: 'text-purple-400',
   },
 };
+
+export const MEDIA_LABELS = {
+  Movie: { singular: 'movie', plural: 'movies', icon: Film },
+  TVShow: { singular: 'show', plural: 'shows', icon: Tv },
+  Game: { singular: 'game', plural: 'games', icon: Gamepad2 },
+} as const;
