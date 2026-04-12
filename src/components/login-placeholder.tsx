@@ -42,11 +42,11 @@ const LoginPlaceholder = ({
   // if user is not logged in show a card with a message and a login button
   return (
     <Card className={cn('border-border', className)}>
-      <CardHeader>
+      <CardHeader className="flex flex-col items-center">
         <CardTitle>Login Required</CardTitle>
         <CardDescription>{message}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col items-center">
         <Button
           variant="default"
           onClick={() => {

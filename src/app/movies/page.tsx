@@ -23,7 +23,7 @@ export default function MoviesTab() {
   return (
     <Tabs
       className="flex flex-col items-center px-5"
-      defaultValue={selectedTab}
+      value={selectedTab}
       onValueChange={(value) => setSelectedTab(value)}
     >
       {/* Tabs */}
@@ -42,9 +42,10 @@ export default function MoviesTab() {
       <MovieDiscoverTab />
       {/* rest of the tabs */}
       {MOVIES_TABS.slice(1).map((tab) => (
-        <TabsContent key={tab.value} value={tab.value} className="my-2 w-full">
+        <TabsContent key={tab.value} value={tab.value} className="my-2">
           <FilteredTabContent
             status={capitalizeFirstLetter(tab.value) as MediaStatus}
+            setSelectedTab={setSelectedTab}
           />
         </TabsContent>
       ))}

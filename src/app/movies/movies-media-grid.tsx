@@ -38,7 +38,7 @@ const MoviesMediaGrid = ({ data, loading }: Props) => {
     variables: deleteVariables,
   } = useDeleteMediaEntry();
   // show loading skeleton
-  if (loading) return <MediaGridSkeleton />;
+  if (loading) return <MediaGridSkeleton layout={layout} />;
   //normalize items
   const items = data?.map(normalizeMediaItem) ?? [];
 

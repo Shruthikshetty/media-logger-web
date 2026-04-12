@@ -1,4 +1,5 @@
 import { cn } from '../lib/utils';
+import { MediaLayout } from '../state-management/layout.store';
 import { Skeleton } from './ui/skeleton';
 
 /**
@@ -8,10 +9,23 @@ import { Skeleton } from './ui/skeleton';
 const MediaGridSkeleton = ({
   noOfItems = 20,
   className,
+  layout,
 }: {
   noOfItems?: number;
   className?: string;
+  layout: MediaLayout;
 }) => {
+  // if list
+  if (layout === 'list') {
+    return (
+      <div className={cn('flex flex-col gap-2', className)}>
+        {Array.from({ length: noOfItems }).map((_, index) => (
+          <Skeleton key={index} className="h-24 w-full rounded-lg" />
+        ))}
+      </div>
+    );
+  }
+  // grid
   return (
     <div
       className={cn(

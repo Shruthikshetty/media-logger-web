@@ -10,6 +10,7 @@ const meta: Meta<typeof MediaGridSkeleton> = {
   },
   args: {
     className: 'p-6',
+    layout: 'grid',
   },
 };
 
@@ -17,11 +18,22 @@ export default meta;
 type Story = StoryObj<typeof MediaGridSkeleton>;
 
 /**
- * Default media grid skeleton with 20 items
+ * Grid layout skeleton (default)
  */
-export const Default: Story = {
+export const Grid: Story = {
   args: {
+    layout: 'grid',
     noOfItems: 20,
+  },
+};
+
+/**
+ * List layout skeleton
+ */
+export const List: Story = {
+  args: {
+    layout: 'list',
+    noOfItems: 10,
   },
 };
 
@@ -30,6 +42,7 @@ export const Default: Story = {
  */
 export const FewItems: Story = {
   args: {
+    layout: 'grid',
     noOfItems: 5,
   },
 };

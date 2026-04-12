@@ -24,6 +24,7 @@ import {
   MEDIA_ENTRY_FETCH_FILTER_SLATE_TIME,
 } from '../constants/config.constants';
 import { Movie } from './discover-service';
+import { useAuthStore } from '../state-management/auth.store';
 
 export type MediaEntryFull = {
   _id: string;
@@ -84,9 +85,12 @@ export const useFetchMediaEntries = ({
   page?: number;
   limit?: number;
 } = {}) => {
+  //check if token is set
+  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
   return useQuery<ResponseMediaEntries, AxiosError<ApiError>>({
     queryKey: [QUERY_KEYS.mediaEntries.fetchAll, page, limit],
     staleTime: MEDIA_ENTRY_FETCH_ALL_SLATE_TIME,
+    enabled: isLoggedIn,
     queryFn: async ({ signal }) =>
       apiClient
         .get<ResponseMediaEntries>(Endpoints.mediaEntriesBase, {
@@ -102,8 +106,10 @@ export const useFetchMediaEntries = ({
  * The query is disabled when no filter fields are provided.
  */
 export const useFilterMediaEntries = (filters: MediaEntryFilterParams = {}) => {
+  //check if token is set
+  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
+  //destructure filters
   const { limit, page, status, rating, onModel, sortBy, sortOrder } = filters;
-
   // check if any filter is provided
   const hasFilters = Boolean(
     status !== undefined ||
@@ -118,7 +124,7 @@ export const useFilterMediaEntries = (filters: MediaEntryFilterParams = {}) => {
   return useQuery<ResponseMediaEntries, AxiosError<ApiError>>({
     queryKey: [QUERY_KEYS.mediaEntries.filter, filters],
     staleTime: MEDIA_ENTRY_FETCH_FILTER_SLATE_TIME,
-    enabled: hasFilters,
+    enabled: hasFilters && isLoggedIn,
     placeholderData: keepPreviousData, // keep previous data when fetching next page
     queryFn: async ({ signal }) =>
       apiClient
