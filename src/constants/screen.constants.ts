@@ -134,6 +134,52 @@ export const MOVIES_TABS = [
   },
 ];
 
+export const GAMES_TABS = [
+  {
+    value: 'discover',
+    label: 'Discover',
+  },
+  {
+    value: 'planning',
+    label: 'Planning',
+  },
+  {
+    value: 'playing',
+    label: 'Playing',
+  },
+  {
+    value: 'completed',
+    label: 'Completed',
+  },
+  {
+    value: 'dropped',
+    label: 'Dropped',
+  },
+];
+
+export const TV_SHOWS_TABS = [
+  {
+    value: 'discover',
+    label: 'Discover',
+  },
+  {
+    value: 'planning',
+    label: 'Planning',
+  },
+  {
+    value: 'watching',
+    label: 'Watching',
+  },
+  {
+    value: 'completed',
+    label: 'Completed',
+  },
+  {
+    value: 'dropped',
+    label: 'Dropped',
+  },
+];
+
 export const OVERVIEW_QUICK_LINKS = [
   {
     title: '🎮 Browse Games',
