@@ -13,10 +13,13 @@ import {
   MediaLayout,
   useLayoutStore,
 } from '@/src/state-management/layout.store';
+import { useRouter } from 'next/navigation';
 
 //@TODO some of the functionality will be implemented later
 /** App top bar */
 const TopBar = () => {
+  // get router
+  const router = useRouter();
   // get layout from layout store
   const { layout, setLayout } = useLayoutStore((state) => state);
   // get user data from auth store
@@ -27,7 +30,9 @@ const TopBar = () => {
   return (
     <header className="bg-background/20 fixed z-60 flex h-13 w-full flex-row items-center justify-between gap-1 overflow-hidden px-5 backdrop-blur-sm">
       <div className="flex flex-row items-center gap-3">
-        <ArrowLeft className="h-full" />
+        <button onClick={() => router.back()}>
+          <ArrowLeft className="h-full" />
+        </button>
         {/* logo */}
         <AppLogo />
         {/* pages details to be added */}
