@@ -8,6 +8,10 @@ import {
 import { GAMES_TABS } from '@/src/constants/screen.constants';
 import { useState } from 'react';
 
+import GamesDiscoverTab from './games-discover-tab';
+import FilteredGamesTabContent from './filtered-tab-content';
+import { MediaStatus } from '@/src/types/global.types';
+
 /**
  * @returns main games page contains games discover and basic filters
  */
@@ -33,9 +37,7 @@ export default function GamesPage() {
         ))}
       </TabsList>
       {/* discover tab */}
-      <TabsContent value="discover" className="my-2 min-w-[60vw]">
-        <p>discover</p>
-      </TabsContent>
+      <GamesDiscoverTab />
       {/* rest of the filter tabs */}
       {GAMES_TABS.slice(1).map((tab) => (
         <TabsContent
@@ -43,7 +45,10 @@ export default function GamesPage() {
           value={tab.value}
           className="my-2 min-w-[60vw]"
         >
-          <p>{tab.label}</p>
+          <FilteredGamesTabContent
+            status={tab.label as MediaStatus}
+            setSelectedTab={setSelectedTab}
+          />
         </TabsContent>
       ))}
     </Tabs>

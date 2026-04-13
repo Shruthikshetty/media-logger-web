@@ -8,6 +8,8 @@ export const QUERY_KEYS = {
   },
   discover: {
     movies: 'discover-movies',
+    games: 'discover-games',
+    tvShows: 'discover-tv-shows',
   },
   mediaEntries: {
     fetchAll: 'media-entries-all',
