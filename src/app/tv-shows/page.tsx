@@ -8,6 +8,10 @@ import {
 import { TV_SHOWS_TABS } from '@/src/constants/screen.constants';
 import { useState } from 'react';
 
+import TVShowsDiscoverTab from './tv-shows-discover-tab';
+import FilteredTVShowsTabContent from './filtered-tab-content';
+import { MediaStatus } from '@/src/types/global.types';
+
 /**
  * @returns main tv shows page contains tv shows discover and basic filters
  */
@@ -33,9 +37,7 @@ export default function TVShowsPage() {
         ))}
       </TabsList>
       {/* discover tab */}
-      <TabsContent value="discover" className="my-2 min-w-[60vw]">
-        <p>discover</p>
-      </TabsContent>
+      <TVShowsDiscoverTab />
       {/* rest of the filter tabs */}
       {TV_SHOWS_TABS.slice(1).map((tab) => (
         <TabsContent
@@ -43,7 +45,10 @@ export default function TVShowsPage() {
           value={tab.value}
           className="my-2 min-w-[60vw]"
         >
-          <p>{tab.label}</p>
+          <FilteredTVShowsTabContent
+            status={tab.label as MediaStatus}
+            setSelectedTab={setSelectedTab}
+          />
         </TabsContent>
       ))}
     </Tabs>
