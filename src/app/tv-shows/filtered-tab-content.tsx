@@ -31,7 +31,7 @@ const FilteredTVShowsTabContent = ({
   });
 
   // get total pages
-  const totalPages = data?.data?.pagination?.totalPages ?? 1;
+  const totalPages = Math.max(data?.data?.pagination?.totalPages ?? 1, 1);
 
   // reset page if it is greater than total pages
   useEffect(() => {
