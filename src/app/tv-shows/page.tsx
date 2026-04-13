@@ -11,6 +11,7 @@ import { useState } from 'react';
 import TVShowsDiscoverTab from './tv-shows-discover-tab';
 import FilteredTVShowsTabContent from './filtered-tab-content';
 import { MediaStatus } from '@/src/types/global.types';
+import { capitalizeFirstLetter } from '@/src/lib/text-utils';
 
 /**
  * @returns main tv shows page contains tv shows discover and basic filters
@@ -46,7 +47,7 @@ export default function TVShowsPage() {
           className="my-2 min-w-[60vw]"
         >
           <FilteredTVShowsTabContent
-            status={tab.label as MediaStatus}
+            status={capitalizeFirstLetter(tab.value) as MediaStatus}
             setSelectedTab={setSelectedTab}
           />
         </TabsContent>

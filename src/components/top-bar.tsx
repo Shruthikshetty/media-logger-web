@@ -27,10 +27,18 @@ const TopBar = () => {
   // fetch user data
   const { data: user } = useGetUserDetails();
 
+  // handle back button click
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      router.back();
+      return;
+    }
+    router.push('/');
+  };
   return (
     <header className="bg-background/20 fixed z-60 flex h-13 w-full flex-row items-center justify-between gap-1 overflow-hidden px-5 backdrop-blur-sm">
       <div className="flex flex-row items-center gap-3">
-        <button onClick={() => router.back()}>
+        <button onClick={handleBack} type="button" aria-label="Go back">
           <ArrowLeft className="h-full" />
         </button>
         {/* logo */}

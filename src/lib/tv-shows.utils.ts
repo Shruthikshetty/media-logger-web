@@ -49,7 +49,7 @@ export const normalizeMediaEntryFull = (
     releaseDate: mediaItem.releaseDate,
     description: mediaItem.description,
     mediaEntry: {
-      _id: item._id,
+      _id: mediaItem._id,
       user: item.user,
       onModel: item.onModel,
       status: item.status,

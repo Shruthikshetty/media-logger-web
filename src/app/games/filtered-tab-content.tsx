@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFilterMediaEntries } from '@/src/services/media-entry';
 import { MediaStatus } from '@/src/types/global.types';
 import GamesMediaGrid from './games-media-grid';
@@ -30,6 +30,17 @@ const FilteredGamesTabContent = ({
     limit: 20,
   });
 
+  // get total pages
+  const totalPages = data?.data?.pagination?.totalPages ?? 1;
+
+  // reset page if it is greater than total pages
+  useEffect(() => {
+    if (!isLoading && page > totalPages) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPage(totalPages);
+    }
+  }, [isLoading, page, totalPages]);
+
   return (
     <LoginPlaceholder>
       <GamesMediaGrid data={data?.data?.mediaEntries} loading={isLoading} />
@@ -41,7 +52,7 @@ const FilteredGamesTabContent = ({
         />
       ) : null}
       {data?.data?.pagination &&
-      data.data.mediaEntries.length === 0 &&
+      data.data.mediaEntries?.length === 0 &&
       !isLoading &&
       page === 1 ? (
         <EmptyStatusState

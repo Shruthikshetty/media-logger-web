@@ -11,6 +11,7 @@ import { useState } from 'react';
 import GamesDiscoverTab from './games-discover-tab';
 import FilteredGamesTabContent from './filtered-tab-content';
 import { MediaStatus } from '@/src/types/global.types';
+import { capitalizeFirstLetter } from '@/src/lib/text-utils';
 
 /**
  * @returns main games page contains games discover and basic filters
@@ -46,7 +47,7 @@ export default function GamesPage() {
           className="my-2 min-w-[60vw]"
         >
           <FilteredGamesTabContent
-            status={tab.label as MediaStatus}
+            status={capitalizeFirstLetter(tab.value) as MediaStatus}
             setSelectedTab={setSelectedTab}
           />
         </TabsContent>
