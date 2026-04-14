@@ -1,51 +1,51 @@
 /**
- * @file Utility types and normalizer functions for the movies feature
+ * @file Utility types and normalizer functions for the games feature
  */
 
 import {
   DiscoverMediaEntry,
-  Movie,
-  MovieWithUserEntry,
+  Game,
+  GameWithUserEntry,
 } from '@/src/services/discover-service';
 import { MediaEntryFull } from '@/src/services/media-entry';
 
-export type NormalizedMovieMediaItem = {
+export type NormalizedGameMediaItem = {
   _id: string;
   title: string;
   posterUrl?: string;
   averageRating?: number;
   genre: string[];
   mediaEntry?: DiscoverMediaEntry;
-  runTime?: number;
+  avgPlaytime?: number;
   releaseDate?: string;
   description: string;
 };
 
-export const normalizeMovieWithUserEntry = (
-  item: MovieWithUserEntry,
-): NormalizedMovieMediaItem => ({
+export const normalizeGameWithUserEntry = (
+  item: GameWithUserEntry,
+): NormalizedGameMediaItem => ({
   _id: item._id,
   title: item.title,
   posterUrl: item.posterUrl,
   averageRating: item.averageRating,
   genre: item.genre,
   mediaEntry: item.mediaEntry,
-  runTime: item.runTime,
+  avgPlaytime: item.avgPlaytime,
   releaseDate: item.releaseDate,
   description: item.description,
 });
 
 export const normalizeMediaEntryFull = (
   item: MediaEntryFull,
-): NormalizedMovieMediaItem => {
-  const mediaItem = item.mediaItem as Movie;
+): NormalizedGameMediaItem => {
+  const mediaItem = item.mediaItem as Game;
   return {
     _id: item._id,
     title: mediaItem.title,
     posterUrl: mediaItem.posterUrl,
     averageRating: mediaItem.averageRating,
     genre: mediaItem.genre,
-    runTime: mediaItem.runTime,
+    avgPlaytime: mediaItem.avgPlaytime,
     releaseDate: mediaItem.releaseDate,
     description: mediaItem.description,
     mediaEntry: {
@@ -59,9 +59,9 @@ export const normalizeMediaEntryFull = (
 };
 
 /** Detect which API shape an item came from and normalize it */
-export const normalizeMediaItem = (
-  item: MovieWithUserEntry | MediaEntryFull,
-): NormalizedMovieMediaItem =>
+export const normalizeGameItem = (
+  item: GameWithUserEntry | MediaEntryFull,
+): NormalizedGameMediaItem =>
   'mediaItem' in item
     ? normalizeMediaEntryFull(item)
-    : normalizeMovieWithUserEntry(item);
+    : normalizeGameWithUserEntry(item);

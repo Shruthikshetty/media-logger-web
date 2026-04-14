@@ -23,7 +23,7 @@ import {
   MEDIA_ENTRY_FETCH_ALL_SLATE_TIME,
   MEDIA_ENTRY_FETCH_FILTER_SLATE_TIME,
 } from '../constants/config.constants';
-import { Movie } from './discover-service';
+import { Game, Movie, TvShowBase } from './discover-service';
 import { useAuthStore } from '../state-management/auth.store';
 
 export type MediaEntryFull = {
@@ -31,7 +31,7 @@ export type MediaEntryFull = {
   user: string;
   onModel: OnModelType;
   status: MediaStatus;
-  mediaItem: Movie; //@TODO this will also contain tv shows and games add later
+  mediaItem: Movie | Game | TvShowBase;
   rating?: number;
   createdAt?: string;
   updatedAt?: string;
@@ -159,9 +159,17 @@ export const useAddMediaEntry = () => {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.discover.movies],
         }),
+        // invalidate discover games query
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.discover.games],
+        }),
         // invalidate the fetch all media entries query
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.mediaEntries.fetchAll],
+        }),
+        // invalidate discover tv shows query
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.discover.tvShows],
         }),
         // invalidate the filter media entries query
         queryClient.invalidateQueries({
@@ -190,9 +198,17 @@ export const useDeleteMediaEntry = () => {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.discover.movies],
         }),
+        // invalidate discover games query
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.discover.games],
+        }),
         // invalidate the fetch all media entries query
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.mediaEntries.fetchAll],
+        }),
+        // invalidate discover tv shows query
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.discover.tvShows],
         }),
         // invalidate the filter media entries query
         queryClient.invalidateQueries({

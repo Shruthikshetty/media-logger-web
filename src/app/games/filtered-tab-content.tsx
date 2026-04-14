@@ -3,17 +3,17 @@
 import { useEffect, useState } from 'react';
 import { useFilterMediaEntries } from '@/src/services/media-entry';
 import { MediaStatus } from '@/src/types/global.types';
-import MoviesMediaGrid from './movies-media-grid';
+import GamesMediaGrid from './games-media-grid';
 import CustomPagination from '@/src/components/custom-pagination';
 import EmptyStatusState from '@/src/components/empty-status-state';
 import LoginPlaceholder from '@/src/components/login-placeholder';
-import { MOVIES_TABS } from '@/src/constants/screen.constants';
+import { GAMES_TABS } from '@/src/constants/screen.constants';
 
 /**
  * Filtered Tab Content - common component for the content of
- * movies filter tab by status
+ * games filter tab by status
  */
-const FilteredTabContent = ({
+const FilteredGamesTabContent = ({
   status,
   setSelectedTab,
 }: {
@@ -25,7 +25,7 @@ const FilteredTabContent = ({
   // fetch filtered media entries
   const { data, isLoading } = useFilterMediaEntries({
     status,
-    onModel: 'Movie', // this will always be 'Movie' for these tab
+    onModel: 'Game', // this will always be 'Game' for these tabs
     page,
     limit: 20,
   });
@@ -43,7 +43,7 @@ const FilteredTabContent = ({
 
   return (
     <LoginPlaceholder>
-      <MoviesMediaGrid data={data?.data?.mediaEntries} loading={isLoading} />
+      <GamesMediaGrid data={data?.data?.mediaEntries} loading={isLoading} />
       {data?.data?.pagination && data.data.pagination.totalPages > 1 ? (
         <CustomPagination
           page={page}
@@ -52,15 +52,15 @@ const FilteredTabContent = ({
         />
       ) : null}
       {data?.data?.pagination &&
-      data.data.mediaEntries.length === 0 &&
+      data.data.mediaEntries?.length === 0 &&
       !isLoading &&
       page === 1 ? (
         <EmptyStatusState
           status={status}
-          mediaType="Movie"
+          mediaType="Game"
           className="min-w-[60vw]"
           handleAction={() => {
-            setSelectedTab(MOVIES_TABS[0].value);
+            setSelectedTab(GAMES_TABS[0].value);
           }}
         />
       ) : null}
@@ -68,4 +68,4 @@ const FilteredTabContent = ({
   );
 };
 
-export default FilteredTabContent;
+export default FilteredGamesTabContent;

@@ -1,28 +1,28 @@
 import MediaCard from '@/src/components/media-card';
-import { MovieWithUserEntry } from '@/src/services/discover-service';
+import { TvShowWithUserEntry } from '@/src/services/discover-service';
 import {
   MediaEntryFull,
   useAddMediaEntry,
   useDeleteMediaEntry,
 } from '@/src/services/media-entry';
 import {
-  NormalizedMovieMediaItem,
-  normalizeMediaItem,
-} from '../../lib/movies.utils';
+  NormalizedTvShowMediaItem,
+  normalizeTvShowItem,
+} from '../../lib/tv-shows.utils';
 import MediaGridSkeleton from '@/src/components/media-grid-skeleton';
 import MediaListItem from '@/src/components/media-list-item';
 import { useLayoutStore } from '@/src/state-management/layout.store';
 
 // props type
 type Props = {
-  data?: MovieWithUserEntry[] | MediaEntryFull[];
+  data?: TvShowWithUserEntry[] | MediaEntryFull[];
   loading?: boolean;
 };
 
 /**
- * Component to display movies in a grid/list format.
+ * Component to display tv shows in a grid/list format.
  */
-const MoviesMediaGrid = ({ data, loading }: Props) => {
+const TVShowsMediaGrid = ({ data, loading }: Props) => {
   // get layout from layout store
   const layout = useLayoutStore((state) => state.layout);
   // add media entry hook
@@ -40,20 +40,20 @@ const MoviesMediaGrid = ({ data, loading }: Props) => {
   // show loading skeleton
   if (loading) return <MediaGridSkeleton layout={layout} />;
   //normalize items
-  const items = data?.map(normalizeMediaItem) ?? [];
+  const items = data?.map(normalizeTvShowItem) ?? [];
 
   // on Add to list
-  const onAddToList = (item: NormalizedMovieMediaItem) => {
+  const onAddToList = (item: NormalizedTvShowMediaItem) => {
     // add media entry
     addMediaEntryMutate({
       status: 'Planning',
-      onModel: 'Movie',
+      onModel: 'TVShow',
       mediaItem: item._id,
     });
   };
 
   // on delete of the entry
-  const onDelete = (item: NormalizedMovieMediaItem) => {
+  const onDelete = (item: NormalizedTvShowMediaItem) => {
     if (!item.mediaEntry?._id) return;
     // delete media entry
     deleteMediaEntryMutate(item.mediaEntry?._id);
@@ -67,7 +67,7 @@ const MoviesMediaGrid = ({ data, loading }: Props) => {
           {items.map((item) => (
             <MediaCard
               key={item._id}
-              mediaType="Movie"
+              mediaType="TvShow"
               imageUrl={item.posterUrl}
               rating={item.averageRating}
               title={item.title}
@@ -88,12 +88,12 @@ const MoviesMediaGrid = ({ data, loading }: Props) => {
           {items.map((item) => (
             <MediaListItem
               key={item._id}
-              mediaType="Movie"
+              mediaType="TvShow"
               imageUrl={item.posterUrl}
               title={item.title}
               rating={item.averageRating}
               releaseDate={item.releaseDate}
-              length={item.runTime}
+              length={item.avgRunTime}
               description={item.description}
               genres={item.genre}
               status={item.mediaEntry?.status}
@@ -111,4 +111,4 @@ const MoviesMediaGrid = ({ data, loading }: Props) => {
   );
 };
 
-export default MoviesMediaGrid;
+export default TVShowsMediaGrid;

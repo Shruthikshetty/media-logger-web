@@ -1,55 +1,55 @@
 /**
- * @file Utility types and normalizer functions for the movies feature
+ * @file Utility types and normalizer functions for the tv shows feature
  */
 
 import {
   DiscoverMediaEntry,
-  Movie,
-  MovieWithUserEntry,
+  TvShowWithUserEntry,
+  TvShowBase,
 } from '@/src/services/discover-service';
 import { MediaEntryFull } from '@/src/services/media-entry';
 
-export type NormalizedMovieMediaItem = {
+export type NormalizedTvShowMediaItem = {
   _id: string;
   title: string;
   posterUrl?: string;
   averageRating?: number;
   genre: string[];
   mediaEntry?: DiscoverMediaEntry;
-  runTime?: number;
+  avgRunTime?: number;
   releaseDate?: string;
   description: string;
 };
 
-export const normalizeMovieWithUserEntry = (
-  item: MovieWithUserEntry,
-): NormalizedMovieMediaItem => ({
+export const normalizeTvShowWithUserEntry = (
+  item: TvShowWithUserEntry,
+): NormalizedTvShowMediaItem => ({
   _id: item._id,
   title: item.title,
   posterUrl: item.posterUrl,
   averageRating: item.averageRating,
   genre: item.genre,
   mediaEntry: item.mediaEntry,
-  runTime: item.runTime,
+  avgRunTime: item.avgRunTime,
   releaseDate: item.releaseDate,
   description: item.description,
 });
 
 export const normalizeMediaEntryFull = (
   item: MediaEntryFull,
-): NormalizedMovieMediaItem => {
-  const mediaItem = item.mediaItem as Movie;
+): NormalizedTvShowMediaItem => {
+  const mediaItem = item.mediaItem as TvShowBase;
   return {
     _id: item._id,
     title: mediaItem.title,
     posterUrl: mediaItem.posterUrl,
     averageRating: mediaItem.averageRating,
     genre: mediaItem.genre,
-    runTime: mediaItem.runTime,
+    avgRunTime: mediaItem.avgRunTime,
     releaseDate: mediaItem.releaseDate,
     description: mediaItem.description,
     mediaEntry: {
-      _id: item._id,
+      _id: mediaItem._id,
       user: item.user,
       onModel: item.onModel,
       status: item.status,
@@ -59,9 +59,9 @@ export const normalizeMediaEntryFull = (
 };
 
 /** Detect which API shape an item came from and normalize it */
-export const normalizeMediaItem = (
-  item: MovieWithUserEntry | MediaEntryFull,
-): NormalizedMovieMediaItem =>
+export const normalizeTvShowItem = (
+  item: TvShowWithUserEntry | MediaEntryFull,
+): NormalizedTvShowMediaItem =>
   'mediaItem' in item
     ? normalizeMediaEntryFull(item)
-    : normalizeMovieWithUserEntry(item);
+    : normalizeTvShowWithUserEntry(item);

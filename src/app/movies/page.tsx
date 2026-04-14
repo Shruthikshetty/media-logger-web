@@ -42,7 +42,11 @@ export default function MoviesTab() {
       <MovieDiscoverTab />
       {/* rest of the tabs */}
       {MOVIES_TABS.slice(1).map((tab) => (
-        <TabsContent key={tab.value} value={tab.value} className="my-2">
+        <TabsContent
+          key={tab.value}
+          value={tab.value}
+          className="my-2 min-w-[60vw]"
+        >
           <FilteredTabContent
             status={capitalizeFirstLetter(tab.value) as MediaStatus}
             setSelectedTab={setSelectedTab}
