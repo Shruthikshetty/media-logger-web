@@ -167,6 +167,7 @@ export default function Login() {
               className="p-0"
               type="button"
               aria-label="sign up"
+              onClick={() => route.push('/signup')}
             >
               Create Account
             </Button>
