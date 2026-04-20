@@ -14,16 +14,23 @@ import {
   Field,
 } from '@/src/components/ui/field';
 import { Input } from '@/src/components/ui/input';
+import { successToast } from '@/src/lib/toast-wrapper';
 import { signupDefaultValues, signupSchema } from '@/src/schema/signup-schema';
+import { useCreateUser } from '@/src/services/user-service';
 import { useForm } from '@tanstack/react-form';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 /**
  * Sign up page containing the sign up form
  * @returns {JSX.Element}
  */
 export default function SignUp() {
+  // hook to sign up
+  const { mutate } = useCreateUser();
+  // hook for navigation
+  const route = useRouter();
   // create a sign up form
   const form = useForm({
     defaultValues: signupDefaultValues,
@@ -31,7 +38,13 @@ export default function SignUp() {
       onSubmit: signupSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log(value);
+      mutate(value, {
+        onSuccess: (data) => {
+          successToast(data?.message ?? 'User created successfully');
+          form.reset();
+          route.replace('/login');
+        },
+      });
     },
   });
 
