@@ -36,7 +36,7 @@ export const useGetUserDetails = () => {
   });
 };
 
-// custom hok to create a new user (sign up)
+// custom hook to create a new user (sign up)
 export const useCreateUser = () => {
   return useMutation<ApiResponse<User>, AxiosError<ApiError>, AddUserRequest>({
     mutationFn: async (userData: AddUserRequest) =>

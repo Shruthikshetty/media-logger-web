@@ -1,14 +1,15 @@
 import z from 'zod';
 import { REGEX } from '../constants/pattern.constants';
 
-//this contains the zod schema for the login form
+//this contains the zod schema for the signup form
 export const signupSchema = z
   .object({
     name: z
       .string({
         error: 'Name must be string',
       })
-      .min(1, 'Name is required'),
+      .min(3, 'Name must be at least 3 characters')
+      .max(50, 'Name must be less than 50 characters'),
     email: z
       .string({
         error: 'Email must be string',
@@ -20,12 +21,14 @@ export const signupSchema = z
       .string({
         error: 'Password must be string',
       })
-      .min(1, 'Password is required'),
+      .min(3, 'Password must be at least 3 characters')
+      .max(50, 'Password must be less than 50 characters'),
     confirmPassword: z
       .string({
         error: 'Confirm Password must be string',
       })
-      .min(1, 'Confirm Password is required'),
+      .min(3, 'Password must be at least 3 characters')
+      .max(50, 'Password must be less than 50 characters'),
   })
   .superRefine(({ confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {
@@ -37,7 +40,7 @@ export const signupSchema = z
     }
   });
 
-//default values for the login form
+//default values for the sign up form
 export const signupDefaultValues = {
   name: '',
   email: '',
@@ -45,5 +48,5 @@ export const signupDefaultValues = {
   confirmPassword: '',
 };
 
-//this is the type for the login form
-export type LoginSchema = z.infer<typeof signupSchema>;
+//this is the type for the signup form
+export type SignupSchema = z.infer<typeof signupSchema>;

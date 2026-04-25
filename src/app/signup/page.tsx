@@ -113,7 +113,7 @@ export default function SignUp() {
                         name={field.name}
                         value={field.state.value ?? ''}
                         onBlur={field.handleBlur}
-                        placeholder="example@gamil.com"
+                        placeholder="example@gmail.com"
                         onChange={(e) => field.handleChange(e.target.value)}
                       />
                       {isInvalid && (
