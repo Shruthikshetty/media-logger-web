@@ -9,13 +9,8 @@ import {
   CardTitle,
 } from '@/src/components/ui/card';
 import { Input } from '@/src/components/ui/input';
-import {
-  loginDefaultValues,
-  loginSchema,
-  LoginSchema,
-} from '@/src/schema/login-schema';
-import { Controller, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { loginDefaultValues, loginSchema } from '@/src/schema/login-schema';
+import { useForm } from '@tanstack/react-form';
 import {
   Field,
   FieldError,
@@ -34,12 +29,6 @@ import { useScreenLoader } from '@/src/state-management/screen-loader.store';
  * Login page containing the login form
  */
 export default function Login() {
-  // create a login form using the login schema using react form hook
-  const { handleSubmit, control } = useForm<LoginSchema>({
-    mode: 'onChange',
-    resolver: zodResolver(loginSchema),
-    defaultValues: loginDefaultValues,
-  });
   // get setters from screen loader store
   const setLoader = useScreenLoader((state) => state.setLoader);
 
@@ -53,31 +42,37 @@ export default function Login() {
   // login mutation hook
   const { mutate, isPending, error } = useLoginUser();
 
-  //handle login form submit
-  const handleLoginSubmit = (data: LoginSchema) => {
-    // set loading true
-    setLoader(true);
-    mutate(data, {
-      onSuccess: (res) => {
-        // set token in cookie
-        Cookies.set(COOKIE_NAMES.token, res?.data?.token, {
-          expires: COOKIE_EXPIRY.token,
-          path: '/', // accessible across the app
-          secure: true,
-        });
-        // set user in store
-        setIsLoggedIn(true);
-        setUser(res.data.user);
-        // navigate to home page
-        successToast('Login success');
-        route.replace('/');
-      },
-      onSettled: () => {
-        // set loading false
-        setLoader(false);
-      },
-    });
-  };
+  // create a login form
+  const form = useForm({
+    defaultValues: loginDefaultValues,
+    validators: {
+      onSubmit: loginSchema,
+    },
+    onSubmit: async ({ value }) => {
+      // set loading true
+      setLoader(true);
+      mutate(value, {
+        onSuccess: (res) => {
+          // set token in cookie
+          Cookies.set(COOKIE_NAMES.token, res?.data?.token, {
+            expires: COOKIE_EXPIRY.token,
+            path: '/', // accessible across the app
+            secure: true,
+          });
+          // set user in store
+          setIsLoggedIn(true);
+          setUser(res.data.user);
+          // navigate to home page
+          successToast('Login success');
+          route.replace('/');
+        },
+        onSettled: () => {
+          // set loading false
+          setLoader(false);
+        },
+      });
+    },
+  });
 
   return (
     <div className="flex h-screen items-center justify-center">
@@ -94,56 +89,69 @@ export default function Login() {
           <form
             id="login-form"
             className="flex flex-col gap-6"
-            onSubmit={handleSubmit(handleLoginSubmit)}
+            onSubmit={(e) => {
+              e.preventDefault();
+              form.handleSubmit();
+            }}
           >
             <FieldGroup className="flex flex-col gap-4">
-              <Controller
-                control={control}
-                name="email"
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel>Email</FieldLabel>
-                    <Input
-                      {...field}
-                      type="email"
-                      id="email"
-                      placeholder="enter your email"
-                    />
-                    {fieldState.error && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
-                )}
-              />
-              <Controller
-                control={control}
-                name="password"
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <div className="flex items-center justify-between">
-                      <FieldLabel>Password</FieldLabel>
-                      {/* TODO this functionality will be implemented later */}
-                      <Button
-                        variant="link"
-                        className="p-0 font-normal"
-                        type="button"
-                        aria-label="forgot password"
-                      >
-                        forgot password
-                      </Button>
-                    </div>
-                    <Input
-                      {...field}
-                      type="password"
-                      id="password"
-                      placeholder="enter your password"
-                    />
-                    {fieldState.error && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
-                )}
-              />
+              <form.Field name="email">
+                {(field) => {
+                  const isInvalid =
+                    field.state.meta.isTouched && !field.state.meta.isValid;
+                  return (
+                    <Field data-invalid={isInvalid}>
+                      <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                      <Input
+                        id={field.name}
+                        name={field.name}
+                        value={field.state.value ?? ''}
+                        type="email"
+                        onBlur={field.handleBlur}
+                        placeholder="enter your email"
+                        onChange={(e) => field.handleChange(e.target.value)}
+                      />
+                      {isInvalid && (
+                        <FieldError errors={field.state.meta.errors} />
+                      )}
+                    </Field>
+                  );
+                }}
+              </form.Field>
+              <form.Field name="password">
+                {(field) => {
+                  const isInvalid =
+                    field.state.meta.isTouched && !field.state.meta.isValid;
+                  return (
+                    <Field data-invalid={isInvalid}>
+                      <div className="flex items-center justify-between">
+                        <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+                        {/* TODO this functionality will be implemented later */}
+                        <Button
+                          variant="link"
+                          className="p-0 font-normal"
+                          type="button"
+                          aria-label="forgot password"
+                        >
+                          forgot password
+                        </Button>
+                      </div>
+                      <Input
+                        id={field.name}
+                        name={field.name}
+                        value={field.state.value ?? ''}
+                        type="password"
+                        onBlur={field.handleBlur}
+                        placeholder="enter your password"
+                        onChange={(e) => field.handleChange(e.target.value)}
+                      />
+                      {isInvalid && (
+                        <FieldError errors={field.state.meta.errors} />
+                      )}
+                    </Field>
+                  );
+                }}
+              </form.Field>
             </FieldGroup>
             {error?.response?.data?.message ? (
               <p className="text-center text-sm text-red-500">
@@ -167,6 +175,7 @@ export default function Login() {
               className="p-0"
               type="button"
               aria-label="sign up"
+              onClick={() => route.push('/signup')}
             >
               Create Account
             </Button>
