@@ -12,8 +12,7 @@ const MovieDetails = () => {
   // get the id from route
   const { id } = useParams<{ id: string }>();
   // fetch the details of the movie by id
-  const { data, isLoading, isError, error } =
-    useGetMovieDetailsWithUserEntry(id);
+  const { data } = useGetMovieDetailsWithUserEntry(id);
 
   //@TODO add loading later
 
@@ -21,12 +20,12 @@ const MovieDetails = () => {
     <div>
       <MediaBackdropCard
         backdropUrl={data?.data.movie.backdropUrl}
-        posteUrl={data?.data.movie.posterUrl}
-        title={data?.data.movie.title || ''}
-        releaseDate={data?.data.movie.releaseDate || ''}
-        rating={data?.data.movie.averageRating || 0}
+        posteUrl={undefined}
+        title={data?.data.movie.title}
+        releaseDate={data?.data.movie.releaseDate}
+        rating={data?.data.movie.averageRating}
         mediaType="Movie"
-        genres={data?.data.movie.genre || []}
+        genres={data?.data.movie.genre}
       />
     </div>
   );

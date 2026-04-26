@@ -13,42 +13,54 @@ import CollapsableBadgeList from './collapsable-badge-list';
 const MediaBackdropCard = ({
   backdropUrl,
   posteUrl,
-  title,
+  title = '???',
   releaseDate,
   rating,
-  genres,
+  genres = [],
   mediaType,
 }: {
-  backdropUrl: string;
-  posteUrl: string;
-  title: string;
-  releaseDate: string;
-  rating: number;
-  genres: string[];
+  backdropUrl?: string;
+  posteUrl?: string;
+  title?: string;
+  releaseDate?: string;
+  rating?: number;
+  genres?: string[];
   mediaType: MediaType;
 }) => {
   const Icon = MEDIA_ICON_MAPPING[mediaType];
   return (
-    <div className="relative h-[35vh] max-h-[50vh] w-full">
+    <div className="relative h-[35vh] max-h-[50vh] w-full lg:h-[40vh]">
       {/* background image */}
-      <Image
-        src={backdropUrl}
-        alt="Backdrop"
-        fill
-        priority
-        className="-z-10 object-cover opacity-90"
-      />
+      {backdropUrl ? (
+        <Image
+          src={backdropUrl}
+          alt="Backdrop"
+          fill
+          priority
+          className="-z-10 object-cover opacity-90"
+        />
+      ) : (
+        <div className="bg-muted/50 absolute inset-0 -z-10 flex h-full w-full flex-row items-center justify-center">
+          <Icon.icon className="size-16 opacity-30" />
+        </div>
+      )}
       {/*  details  */}
       <div className="z-10 flex h-full w-full flex-row items-center p-5">
         {/* poster  */}
-        <Image
-          src={posteUrl}
-          alt="poster"
-          width={150}
-          height={225}
-          priority
-          className="aspect-2/3 rounded-lg object-cover"
-        />
+        {posteUrl ? (
+          <Image
+            src={posteUrl}
+            alt="poster"
+            width={150}
+            height={225}
+            priority
+            className="aspect-2/3 rounded-lg object-cover"
+          />
+        ) : (
+          <div className="bg-muted/80 flex aspect-2/3 h-52 w-36 flex-row items-center justify-center rounded-lg">
+            <Icon.icon className="size-16 opacity-30" />
+          </div>
+        )}
         <div className="ml-5 flex flex-col">
           {/* title */}
           <div className="flex flex-row items-center gap-2">
@@ -59,14 +71,19 @@ const MediaBackdropCard = ({
           </div>
           <div className="flex flex-row items-center gap-2">
             {/* rating */}
-            <p className="flex flex-row items-center gap-1 font-semibold">
-              <Star className="fill-primary stroke-primary size-4" /> {rating}
-              /10
-            </p>
+            {rating != undefined ? (
+              <p className="flex flex-row items-center gap-1 font-semibold">
+                <Star className="fill-primary stroke-primary size-4" /> {rating}
+                /10
+              </p>
+            ) : null}
             {/* release date  */}
-            <p className="flex flex-row items-center gap-1">
-              <Calendar className="size-4" /> {formatDate(releaseDate, 'yyyy')}
-            </p>
+            {releaseDate ? (
+              <p className="flex flex-row items-center gap-1">
+                <Calendar className="size-4" />{' '}
+                {formatDate(releaseDate, 'yyyy')}
+              </p>
+            ) : null}
           </div>
           {/* genres */}
           <CollapsableBadgeList
