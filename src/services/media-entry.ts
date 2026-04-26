@@ -23,8 +23,9 @@ import {
   MEDIA_ENTRY_FETCH_ALL_SLATE_TIME,
   MEDIA_ENTRY_FETCH_FILTER_SLATE_TIME,
 } from '../constants/config.constants';
-import { Game, Movie, TvShowBase } from './discover-service';
+import { Game, TvShowBase } from './discover-service';
 import { useAuthStore } from '../state-management/auth.store';
+import { Movie } from './movie-service';
 
 export type MediaEntryFull = {
   _id: string;
