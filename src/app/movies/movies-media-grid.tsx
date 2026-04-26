@@ -1,3 +1,4 @@
+'use client';
 import MediaCard from '@/src/components/media-card';
 import { MovieWithUserEntry } from '@/src/services/discover-service';
 import {
@@ -12,6 +13,7 @@ import {
 import MediaGridSkeleton from '@/src/components/media-grid-skeleton';
 import MediaListItem from '@/src/components/media-list-item';
 import { useLayoutStore } from '@/src/state-management/layout.store';
+import { useRouter } from 'next/navigation';
 
 // props type
 type Props = {
@@ -25,6 +27,8 @@ type Props = {
 const MoviesMediaGrid = ({ data, loading }: Props) => {
   // get layout from layout store
   const layout = useLayoutStore((state) => state.layout);
+  // define router
+  const router = useRouter();
   // add media entry hook
   const {
     mutate: addMediaEntryMutate,
@@ -79,6 +83,7 @@ const MoviesMediaGrid = ({ data, loading }: Props) => {
               disableDelete={
                 deleteVariables === item.mediaEntry?._id && isDeleting
               }
+              onCardClick={() => router.push(`/movies/${item._id}`)}
             />
           ))}
         </div>

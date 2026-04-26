@@ -4,10 +4,10 @@
 
 import {
   DiscoverMediaEntry,
-  Movie,
   MovieWithUserEntry,
 } from '@/src/services/discover-service';
 import { MediaEntryFull } from '@/src/services/media-entry';
+import { Movie } from '../services/movie-service';
 
 export type NormalizedMovieMediaItem = {
   _id: string;

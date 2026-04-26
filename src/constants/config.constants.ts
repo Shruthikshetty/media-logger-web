@@ -47,3 +47,8 @@ export const MEDIA_ENTRY_FETCH_ALL_SLATE_TIME = 5 * 60 * 1000; // 5 minutes
  * media entries fetch by filter stale time
  */
 export const MEDIA_ENTRY_FETCH_FILTER_SLATE_TIME = 5 * 60 * 1000; // 5 minutes
+
+/**
+ * movie details stale time
+ */
+export const MOVIE_DETAILS_STALE_TIME = 5 * 60 * 1000; // 5 minutes

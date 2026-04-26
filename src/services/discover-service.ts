@@ -19,26 +19,7 @@ import {
   DISCOVER_MOVIES_STALE_TIME,
   DISCOVER_TV_SHOWS_STALE_TIME,
 } from '../constants/config.constants';
-
-export type Movie = {
-  _id: string;
-  title: string;
-  description: string;
-  averageRating?: number;
-  genre: string[];
-  releaseDate: string;
-  cast?: string[];
-  directors?: string[];
-  runTime: number;
-  languages: string[];
-  posterUrl?: string;
-  backdropUrl?: string;
-  isActive: boolean;
-  status: string;
-  tags?: string[];
-  ageRating: number;
-  youtubeVideoId?: string;
-};
+import { Movie } from './movie-service';
 
 export type gameStatus = 'released' | 'upcoming';
 

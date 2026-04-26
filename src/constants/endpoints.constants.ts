@@ -11,4 +11,5 @@ export const Endpoints = {
   discoverMovies: `/api/discover/movies`,
   mediaEntriesBase: `/api/media-entry`,
   mediaEntriesFilter: `/api/media-entry/filter`,
+  baseMovie: `/api/movie`,
 };

@@ -15,6 +15,9 @@ export const QUERY_KEYS = {
     fetchAll: 'media-entries-all',
     filter: 'media-entries-filter',
   },
+  movie: {
+    detailsWithEntry: 'movie-details-with-entry',
+  },
 };
 
 export const MUTATION_KEYS = {
