@@ -14,8 +14,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Media logger',
-  description: 'Logger your media content',
+  title: 'Media Logger',
+  description:
+    'Your personal media logger. Keep track of movies, TV shows, and games you have watched, played, or want to explore.',
+  keywords: [
+    'media logger',
+    'movie tracker',
+    'tv show tracker',
+    'game tracker',
+    'watchlist',
+    'entertainment',
+  ],
 };
 
 export default function RootLayout({
