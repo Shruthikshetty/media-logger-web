@@ -13,7 +13,7 @@ import { Skeleton } from './ui/skeleton';
  */
 const MediaBackdropCard = ({
   backdropUrl,
-  posteUrl,
+  posterUrl,
   title = '???',
   releaseDate,
   rating,
@@ -22,7 +22,7 @@ const MediaBackdropCard = ({
   loading = false,
 }: {
   backdropUrl?: string;
-  posteUrl?: string;
+  posterUrl?: string;
   title?: string;
   releaseDate?: string;
   rating?: number;
@@ -75,9 +75,9 @@ const MediaBackdropCard = ({
       {/*  details  */}
       <div className="z-10 flex h-full w-full flex-row items-center p-5">
         {/* poster  */}
-        {posteUrl ? (
+        {posterUrl ? (
           <Image
-            src={posteUrl}
+            src={posterUrl}
             alt="poster"
             width={150}
             height={225}

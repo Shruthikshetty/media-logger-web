@@ -18,7 +18,7 @@ const MovieDetails = () => {
     <div>
       <MediaBackdropCard
         backdropUrl={data?.data.movie?.backdropUrl}
-        posteUrl={data?.data.movie?.posterUrl}
+        posterUrl={data?.data.movie?.posterUrl}
         title={data?.data.movie?.title}
         releaseDate={data?.data.movie?.releaseDate}
         rating={data?.data.movie?.averageRating}
