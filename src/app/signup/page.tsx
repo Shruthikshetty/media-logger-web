@@ -28,7 +28,8 @@ import { useRouter } from 'next/navigation';
  */
 export default function SignUp() {
   // hook to sign up
-  const { mutate } = useCreateUser();
+  const { mutate, isPending } = useCreateUser();
+  //@TODO add loading
   // hook for navigation
   const route = useRouter();
   // create a sign up form
@@ -175,7 +176,7 @@ export default function SignUp() {
             <Button
               type="submit"
               aria-label="sign up"
-              // disabled={isPending}
+              disabled={isPending}
               className="cursor-pointer"
             >
               Sign up
