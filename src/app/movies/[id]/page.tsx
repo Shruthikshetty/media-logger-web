@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from '@/src/components/ui/card';
 import { Separator } from '@/src/components/ui/separator';
+import YoutubePlayerCard from '@/src/components/youtube-player-card';
 import { formatDate } from '@/src/lib/date.utils';
 import { capitalizeFirstLetter } from '@/src/lib/text-utils';
 import { formatDuration } from '@/src/lib/time.utils';
@@ -91,7 +92,8 @@ const MovieDetails = () => {
               </CardContent>
             </Card>
           ) : null}
-          {/*@TODO trailer */}
+          {/* Trailer card */}
+          <YoutubePlayerCard videoId={data?.data.movie?.youtubeVideoId ?? ''} />
         </div>
         {/* details part 1 */}
         <Card className="border-border mt-4 min-w-[25vw] gap-2 md:mt-0">
