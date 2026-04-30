@@ -29,7 +29,7 @@ const MovieDetails = () => {
   const { data, isLoading } = useGetMovieDetailsWithUserEntry(id);
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col items-center gap-3">
       <MediaBackdropCard
         backdropUrl={data?.data.movie?.backdropUrl}
         posterUrl={data?.data.movie?.posterUrl}
@@ -39,11 +39,15 @@ const MovieDetails = () => {
         mediaType="Movie"
         genres={data?.data.movie?.genre}
         loading={isLoading}
+        starValue={data?.data?.mediaEntry?.rating}
+        onStarRatingChange={() => {
+          //@TODO update user rating
+        }}
       />
       {/*@TODO Tabs will be added later */}
       <div className="flex flex-col gap-0 p-5 md:flex-row md:gap-5">
         {/* details part 1 */}
-        <div className="flex flex-col gap-4">
+        <div className="flex min-w-[65vw] flex-col gap-4">
           {/* synopsis */}
           <Card className="border-border gap-2">
             <CardHeader>
