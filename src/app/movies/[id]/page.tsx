@@ -20,6 +20,7 @@ import {
   useUpdateMediaEntry,
 } from '@/src/services/media-entry';
 import { useGetMovieDetailsWithUserEntry } from '@/src/services/movie-service';
+import { useAuthStore } from '@/src/state-management/auth.store';
 import { MediaStatus } from '@/src/types/global.types';
 import { useQueryClient } from '@tanstack/react-query';
 import { Users } from 'lucide-react';
@@ -32,6 +33,8 @@ import { useParams } from 'next/navigation';
 const MovieDetails = () => {
   // get the id from route
   const { id } = useParams<{ id: string }>();
+  // get if user is logged in from store
+  const { isLoggedIn } = useAuthStore();
   // query client
   const queryClient = useQueryClient();
   // fetch the details of the movie by id
@@ -114,6 +117,7 @@ const MovieDetails = () => {
         onStatusChange={(status) => handleMediaEntryChange({ status })}
         defaultStatus={data?.data?.mediaEntry?.status}
         disableUpdate={addMediaEntryPending || updateMediaEntryPending}
+        isLoggedIn={isLoggedIn}
       />
       {/*@TODO Tabs will be added later */}
       {/*@TODO below details loading shimmer to be added */}

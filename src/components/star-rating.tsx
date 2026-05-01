@@ -110,6 +110,7 @@ const StarRating = ({
         aria-disabled={disabled}
         aria-valuenow={displayRating}
         aria-valuemin={0}
+        aria-label={label ?? 'Rating'}
         aria-valuemax={totalStars}
         onKeyDown={handleKeyDown}
       >

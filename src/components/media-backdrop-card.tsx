@@ -39,6 +39,7 @@ const MediaBackdropCard = ({
   disableUpdate,
   defaultStatus = '',
   onStatusChange,
+  isLoggedIn = false,
 }: {
   backdropUrl?: string;
   posterUrl?: string;
@@ -53,6 +54,7 @@ const MediaBackdropCard = ({
   disableUpdate?: boolean;
   defaultStatus?: MediaStatus | '';
   onStatusChange?: (value: MediaStatus) => void;
+  isLoggedIn?: boolean;
 }) => {
   const [mediaStatus, setMediaStatus] = useState(defaultStatus);
   // get the icon based on media type
@@ -182,40 +184,44 @@ const MediaBackdropCard = ({
               }}
             />
             {/* for large devices */}
-            <div className="mt-2 hidden gap-2 sm:flex sm:flex-col">
-              {/* user rating  */}
-              {onStarRatingChange ? (
-                <StarRating
-                  label="Your Rating :"
-                  size={14}
-                  hideRatingValue
-                  defaultValue={starValue}
-                  disabled={disableUpdate}
-                  onChange={onStarRatingChange}
-                />
-              ) : null}
-              {/* change status */}
-              {renderStatusSelect()}
-            </div>
+            {isLoggedIn ? (
+              <div className="mt-2 hidden gap-2 sm:flex sm:flex-col">
+                {/* user rating  */}
+                {onStarRatingChange ? (
+                  <StarRating
+                    label="Your Rating :"
+                    size={14}
+                    hideRatingValue
+                    defaultValue={starValue}
+                    disabled={disableUpdate}
+                    onChange={onStarRatingChange}
+                  />
+                ) : null}
+                {/* change status */}
+                {onStatusChange ? renderStatusSelect() : null}
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
       {/* for small devices */}
-      <div className="flex flex-col gap-2 px-5 py-1 sm:hidden">
-        {/* user rating  */}
-        {onStarRatingChange ? (
-          <StarRating
-            label="Your rating :"
-            size={14}
-            hideRatingValue
-            defaultValue={starValue}
-            disabled={disableUpdate}
-            onChange={onStarRatingChange}
-          />
-        ) : null}
-        {/* change status  */}
-        {renderStatusSelect()}
-      </div>
+      {isLoggedIn ? (
+        <div className="flex flex-col gap-2 px-5 py-1 sm:hidden">
+          {/* user rating  */}
+          {onStarRatingChange ? (
+            <StarRating
+              label="Your rating :"
+              size={14}
+              hideRatingValue
+              defaultValue={starValue}
+              disabled={disableUpdate}
+              onChange={onStarRatingChange}
+            />
+          ) : null}
+          {/* change status  */}
+          {onStatusChange ? renderStatusSelect() : null}
+        </div>
+      ) : null}
     </>
   );
 };
