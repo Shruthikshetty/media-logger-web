@@ -1,12 +1,25 @@
 import Image from 'next/image';
-import { MediaType } from '../types/global.types';
-import { MEDIA_ICON_MAPPING } from '../constants/screen.constants';
+import { MediaStatus, MediaType } from '../types/global.types';
+import {
+  MEDIA_ICON_MAPPING,
+  MEDIA_STATUS_SELECT_OPTIONS,
+} from '../constants/screen.constants';
 import { capitalizeFirstLetter } from '../lib/text-utils';
 import { Calendar, Star } from 'lucide-react';
 import { formatDate } from '../lib/date.utils';
 import CollapsableBadgeList from './collapsable-badge-list';
 import { Skeleton } from './ui/skeleton';
 import StarRating from './star-rating';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from './ui/select';
+import { cn } from '../lib/utils';
+import { useState } from 'react';
 
 /**
  * A card has large background image with
@@ -24,6 +37,8 @@ const MediaBackdropCard = ({
   onStarRatingChange,
   starValue = 0,
   disableUpdate,
+  defaultStatus = '',
+  onStatusChange,
 }: {
   backdropUrl?: string;
   posterUrl?: string;
@@ -36,9 +51,43 @@ const MediaBackdropCard = ({
   starValue?: number;
   onStarRatingChange?: (value: number) => void;
   disableUpdate?: boolean;
+  defaultStatus?: MediaStatus | '';
+  onStatusChange?: (value: MediaStatus) => void;
 }) => {
+  const [mediaStatus, setMediaStatus] = useState(defaultStatus);
   // get the icon based on media type
   const Icon = MEDIA_ICON_MAPPING[mediaType];
+  // get options based on media type
+  const options = MEDIA_STATUS_SELECT_OPTIONS[mediaType];
+
+  // render select for status
+  const renderStatusSelect = () => (
+    <Select
+      value={mediaStatus}
+      onValueChange={(value) => {
+        setMediaStatus(value as MediaStatus);
+        onStatusChange?.(value as MediaStatus);
+      }}
+    >
+      <SelectTrigger
+        className={cn(
+          'bg-background/70! w-full max-w-70 font-semibold',
+          options?.find((option) => option.value === mediaStatus)?.color,
+        )}
+      >
+        <SelectValue placeholder="Select Status" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          {options?.map((option) => (
+            <SelectItem key={option.value} value={option.value}>
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  );
 
   // in case content is loading
   if (loading) {
@@ -132,11 +181,11 @@ const MediaBackdropCard = ({
               }}
             />
             {/* for large devices */}
-            <div className="mt-2 hidden flex-col gap-2 sm:block">
+            <div className="mt-2 hidden gap-2 sm:flex sm:flex-col">
               {/* user rating  */}
               {onStarRatingChange ? (
                 <StarRating
-                  label="Your rating :"
+                  label="Your Rating :"
                   size={14}
                   hideRatingValue
                   defaultValue={starValue}
@@ -144,12 +193,14 @@ const MediaBackdropCard = ({
                   onChange={onStarRatingChange}
                 />
               ) : null}
+              {/* change status */}
+              {renderStatusSelect()}
             </div>
           </div>
         </div>
       </div>
       {/* for small devices */}
-      <div className="p-5 sm:hidden">
+      <div className="flex flex-col gap-2 px-5 py-1 sm:hidden">
         {/* user rating  */}
         {onStarRatingChange ? (
           <StarRating
@@ -162,6 +213,7 @@ const MediaBackdropCard = ({
           />
         ) : null}
         {/* change status  */}
+        {renderStatusSelect()}
       </div>
     </>
   );

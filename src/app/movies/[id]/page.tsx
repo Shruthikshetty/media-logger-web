@@ -20,6 +20,7 @@ import {
   useUpdateMediaEntry,
 } from '@/src/services/media-entry';
 import { useGetMovieDetailsWithUserEntry } from '@/src/services/movie-service';
+import { MediaStatus } from '@/src/types/global.types';
 import { useQueryClient } from '@tanstack/react-query';
 import { Users } from 'lucide-react';
 import { useParams } from 'next/navigation';
@@ -43,8 +44,15 @@ const MovieDetails = () => {
     useUpdateMediaEntry();
 
   // handle star rating change
-  const handleStarRatingChange = (rating: number) => {
-    console.log(data?.data.mediaEntry);
+  const handleMediaEntryChange = ({
+    rating,
+    status,
+  }: {
+    rating?: number;
+    status?: MediaStatus;
+  }) => {
+    // filter invalid calls
+    if (!rating && !status) return;
     // check if media entry exists
     if (data?.data?.mediaEntry?._id) {
       // update media entry
@@ -52,7 +60,8 @@ const MovieDetails = () => {
         {
           id: data.data.mediaEntry._id,
           data: {
-            rating: rating,
+            ...(rating != undefined && { rating }),
+            ...(status && { status }),
           },
         },
         {
@@ -72,10 +81,10 @@ const MovieDetails = () => {
       // add media entry
       addMediaEntry(
         {
-          rating: rating,
+          rating,
           mediaItem: id,
           onModel: 'Movie',
-          status: 'Completed',
+          status: status ?? 'Completed',
         },
         {
           onSuccess: () => {
@@ -101,10 +110,13 @@ const MovieDetails = () => {
         genres={data?.data.movie?.genre}
         loading={isLoading}
         starValue={data?.data?.mediaEntry?.rating}
-        onStarRatingChange={handleStarRatingChange}
+        onStarRatingChange={(rating) => handleMediaEntryChange({ rating })}
+        onStatusChange={(status) => handleMediaEntryChange({ status })}
+        defaultStatus={data?.data?.mediaEntry?.status}
         disableUpdate={addMediaEntryPending || updateMediaEntryPending}
       />
       {/*@TODO Tabs will be added later */}
+      {/*@TODO below details loading shimmer to be added */}
       <div className="flex flex-col gap-0 p-5 md:flex-row md:gap-5">
         {/* details part 1 */}
         <div className="flex min-w-[65vw] flex-col gap-4">

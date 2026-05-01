@@ -218,3 +218,73 @@ export const MEDIA_LABELS = {
   TVShow: { singular: 'show', plural: 'shows', icon: Tv },
   Game: { singular: 'game', plural: 'games', icon: Gamepad2 },
 } as const;
+
+// status select option
+export const MEDIA_STATUS_SELECT_OPTIONS = {
+  Movie: [
+    {
+      label: 'Planning',
+      value: 'Planning',
+      color: 'text-purple-400',
+    },
+    {
+      label: 'Watching',
+      value: 'Watching',
+      color: 'text-blue-400',
+    },
+    {
+      label: 'Completed',
+      value: 'Completed',
+      color: 'text-green-400',
+    },
+    {
+      label: 'Dropped',
+      value: 'Dropped',
+      color: 'text-red-400',
+    },
+  ],
+  TvShow: [
+    {
+      label: 'Planning',
+      value: 'Planning',
+      color: 'text-purple-400',
+    },
+    {
+      label: 'Watching',
+      value: 'Watching',
+      color: 'text-blue-400',
+    },
+    {
+      label: 'Completed',
+      value: 'Completed',
+      color: 'text-green-400',
+    },
+    {
+      label: 'Dropped',
+      value: 'Dropped',
+      color: 'text-red-400',
+    },
+  ],
+  Game: [
+    {
+      label: 'Planning',
+      value: 'Planning',
+      color: 'text-purple-400',
+    },
+    {
+      label: 'Playing',
+      value: 'Playing',
+      color: 'text-blue-400',
+    },
+    {
+      label: 'Completed',
+      value: 'Completed',
+      color: 'text-green-400',
+    },
+    {
+      label: 'Dropped',
+      value: 'Dropped',
+      color: 'text-red-400',
+    },
+  ],
+};
