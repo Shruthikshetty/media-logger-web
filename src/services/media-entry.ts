@@ -74,6 +74,11 @@ export type MediaEntryAddParams = {
   mediaItem: string;
 };
 
+export type UpdateMediaEntryRequest = {
+  status?: MediaStatus;
+  rating?: number;
+};
+
 type ResponseMediaEntryAdd = ApiResponse<MediaItem>;
 
 /**
@@ -210,6 +215,39 @@ export const useDeleteMediaEntry = () => {
         // invalidate discover tv shows query
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.discover.tvShows],
+        }),
+        // invalidate the filter media entries query
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.mediaEntries.filter],
+        }),
+      ]);
+    },
+  });
+};
+
+/**
+ * Hook to update a media entry
+ */
+export const useUpdateMediaEntry = () => {
+  // query client
+  const queryClient = useQueryClient();
+  return useMutation<
+    ApiResponse<MediaItem>,
+    AxiosError<ApiError>,
+    { id: string; data: UpdateMediaEntryRequest }
+  >({
+    mutationKey: [MUTATION_KEYS.mediaEntries.update],
+    mutationFn: async ({ id, data }) =>
+      apiClient
+        .patch<
+          ApiResponse<MediaItem>
+        >(`${Endpoints.mediaEntriesBase}/${id}`, data)
+        .then((res) => res.data),
+    onSuccess: () => {
+      return Promise.all([
+        // invalidate the fetch all media entries query
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.mediaEntries.fetchAll],
         }),
         // invalidate the filter media entries query
         queryClient.invalidateQueries({

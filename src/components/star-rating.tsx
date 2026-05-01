@@ -14,6 +14,7 @@ interface StarRatingProps {
   label?: string;
   className?: string;
   hideRatingValue?: boolean;
+  disabled?: boolean;
 }
 
 /**
@@ -29,6 +30,7 @@ const StarRating = ({
   label,
   className,
   hideRatingValue = false,
+  disabled = false,
 }: StarRatingProps) => {
   const [internalRating, setInternalRating] = useState(defaultValue);
   const [hoverRating, setHoverRating] = useState<number | null>(null);
@@ -42,6 +44,7 @@ const StarRating = ({
     e: React.MouseEvent<HTMLDivElement>,
     starIndex: number,
   ) => {
+    if (disabled) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     // Determine if we are hovering over the left or right half of the star
@@ -52,6 +55,7 @@ const StarRating = ({
 
   // clear hover state when mouse leaves
   const handleMouseLeave = () => {
+    if (disabled) return;
     setHoverRating(null);
   };
 
@@ -60,6 +64,7 @@ const StarRating = ({
     e: React.MouseEvent<HTMLDivElement>,
     starIndex: number,
   ) => {
+    if (disabled) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const isHalf = x < rect.width / 2;
@@ -99,6 +104,7 @@ const StarRating = ({
               key={i}
               className={cn(
                 'relative z-10 cursor-pointer transition-all duration-200 hover:z-20 hover:scale-125',
+                disabled && 'cursor-not-allowed',
               )}
               onMouseMove={(e) => handleMouseMove(e, i)}
               onClick={(e) => handleClick(e, i)}

@@ -23,6 +23,7 @@ const MediaBackdropCard = ({
   loading = false,
   onStarRatingChange,
   starValue = 0,
+  disableUpdate,
 }: {
   backdropUrl?: string;
   posterUrl?: string;
@@ -34,6 +35,7 @@ const MediaBackdropCard = ({
   loading?: boolean;
   starValue?: number;
   onStarRatingChange?: (value: number) => void;
+  disableUpdate?: boolean;
 }) => {
   // get the icon based on media type
   const Icon = MEDIA_ICON_MAPPING[mediaType];
@@ -138,6 +140,7 @@ const MediaBackdropCard = ({
                   size={14}
                   hideRatingValue
                   defaultValue={starValue}
+                  disabled={disableUpdate}
                   onChange={onStarRatingChange}
                 />
               ) : null}
@@ -154,9 +157,11 @@ const MediaBackdropCard = ({
             size={14}
             hideRatingValue
             defaultValue={starValue}
+            disabled={disableUpdate}
             onChange={onStarRatingChange}
           />
         ) : null}
+        {/* change status  */}
       </div>
     </>
   );

@@ -27,5 +27,6 @@ export const MUTATION_KEYS = {
   mediaEntries: {
     add: 'media-entries-add',
     delete: 'media-entries-delete',
+    update: 'media-entries-update',
   },
 };

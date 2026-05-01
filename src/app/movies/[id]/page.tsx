@@ -11,10 +11,16 @@ import {
 } from '@/src/components/ui/card';
 import { Separator } from '@/src/components/ui/separator';
 import YoutubePlayerCard from '@/src/components/youtube-player-card';
+import { QUERY_KEYS } from '@/src/constants/service-key.constants';
 import { formatDate } from '@/src/lib/date.utils';
 import { capitalizeFirstLetter } from '@/src/lib/text-utils';
 import { formatDuration } from '@/src/lib/time.utils';
+import {
+  useAddMediaEntry,
+  useUpdateMediaEntry,
+} from '@/src/services/media-entry';
 import { useGetMovieDetailsWithUserEntry } from '@/src/services/movie-service';
+import { useQueryClient } from '@tanstack/react-query';
 import { Users } from 'lucide-react';
 import { useParams } from 'next/navigation';
 
@@ -25,8 +31,63 @@ import { useParams } from 'next/navigation';
 const MovieDetails = () => {
   // get the id from route
   const { id } = useParams<{ id: string }>();
+  // query client
+  const queryClient = useQueryClient();
   // fetch the details of the movie by id
   const { data, isLoading } = useGetMovieDetailsWithUserEntry(id);
+  // hook to add a media entry
+  const { mutate: addMediaEntry, isPending: addMediaEntryPending } =
+    useAddMediaEntry();
+  // hook to update a media entry
+  const { mutate: updateMediaEntry, isPending: updateMediaEntryPending } =
+    useUpdateMediaEntry();
+
+  // handle star rating change
+  const handleStarRatingChange = (rating: number) => {
+    console.log(data?.data.mediaEntry);
+    // check if media entry exists
+    if (data?.data?.mediaEntry?._id) {
+      // update media entry
+      updateMediaEntry(
+        {
+          id: data.data.mediaEntry._id,
+          data: {
+            rating: rating,
+          },
+        },
+        {
+          onSuccess: () => {
+            // invalidate discover movies query
+            queryClient.invalidateQueries({
+              queryKey: [QUERY_KEYS.discover.movies],
+            });
+            // invalidate the movie details with user entry query
+            queryClient.invalidateQueries({
+              queryKey: [QUERY_KEYS.movie.detailsWithEntry, id],
+            });
+          },
+        },
+      );
+    } else {
+      // add media entry
+      addMediaEntry(
+        {
+          rating: rating,
+          mediaItem: id,
+          onModel: 'Movie',
+          status: 'Completed',
+        },
+        {
+          onSuccess: () => {
+            // invalidate the movie details with user entry query
+            queryClient.invalidateQueries({
+              queryKey: [QUERY_KEYS.movie.detailsWithEntry, id],
+            });
+          },
+        },
+      );
+    }
+  };
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -40,9 +101,8 @@ const MovieDetails = () => {
         genres={data?.data.movie?.genre}
         loading={isLoading}
         starValue={data?.data?.mediaEntry?.rating}
-        onStarRatingChange={() => {
-          //@TODO update user rating
-        }}
+        onStarRatingChange={handleStarRatingChange}
+        disableUpdate={addMediaEntryPending || updateMediaEntryPending}
       />
       {/*@TODO Tabs will be added later */}
       <div className="flex flex-col gap-0 p-5 md:flex-row md:gap-5">
