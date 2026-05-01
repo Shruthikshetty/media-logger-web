@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     'entertainment',
   ],
   verification: {
-    google: 'XZJxfK8FFa18GtizwebJYOecR5hMXBv_-J16CiBAICI',
+    google: 'BN-7vftkwf5OYUsNKaE6LhjT_PsdrKY3kqpnr679OUI',
   },
 };
 
