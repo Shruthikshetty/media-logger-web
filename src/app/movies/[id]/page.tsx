@@ -52,7 +52,7 @@ const MovieDetails = () => {
     status?: MediaStatus;
   }) => {
     // filter invalid calls
-    if (!rating && !status) return;
+    if (rating === undefined && status === undefined) return;
     // check if media entry exists
     if (data?.data?.mediaEntry?._id) {
       // update media entry

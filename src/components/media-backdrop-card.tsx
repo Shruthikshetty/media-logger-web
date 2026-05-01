@@ -64,6 +64,7 @@ const MediaBackdropCard = ({
   const renderStatusSelect = () => (
     <Select
       value={mediaStatus}
+      disabled={disableUpdate}
       onValueChange={(value) => {
         setMediaStatus(value as MediaStatus);
         onStatusChange?.(value as MediaStatus);

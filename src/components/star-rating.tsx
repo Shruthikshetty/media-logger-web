@@ -76,6 +76,27 @@ const StarRating = ({
     onChange?.(newRating);
   };
 
+  // handle keyboard interaction for slider accessibility
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (disabled) return;
+    const step = 0.5;
+    let next = currentRating;
+
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp')
+      next = Math.min(totalStars, currentRating + step);
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown')
+      next = Math.max(0, currentRating - step);
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = totalStars;
+    else return;
+
+    e.preventDefault();
+    if (next !== currentRating) {
+      if (value === undefined) setInternalRating(next);
+      onChange?.(next);
+    }
+  };
+
   return (
     <div className={cn('flex items-center gap-3', className)}>
       {label && (
@@ -85,9 +106,12 @@ const StarRating = ({
         className="flex items-center gap-1"
         onMouseLeave={handleMouseLeave}
         role="slider"
+        tabIndex={disabled ? -1 : 0}
+        aria-disabled={disabled}
         aria-valuenow={displayRating}
         aria-valuemin={0}
         aria-valuemax={totalStars}
+        onKeyDown={handleKeyDown}
       >
         {[...Array(totalStars)].map((_, i) => {
           const starValue = i + 1;

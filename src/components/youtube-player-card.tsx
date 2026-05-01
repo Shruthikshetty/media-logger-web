@@ -51,6 +51,7 @@ const YoutubePlayerCard = ({
             size="sm"
             variant="outline"
             className="border-primary text-primary! hover:bg-primary/10 flex items-center gap-1.5"
+            aria-label="Play trailer"
             onClick={() => setPlaying(true)}
           >
             <Play className="stroke-primary h-3.5 w-3.5" />

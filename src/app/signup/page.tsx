@@ -39,6 +39,7 @@ export default function SignUp() {
       onSubmit: signupSchema,
     },
     onSubmit: async ({ value }) => {
+      if (isPending) return;
       mutate(value, {
         onSuccess: (data) => {
           successToast(data?.message ?? 'User created successfully');
