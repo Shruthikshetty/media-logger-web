@@ -25,6 +25,9 @@ export const metadata: Metadata = {
     'watchlist',
     'entertainment',
   ],
+  verification: {
+    google: 'XZJxfK8FFa18GtizwebJYOecR5hMXBv_-J16CiBAICI',
+  },
 };
 
 export default function RootLayout({
