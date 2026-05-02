@@ -13,11 +13,14 @@ const MovieDiscoverTab = () => {
   // selected page
   const [page, setPage] = useState(1);
   // fetch discover movies
-  const { data, isLoading } = useGetDiscoverMovies({ page });
+  const { data, isFetching, isLoading } = useGetDiscoverMovies({ page });
 
   return (
     <TabsContent value="discover" className="my-2">
-      <MoviesMediaGrid data={data?.data?.movies} loading={isLoading} />
+      <MoviesMediaGrid
+        data={data?.data?.movies}
+        loading={isFetching || isLoading}
+      />
       {data?.data?.pagination && data.data.pagination.totalPages > 1 && (
         <CustomPagination
           page={page}

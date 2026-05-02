@@ -1,6 +1,6 @@
 // this file contains the auth related services
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { User } from '../state-management/auth.store';
 import { AxiosError } from 'axios';
 import { ApiError } from '../types/global.types';
@@ -23,9 +23,15 @@ type ResponseAuthType = {
 };
 
 export function useLoginUser() {
+  // get the query client instance
+  const queryClient = useQueryClient();
   return useMutation<ResponseAuthType, AxiosError<ApiError>, RequestAuthType>({
     mutationKey: [MUTATION_KEYS.auth.login],
     mutationFn: async (req: RequestAuthType) =>
       apiClient.post(Endpoints.login, req).then((res) => res.data),
+    onSuccess: () => {
+      // invalidate all the queries
+      queryClient.invalidateQueries();
+    },
   });
 }

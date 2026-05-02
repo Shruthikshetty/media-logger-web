@@ -23,7 +23,7 @@ const FilteredTabContent = ({
   // selected page
   const [page, setPage] = useState(1);
   // fetch filtered media entries
-  const { data, isLoading } = useFilterMediaEntries({
+  const { data, isLoading, isFetching } = useFilterMediaEntries({
     status,
     onModel: 'Movie', // this will always be 'Movie' for these tab
     page,
@@ -35,15 +35,18 @@ const FilteredTabContent = ({
 
   // reset page if it is greater than total pages
   useEffect(() => {
-    if (!isLoading && page > totalPages) {
+    if (!isLoading && !isFetching && page > totalPages) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setPage(totalPages);
     }
-  }, [isLoading, page, totalPages]);
+  }, [isLoading, isFetching, page, totalPages]);
 
   return (
     <LoginPlaceholder>
-      <MoviesMediaGrid data={data?.data?.mediaEntries} loading={isLoading} />
+      <MoviesMediaGrid
+        data={data?.data?.mediaEntries}
+        loading={isFetching || isLoading}
+      />
       {data?.data?.pagination && data.data.pagination.totalPages > 1 ? (
         <CustomPagination
           page={page}
