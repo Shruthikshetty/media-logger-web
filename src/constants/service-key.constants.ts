@@ -18,6 +18,9 @@ export const QUERY_KEYS = {
   movie: {
     detailsWithEntry: 'movie-details-with-entry',
   },
+  game: {
+    detailsWithEntry: 'game-details-with-entry',
+  },
 };
 
 export const MUTATION_KEYS = {

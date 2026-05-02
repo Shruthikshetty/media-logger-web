@@ -40,7 +40,7 @@ export const normalizeMediaEntryFull = (
 ): NormalizedTvShowMediaItem => {
   const mediaItem = item.mediaItem as TvShowBase;
   return {
-    _id: item._id,
+    _id: mediaItem._id,
     title: mediaItem.title,
     posterUrl: mediaItem.posterUrl,
     averageRating: mediaItem.averageRating,
@@ -49,7 +49,7 @@ export const normalizeMediaEntryFull = (
     releaseDate: mediaItem.releaseDate,
     description: mediaItem.description,
     mediaEntry: {
-      _id: mediaItem._id,
+      _id: item._id,
       user: item.user,
       onModel: item.onModel,
       status: item.status,

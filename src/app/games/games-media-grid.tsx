@@ -12,6 +12,7 @@ import {
 import MediaGridSkeleton from '@/src/components/media-grid-skeleton';
 import MediaListItem from '@/src/components/media-list-item';
 import { useLayoutStore } from '@/src/state-management/layout.store';
+import { useRouter } from 'next/navigation';
 
 // props type
 type Props = {
@@ -37,6 +38,10 @@ const GamesMediaGrid = ({ data, loading }: Props) => {
     isPending: isDeleting,
     variables: deleteVariables,
   } = useDeleteMediaEntry();
+
+  // initialize the router
+  const router = useRouter();
+
   // show loading skeleton
   if (loading) return <MediaGridSkeleton layout={layout} />;
   //normalize items
@@ -79,6 +84,7 @@ const GamesMediaGrid = ({ data, loading }: Props) => {
               disableDelete={
                 deleteVariables === item.mediaEntry?._id && isDeleting
               }
+              onCardClick={() => router.push(`/games/${item._id}`)}
             />
           ))}
         </div>
@@ -103,6 +109,7 @@ const GamesMediaGrid = ({ data, loading }: Props) => {
               disableDelete={
                 deleteVariables === item.mediaEntry?._id && isDeleting
               }
+              onMediaClick={() => router.push(`/games/${item._id}`)}
             />
           ))}
         </div>

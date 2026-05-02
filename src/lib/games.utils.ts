@@ -4,10 +4,10 @@
 
 import {
   DiscoverMediaEntry,
-  Game,
   GameWithUserEntry,
 } from '@/src/services/discover-service';
 import { MediaEntryFull } from '@/src/services/media-entry';
+import { Game } from '../services/game-service';
 
 export type NormalizedGameMediaItem = {
   _id: string;
@@ -40,7 +40,7 @@ export const normalizeMediaEntryFull = (
 ): NormalizedGameMediaItem => {
   const mediaItem = item.mediaItem as Game;
   return {
-    _id: item._id,
+    _id: mediaItem._id,
     title: mediaItem.title,
     posterUrl: mediaItem.posterUrl,
     averageRating: mediaItem.averageRating,
