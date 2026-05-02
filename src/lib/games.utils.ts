@@ -40,7 +40,7 @@ export const normalizeMediaEntryFull = (
 ): NormalizedGameMediaItem => {
   const mediaItem = item.mediaItem as Game;
   return {
-    _id: item._id,
+    _id: mediaItem._id,
     title: mediaItem.title,
     posterUrl: mediaItem.posterUrl,
     averageRating: mediaItem.averageRating,

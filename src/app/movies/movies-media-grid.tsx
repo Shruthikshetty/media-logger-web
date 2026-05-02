@@ -108,6 +108,7 @@ const MoviesMediaGrid = ({ data, loading }: Props) => {
               disableDelete={
                 deleteVariables === item.mediaEntry?._id && isDeleting
               }
+              onMediaClick={() => router.push(`/movies/${item._id}`)}
             />
           ))}
         </div>

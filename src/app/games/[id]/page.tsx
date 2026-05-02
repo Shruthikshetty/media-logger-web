@@ -187,7 +187,8 @@ const GameDetails = () => {
                     </p>
                   </div>
                 ) : null}
-                {data?.data.game?.avgPlaytime ? (
+                {data?.data.game?.avgPlaytime != undefined ||
+                data?.data.game?.avgPlaytime != null ? (
                   <div>
                     <p className="text-muted-foreground">Average Playtime</p>
                     <p>{formatDuration(data?.data.game?.avgPlaytime ?? 0)}</p>
@@ -199,7 +200,7 @@ const GameDetails = () => {
                     variant={'outline'}
                     className="border-muted-foreground/50 font-bold"
                   >
-                    {data?.data.game?.ageRating} +
+                    {data?.data.game?.ageRating ?? 'UR'} +
                   </Badge>
                 </div>
                 <Separator />

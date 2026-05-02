@@ -109,6 +109,7 @@ const GamesMediaGrid = ({ data, loading }: Props) => {
               disableDelete={
                 deleteVariables === item.mediaEntry?._id && isDeleting
               }
+              onMediaClick={() => router.push(`/games/${item._id}`)}
             />
           ))}
         </div>
