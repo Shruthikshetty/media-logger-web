@@ -20,28 +20,7 @@ import {
   DISCOVER_TV_SHOWS_STALE_TIME,
 } from '../constants/config.constants';
 import { Movie } from './movie-service';
-
-export type gameStatus = 'released' | 'upcoming';
-
-export type Game = {
-  _id: string;
-  title: string;
-  description: string;
-  averageRating?: number;
-  genre: string[];
-  releaseDate: string;
-  posterUrl?: string;
-  backdropUrl?: string;
-  isActive: boolean;
-  status: gameStatus;
-  platforms: string[];
-  avgPlaytime?: number;
-  developer?: string;
-  ageRating?: number;
-  youtubeVideoId?: string;
-  createdAt: string;
-  updatedAt: string;
-};
+import { Game } from './game-service';
 
 export type TvShowBase = {
   _id: string;
