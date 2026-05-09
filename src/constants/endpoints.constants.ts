@@ -13,4 +13,5 @@ export const Endpoints = {
   mediaEntriesFilter: `/api/media-entry/filter`,
   baseMovie: `/api/movie`,
   baseGame: `/api/game`,
+  baseTvShow: `/api/tv-show`,
 };

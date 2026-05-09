@@ -21,6 +21,9 @@ export const QUERY_KEYS = {
   game: {
     detailsWithEntry: 'game-details-with-entry',
   },
+  tvShow: {
+    detailsWithEntry: 'tv-show-details-with-entry',
+  },
 };
 
 export const MUTATION_KEYS = {

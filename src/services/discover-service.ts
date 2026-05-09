@@ -21,32 +21,7 @@ import {
 } from '../constants/config.constants';
 import { Movie } from './movie-service';
 import { Game } from './game-service';
-
-export type TvShowBase = {
-  _id: string;
-  title: string;
-  description: string;
-  releaseDate: string;
-  averageRating?: number;
-  genre: string[];
-  cast?: string[];
-  directors?: string[];
-  avgRunTime?: number;
-  languages?: string[];
-  posterUrl?: string;
-  backdropUrl?: string;
-  isActive: boolean;
-  status: string;
-  tags?: string[];
-  ageRating?: number;
-  totalSeasons: number;
-  totalEpisodes: number;
-  youtubeVideoId?: string;
-  tmdbId?: string;
-  imdbId?: string;
-  createdAt: string;
-  updatedAt: string;
-};
+import { TvShowBase } from './tv-show-service';
 
 export type DiscoverMediaEntry = {
   _id: string;
