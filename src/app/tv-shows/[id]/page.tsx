@@ -50,8 +50,6 @@ const TvShowDetails = () => {
   // hook to update a media entry
   const { mutate: updateMediaEntry, isPending: updateMediaEntryPending } =
     useUpdateMediaEntry();
-
-  console.log(data);
   // handle star rating change
   const handleMediaEntryChange = ({
     rating,
