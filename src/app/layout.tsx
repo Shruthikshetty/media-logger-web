@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Media Logger',
+  title: 'Media Logger — Personal media tracker',
+  applicationName: 'Media Logger',
   description:
     'Your personal media logger. Keep track of movies, TV shows, and games you have watched, played, or want to explore.',
   keywords: [
@@ -27,6 +28,10 @@ export const metadata: Metadata = {
   ],
   verification: {
     google: 'BN-7vftkwf5OYUsNKaE6LhjT_PsdrKY3kqpnr679OUI',
+  },
+  openGraph: {
+    siteName: 'Media Logger',
+    type: 'website',
   },
 };
 
