@@ -8,14 +8,14 @@ export const TvShowOverViewDetailsSkeleton = () => {
   return (
     <div className="flex w-full flex-col gap-5 p-5 md:flex-row">
       {/* left section */}
-      <div className="flex w-full min-w-[65vw] flex-col gap-4">
+      <div className="flex w-full flex-col gap-4 md:min-w-[65vw]">
         <Skeleton className="h-40 w-full" />
         <Skeleton className="h-40 w-full" />
         <Skeleton className="h-96 w-full" />
       </div>
       {/* right section */}
-      <div className="w-full min-w-[25vw] md:mt-0">
-        <Skeleton className="h-100 w-full" />
+      <div className="w-full md:mt-0 md:min-w-[25vw]">
+        <Skeleton className="h-96 w-full" />
       </div>
     </div>
   );
