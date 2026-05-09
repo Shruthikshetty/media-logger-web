@@ -5,9 +5,9 @@
 import {
   DiscoverMediaEntry,
   TvShowWithUserEntry,
-  TvShowBase,
 } from '@/src/services/discover-service';
 import { MediaEntryFull } from '@/src/services/media-entry';
+import { TvShowBase } from '../services/tv-show-service';
 
 export type NormalizedTvShowMediaItem = {
   _id: string;

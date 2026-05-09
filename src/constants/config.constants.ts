@@ -55,3 +55,8 @@ export const MOVIE_DETAILS_STALE_TIME = 5 * 60 * 1000; // 5 minutes
  */
 export const GAME_DETAILS_STALE_TIME = 5 * 60 * 1000; // 5 minutes
 
+/**
+ * tv show details stale time
+ */
+export const TV_SHOW_DETAILS_STALE_TIME = 5 * 60 * 1000; // 5 minutes
+

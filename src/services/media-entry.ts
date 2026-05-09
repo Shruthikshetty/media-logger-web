@@ -23,10 +23,10 @@ import {
   MEDIA_ENTRY_FETCH_ALL_SLATE_TIME,
   MEDIA_ENTRY_FETCH_FILTER_SLATE_TIME,
 } from '../constants/config.constants';
-import { TvShowBase } from './discover-service';
 import { useAuthStore } from '../state-management/auth.store';
 import { Movie } from './movie-service';
 import { Game } from './game-service';
+import { TvShowBase } from './tv-show-service';
 
 export type MediaEntryFull = {
   _id: string;

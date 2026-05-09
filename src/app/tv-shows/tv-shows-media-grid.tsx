@@ -12,6 +12,7 @@ import {
 import MediaGridSkeleton from '@/src/components/media-grid-skeleton';
 import MediaListItem from '@/src/components/media-list-item';
 import { useLayoutStore } from '@/src/state-management/layout.store';
+import { useRouter } from 'next/navigation';
 
 // props type
 type Props = {
@@ -25,6 +26,8 @@ type Props = {
 const TVShowsMediaGrid = ({ data, loading }: Props) => {
   // get layout from layout store
   const layout = useLayoutStore((state) => state.layout);
+  // initialize the router
+  const router = useRouter();
   // add media entry hook
   const {
     mutate: addMediaEntryMutate,
@@ -79,6 +82,7 @@ const TVShowsMediaGrid = ({ data, loading }: Props) => {
               disableDelete={
                 deleteVariables === item.mediaEntry?._id && isDeleting
               }
+              onCardClick={() => router.push(`/tv-shows/${item._id}`)}
             />
           ))}
         </div>
@@ -103,6 +107,7 @@ const TVShowsMediaGrid = ({ data, loading }: Props) => {
               disableDelete={
                 deleteVariables === item.mediaEntry?._id && isDeleting
               }
+              onMediaClick={() => router.push(`/tv-shows/${item._id}`)}
             />
           ))}
         </div>
